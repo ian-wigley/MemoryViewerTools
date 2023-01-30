@@ -14,6 +14,7 @@ namespace MemoryViewer
     {
         private int width = 320;
         private int height = 256;
+        private int stride = 0;
         private int imagePointer = 0;
         private readonly GroupBox outerGroup = new GroupBox();
         private byte[] globalBytes = { };
@@ -21,6 +22,7 @@ namespace MemoryViewer
 
         public Form1()
         {
+            stride = width;
             InitializeComponent();
             InitializeForm();
             byteviewer = new ByteViewer
@@ -43,13 +45,17 @@ namespace MemoryViewer
             Name = "Byte Viewer Form";
             Text = "Byte Viewer Form";
 
+            Copy.Visible = false;
+            CopyDataLabel.Visible = false;
+            VScrollBar.Visible = false;
+
             outerGroup.Location = new Point(8, 6);
             outerGroup.Name = "outerGroup";
             outerGroup.Size = new Size(760, 467);
             outerGroup.TabIndex = 5;
             outerGroup.TabStop = false;
             outerGroup.Text = "Memory";
-             tabPage1.Controls.Add(outerGroup);
+            tabPage1.Controls.Add(outerGroup);
 
             // Create a group box around the different byte display modes
             GroupBox group = new GroupBox
@@ -72,7 +78,7 @@ namespace MemoryViewer
 
             RadioButton rbutton2 = new RadioButton
             {
-                Location = new Point(58, 15), //54
+                Location = new Point(58, 15),
                 Size = new Size(50, 16),
                 Text = "ANSI"
             };
@@ -130,7 +136,7 @@ namespace MemoryViewer
             byteviewer.SetDisplayMode(mode);
         }
 
-         private void LoadToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadMenuClick(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() != DialogResult.OK)
@@ -151,17 +157,35 @@ namespace MemoryViewer
                 Array.Copy(bitmapBytes, bytes, bitmapBytes.Length);
             }
 
-            canvas.BackgroundImage = new Bitmap(width, height, width, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, Marshal.UnsafeAddrOfPinnedArrayElement(bytes, 0));
+            canvas.BackgroundImage = SetCanvas(bytes);
+            //new Bitmap(width, height, width, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, Marshal.UnsafeAddrOfPinnedArrayElement(bytes, 0));
 
             // Process filename to display within the form
             Name = ofd.FileName;
             string temp = ofd.FileName;
             int start = temp.LastIndexOf("\\") + 1;
-            //Text = temp.Substring(temp.LastIndexOf("\\") + 1, temp.Length - temp.LastIndexOf("\\") + 1) + " - Byte Viewer";
             Text = temp.Substring(start, temp.Length - start) + " - Byte Viewer";
+            Copy.Visible = true;
+            CopyDataLabel.Visible = true;
+            // If the amount of bytes is greater than the width x height,
+            // display the Vertical scroll bar. 
+            if (bytes.Length > (width * height))
+            {
+                VScrollBar.Visible = true;
+            }
         }
 
-        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
+        private Bitmap SetCanvas(byte[] bytes)
+        {
+            return new Bitmap(
+                width,
+                height,
+                stride,
+                System.Drawing.Imaging.PixelFormat.Format1bppIndexed,
+                Marshal.UnsafeAddrOfPinnedArrayElement(bytes, 0));
+        }
+
+        private void ExitMenuClick(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -268,35 +292,18 @@ namespace MemoryViewer
             return test;
         }
 
-        //private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        //{
-        //    imagePointer += 320;
-        //    byte[] bytes = byteviewer.GetBytes();
-        //    Bitmap bm = new Bitmap(320, 256, 320, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, Marshal.UnsafeAddrOfPinnedArrayElement(bytes, imagePointer));
-        //    canvas.BackgroundImage = bm;
-        //}
-
-        private void VScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        private void VScrollBar_Scroll(object sender, ScrollEventArgs e)
         {
             if (byteviewer.GetBytes().Length > (width * height))
             {
-                //string s = vScrollBar1.Value.ToString();
                 byte[] bytes = byteviewer.GetBytes();
-
-                // vScrollBar1.SmallChange = 1;
-                // vScrollBar1.LargeChange = 1;// * 6;
-                vScrollBar1.Maximum = bytes.Length - (width * height);// * 3200;
+                VScrollBar.SmallChange = 1;
+                VScrollBar.LargeChange = 10;
+                VScrollBar.Maximum = (bytes.Length / stride) / 4;
 
                 if (bytes.Length > 0)
                 {
-                    if (e.NewValue > e.OldValue)
-                    {
-                        imagePointer += width;
-                    }
-                    else if (e.NewValue < e.OldValue)
-                    {
-                        imagePointer -= width;
-                    }
+                    imagePointer = stride * e.NewValue;
 
                     Bitmap bm = new Bitmap(width, height, width, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, Marshal.UnsafeAddrOfPinnedArrayElement(bytes, imagePointer));
                     canvas.BackgroundImage = bm;
@@ -503,6 +510,14 @@ namespace MemoryViewer
         {
             // To-do - add find functionality to search for stuff within the data set !
         }
+
+        //private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        //{
+        //    imagePointer += 320;
+        //    byte[] bytes = byteviewer.GetBytes();
+        //    Bitmap bm = new Bitmap(320, 256, 320, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, Marshal.UnsafeAddrOfPinnedArrayElement(bytes, imagePointer));
+        //    canvas.BackgroundImage = bm;
+        //}
 
         //// Show a file selection dialog and cues the byte viewer to  
         //// load the data in a selected file. 
