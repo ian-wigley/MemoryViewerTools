@@ -12,9 +12,9 @@ namespace MemoryViewer
 {
     public partial class Form1 : Form
     {
-        //private ByteViewer byteviewer;
         private int width = 320;
         private int height = 256;
+        private int imagePointer = 0;
         private readonly GroupBox outerGroup = new GroupBox();
         private byte[] globalBytes = { };
         private byte[] byteSelection = { };
@@ -49,8 +49,7 @@ namespace MemoryViewer
             outerGroup.TabIndex = 5;
             outerGroup.TabStop = false;
             outerGroup.Text = "Memory";
-            //group.Controls.Add(this.groupBox2);
-            tabPage1.Controls.Add(outerGroup);
+             tabPage1.Controls.Add(outerGroup);
 
             // Create a group box around the different byte display modes
             GroupBox group = new GroupBox
@@ -82,7 +81,7 @@ namespace MemoryViewer
 
             RadioButton rbutton3 = new RadioButton
             {
-                Location = new Point(110, 15),//106
+                Location = new Point(110, 15),
                 Size = new Size(46, 16),
                 Text = "Hex"
             };
@@ -131,25 +130,7 @@ namespace MemoryViewer
             byteviewer.SetDisplayMode(mode);
         }
 
-        //// Show a file selection dialog and cues the byte viewer to  
-        //// load the data in a selected file. 
-        //private void loadBytesFromFile(object sender, EventArgs e)
-        //{
-        //    OpenFileDialog ofd = new OpenFileDialog();
-        //    if (ofd.ShowDialog() != DialogResult.OK)
-        //    {
-        //        return;
-        //    }
-        //    byteviewer.SetFile(ofd.FileName);
-        //}
-
-        //// Clear the bytes in the byte viewer. 
-        //private void clearBytes(object sender, EventArgs e)
-        //{
-        //    byteviewer.SetBytes(new byte[] { });
-        //}
-
-        private void LoadToolStripMenuItem_Click(object sender, EventArgs e)
+         private void LoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() != DialogResult.OK)
@@ -286,8 +267,6 @@ namespace MemoryViewer
             }
             return test;
         }
-
-        int imagePointer = 0;
 
         //private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         //{
@@ -524,5 +503,23 @@ namespace MemoryViewer
         {
             // To-do - add find functionality to search for stuff within the data set !
         }
+
+        //// Show a file selection dialog and cues the byte viewer to  
+        //// load the data in a selected file. 
+        //private void loadBytesFromFile(object sender, EventArgs e)
+        //{
+        //    OpenFileDialog ofd = new OpenFileDialog();
+        //    if (ofd.ShowDialog() != DialogResult.OK)
+        //    {
+        //        return;
+        //    }
+        //    byteviewer.SetFile(ofd.FileName);
+        //}
+
+        //// Clear the bytes in the byte viewer. 
+        //private void clearBytes(object sender, EventArgs e)
+        //{
+        //    byteviewer.SetBytes(new byte[] { });
+        //}
     }
 }
