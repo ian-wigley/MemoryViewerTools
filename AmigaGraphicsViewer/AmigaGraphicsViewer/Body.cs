@@ -19,7 +19,5 @@ namespace MemoryViewer
             AddData(data);
 
         }
-
-
     }
 }

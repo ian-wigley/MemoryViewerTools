@@ -15,20 +15,21 @@ namespace MemoryViewer
         //private ByteViewer byteviewer;
         private int width = 320;
         private int height = 256;
-        private GroupBox outerGroup = new GroupBox();
+        private readonly GroupBox outerGroup = new GroupBox();
         private byte[] globalBytes = { };
+        private byte[] byteSelection = { };
 
         public Form1()
         {
             InitializeComponent();
             InitializeForm();
-
-            byteviewer = new ByteViewer();
-            byteviewer.Location = new Point(60, 66);
-            byteviewer.Size = new Size(740, 400);
-            byteviewer.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top;
+            byteviewer = new ByteViewer
+            {
+                Location = new Point(60, 66),
+                Size = new Size(740, 400),
+                Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Top
+            };
             byteviewer.SetBytes(new byte[] { });
-            //tabPage1.Controls.Add(byteviewer);
             outerGroup.Controls.Add(byteviewer);
 
             MaximizeBox = false;
@@ -39,12 +40,8 @@ namespace MemoryViewer
         private void InitializeForm()
         {
             SuspendLayout();
-            //ClientSize = new Size(680, 880); //440
-            //MinimumSize = new Size(660, 800); //400
-            //Size = new Size(680, 440);
             Name = "Byte Viewer Form";
             Text = "Byte Viewer Form";
-
 
             outerGroup.Location = new Point(8, 6);
             outerGroup.Name = "outerGroup";
@@ -56,49 +53,60 @@ namespace MemoryViewer
             tabPage1.Controls.Add(outerGroup);
 
             // Create a group box around the different byte display modes
-            GroupBox group = new GroupBox();
-            group.Location = new Point(270, 23);
-            group.Size = new Size(260, 36); //220
-            group.Text = "Display Mode";
-            //Controls.Add(group);
-            //tabPage1.Controls.Add(group);
+            GroupBox group = new GroupBox
+            {
+                Location = new Point(270, 23),
+                Size = new Size(260, 36), //220
+                Text = "Display Mode"
+            };
             outerGroup.Controls.Add(group);
 
-            RadioButton rbutton1 = new RadioButton();
-            rbutton1.Location = new Point(6, 15);
-            rbutton1.Size = new Size(50, 16); //46
-            rbutton1.Text = "Auto";
-            rbutton1.Checked = true;
-            rbutton1.Click += new EventHandler(changeByteMode);
+            RadioButton rbutton1 = new RadioButton
+            {
+                Location = new Point(6, 15),
+                Size = new Size(50, 16),
+                Text = "Auto",
+                Checked = true
+            };
+            rbutton1.Click += new EventHandler(ChangeByteMode);
             group.Controls.Add(rbutton1);
 
-            RadioButton rbutton2 = new RadioButton();
-            rbutton2.Location = new Point(58, 15); //54
-            rbutton2.Size = new Size(50, 16);
-            rbutton2.Text = "ANSI";
-            rbutton2.Click += new EventHandler(changeByteMode);
+            RadioButton rbutton2 = new RadioButton
+            {
+                Location = new Point(58, 15), //54
+                Size = new Size(50, 16),
+                Text = "ANSI"
+            };
+            rbutton2.Click += new EventHandler(ChangeByteMode);
             group.Controls.Add(rbutton2);
 
-            RadioButton rbutton3 = new RadioButton();
-            rbutton3.Location = new Point(110, 15);//106
-            rbutton3.Size = new Size(46, 16);
-            rbutton3.Text = "Hex";
-            rbutton3.Click += new EventHandler(changeByteMode);
+            RadioButton rbutton3 = new RadioButton
+            {
+                Location = new Point(110, 15),//106
+                Size = new Size(46, 16),
+                Text = "Hex"
+            };
+            rbutton3.Click += new EventHandler(ChangeByteMode);
             group.Controls.Add(rbutton3);
 
-            RadioButton rbutton4 = new RadioButton();
-            rbutton4.Location = new Point(156, 15); //152
-            rbutton4.Size = new Size(68, 16); //64
-            rbutton4.Text = "Unicode";
-            rbutton4.Click += new EventHandler(changeByteMode);
+            RadioButton rbutton4 = new RadioButton
+            {
+                Location = new Point(156, 15),
+                Size = new Size(68, 16),
+                Text = "Unicode"
+            };
+            rbutton4.Click += new EventHandler(ChangeByteMode);
             group.Controls.Add(rbutton4);
+
+            bmapWidth.Text = "Width: " + width.ToString();
+            bmapHeight.Text = "Height: " + height.ToString();
 
             ResumeLayout(false);
         }
 
         // Changes the display mode of the byte viewer according to the  
         // Text property of the RadioButton sender control. 
-        private void changeByteMode(object sender, EventArgs e)
+        private void ChangeByteMode(object sender, EventArgs e)
         {
             RadioButton rbutton = (RadioButton)sender;
 
@@ -141,7 +149,7 @@ namespace MemoryViewer
         //    byteviewer.SetBytes(new byte[] { });
         //}
 
-        private void loadToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LoadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() != DialogResult.OK)
@@ -172,25 +180,25 @@ namespace MemoryViewer
             Text = temp.Substring(start, temp.Length - start) + " - Byte Viewer";
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog();
-            sfd.Filter = "IFF file (*.iff)|*.iff|CSV file (*.csv)|*.csv|Binary file (*.bin)|*.bin|Text file (*.txt)|*.txt|All files (*.*)|*.*";// ".csv";
-            sfd.AddExtension = true;
+            SaveFileDialog sfd = new SaveFileDialog
+            {
+                Filter = "IFF file (*.iff)|*.iff|CSV file (*.csv)|*.csv|Binary file (*.bin)|*.bin|Text file (*.txt)|*.txt|All files (*.*)|*.*",// ".csv";
+                AddExtension = true
+            };
 
             if (sfd.ShowDialog() != DialogResult.OK)
             {
                 return;
             }
 
-
             byte[] bytes = byteviewer.GetBytes();
-
             int len = bytes.Length;
 
             if (sfd.FileName.ToLower().Contains(".bin"))
@@ -289,7 +297,7 @@ namespace MemoryViewer
         //    canvas.BackgroundImage = bm;
         //}
 
-        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        private void VScrollBar1_Scroll(object sender, ScrollEventArgs e)
         {
             if (byteviewer.GetBytes().Length > (width * height))
             {
@@ -482,14 +490,14 @@ namespace MemoryViewer
             //g.DrawLine(Pens.Red, tabControl1.Left, tabControl1.Top, tabControl1.Right, tabControl1.Bottom);
         }
 
-        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        private void TabControl1_DrawItem(object sender, DrawItemEventArgs e)
         {
             //Graphics g = e.Graphics;
             //g.DrawString("this is a diagonal line", fnt, System.Drawing.Brushes.Blue, new Point(30, 30));
             //g.DrawLine(Pens.Red, tabControl1.Left, tabControl1.Top, tabControl1.Right, tabControl1.Bottom);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void Button1_Click(object sender, EventArgs e)
         {
             IFFDetail iffDetail = new IFFDetail();
             if (iffDetail.ShowDialog() == DialogResult.OK)
@@ -497,8 +505,8 @@ namespace MemoryViewer
                 int j = 0;
             }
 
-                //int memLoc = int.Parse(label1.Text, NumberFormatInfo.InvariantInfo);
-                string testText = "0x46f00";
+            //int memLoc = int.Parse(label1.Text, NumberFormatInfo.InvariantInfo);
+            string testText = "0x46f00";
             int result = 0;
             int.TryParse(testText.Substring(2), NumberStyles.AllowHexSpecifier, null, out result);
             int index = 0;
@@ -510,14 +518,11 @@ namespace MemoryViewer
                     byteSelection[index++] = globalBytes[i];
                 }
             }
-         }
+        }
 
-        private byte[] byteSelection = { };
-
-        private void findToolStripMenuItem_Click(object sender, EventArgs e)
+        private void FindToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // To-do - add find functionality to search for stuff within the data set !
-            int i = 0;
         }
     }
 }
