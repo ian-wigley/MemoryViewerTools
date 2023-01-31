@@ -8,9 +8,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace MemoryViewer
+namespace MemoryAndGraphicsViewer
 {
-    public partial class Form1 : Form
+    public partial class GraphicsViewer : Form
     {
         private int width = 320;
         private int height = 256;
@@ -19,8 +19,9 @@ namespace MemoryViewer
         private readonly GroupBox outerGroup = new GroupBox();
         private byte[] globalBytes = { };
         private byte[] byteSelection = { };
+        private Font fnt = new Font("Arial", 10);
 
-        public Form1()
+        public GraphicsViewer()
         {
             stride = width;
             InitializeComponent();
@@ -42,9 +43,11 @@ namespace MemoryViewer
         private void InitializeForm()
         {
             SuspendLayout();
-            Name = "Byte Viewer Form";
-            Text = "Byte Viewer Form";
+            Name = "Memory & Graphical Viewer";
+            Text = "Memory & Graphical Viewer";
 
+            ToolTip tooltip = new ToolTip();
+            tooltip.SetToolTip(Copy, "Not impelmented");
             Copy.Visible = false;
             CopyDataLabel.Visible = false;
             VScrollBar.Visible = false;
@@ -192,15 +195,6 @@ namespace MemoryViewer
                 MessageBox.Show("An error occured generating the bitmap.", exception.Message);
             }
             return bitmap;
-
-            /*
-            return new Bitmap(
-                width,
-                height,
-                stride,
-                System.Drawing.Imaging.PixelFormat.Format1bppIndexed,
-                Marshal.UnsafeAddrOfPinnedArrayElement(bytes, index));
-            */
         }
 
         private void ExitMenuClick(object sender, EventArgs e)
@@ -208,11 +202,11 @@ namespace MemoryViewer
             Application.Exit();
         }
 
-        private void SaveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void SaveAsMenu_Click(object sender, EventArgs e)
         {
             SaveFileDialog sfd = new SaveFileDialog
             {
-                Filter = "IFF file (*.iff)|*.iff|CSV file (*.csv)|*.csv|Binary file (*.bin)|*.bin|Text file (*.txt)|*.txt|All files (*.*)|*.*",// ".csv";
+                Filter = "IFF file (*.iff)|*.iff|CSV file (*.csv)|*.csv|Binary file (*.bin)|*.bin|Text file (*.txt)|*.txt|All files (*.*)|*.*",
                 AddExtension = true
             };
 
@@ -232,8 +226,6 @@ namespace MemoryViewer
                     MemoryLocations ms = new MemoryLocations(len);
                     if (ms.ShowDialog() == DialogResult.OK)
                     {
-                        //int one = ms.GetMemLowLoc;
-                        //int two = ms.GetMemHighLoc;
                         CopyDataAndWrite(ms.GetMemLowLoc, ms.GetMemHighLoc, bytes, sfd.FileName);
                     }
                 }
@@ -276,10 +268,9 @@ namespace MemoryViewer
                     //    );
                 }
 
-                //            string binary = "%" + string.Join(", %", bytes.Select(x => Convert.ToString(x, 2/*NumberFormatInfo.InvariantInfo*/).PadLeft(8, '0') + "\n"));
-
-                //            string hex = "03c";//x3c";
-                //            var s = string.Join("", hex.Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0')));
+                // string binary = "%" + string.Join(", %", bytes.Select(x => Convert.ToString(x, 2/*NumberFormatInfo.InvariantInfo*/).PadLeft(8, '0') + "\n"));
+                // string hex = "03c";//x3c";
+                // var s = string.Join("", hex.Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0')));
 
                 File.WriteAllLines(sfd.FileName, datawords);
             }
@@ -296,7 +287,7 @@ namespace MemoryViewer
 
             if (sfd.FileName.ToLower().Contains(".iff"))
             {
-                BuildIFFandWrite(sfd.FileName, byteSelection);// bytes);
+                BuildIFFandWrite(sfd.FileName, byteSelection);
             }
         }
 
@@ -482,8 +473,6 @@ namespace MemoryViewer
             return new byte[] { input[3], input[2], input[1], input[0] };
         }
 
-        Font fnt = new Font("Arial", 10);
-
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             //Graphics g = e.Graphics;
@@ -499,8 +488,11 @@ namespace MemoryViewer
             //g.DrawLine(Pens.Red, tabControl1.Left, tabControl1.Top, tabControl1.Right, tabControl1.Bottom);
         }
 
-        private void Button1_Click(object sender, EventArgs e)
+        private void IFFButton_Click(object sender, EventArgs e)
         {
+            // To-do implement this code
+
+            /*
             IFFDetail iffDetail = new IFFDetail();
             if (iffDetail.ShowDialog() == DialogResult.OK)
             {
@@ -520,6 +512,7 @@ namespace MemoryViewer
                     byteSelection[index++] = globalBytes[i];
                 }
             }
+            */
         }
 
         private void FindToolStripMenuItem_Click(object sender, EventArgs e)
