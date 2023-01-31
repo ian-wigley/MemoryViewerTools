@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace MemoryViewer
+namespace MemoryAndGraphicsViewer
 {
     public class Body : Chunk
     {
