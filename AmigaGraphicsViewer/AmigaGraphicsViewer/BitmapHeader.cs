@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MemoryViewer
+namespace MemoryAndGraphicsViewer
 {
     public class BitmapHeader : Chunk
     {
