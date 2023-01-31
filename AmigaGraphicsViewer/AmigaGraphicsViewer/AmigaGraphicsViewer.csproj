@@ -7,8 +7,8 @@
     <ProjectGuid>{3F435011-DDFB-4501-980A-4BDBDC141D9C}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MemoryViewer</RootNamespace>
-    <AssemblyName>MemoryViewer</AssemblyName>
+    <RootNamespace>MemoryAndGraphicsViewer</RootNamespace>
+    <AssemblyName>MemoryAndGraphicsViewer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -87,6 +87,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
