@@ -1,4 +1,4 @@
-﻿namespace MemoryViewer
+﻿namespace MemoryAndGraphicsViewer
 {
     partial class MemoryLocations
     {
