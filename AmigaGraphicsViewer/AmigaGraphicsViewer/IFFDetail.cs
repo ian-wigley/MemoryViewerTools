@@ -28,10 +28,10 @@ namespace MemoryViewer
 
         private void button1_Click(object sender, System.EventArgs e)
         {
-    //        if (int.TryParse(GetSelectedMemStartLocation, NumberStyles.HexNumber, null, out lowValue)
-    //&& int.TryParse(GetSelectedMemEndLocation, NumberStyles.HexNumber, null, out highValue)
-    //&& highValue > lowValue
-    //&& highValue <= numberOfBytes)
+            //if (int.TryParse(GetSelectedMemStartLocation, NumberStyles.HexNumber, null, out lowValue)
+            //&& int.TryParse(GetSelectedMemEndLocation, NumberStyles.HexNumber, null, out highValue)
+            //&& highValue > lowValue
+            //&& highValue <= numberOfBytes)
             {
                 DialogResult = DialogResult.OK;
                 Close();
