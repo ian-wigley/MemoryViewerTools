@@ -61,7 +61,7 @@ namespace MemoryViewer
             GroupBox group = new GroupBox
             {
                 Location = new Point(270, 23),
-                Size = new Size(260, 36), //220
+                Size = new Size(260, 36),
                 Text = "Display Mode"
             };
             outerGroup.Controls.Add(group);
@@ -157,8 +157,7 @@ namespace MemoryViewer
                 Array.Copy(bitmapBytes, bytes, bitmapBytes.Length);
             }
 
-            canvas.BackgroundImage = SetCanvas(bytes);
-            //new Bitmap(width, height, width, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, Marshal.UnsafeAddrOfPinnedArrayElement(bytes, 0));
+            canvas.BackgroundImage = SetCanvas(bytes, 0);
 
             // Process filename to display within the form
             Name = ofd.FileName;
@@ -175,14 +174,33 @@ namespace MemoryViewer
             }
         }
 
-        private Bitmap SetCanvas(byte[] bytes)
+        private Bitmap SetCanvas(byte[] bytes, int index)
         {
+            Bitmap bitmap = new Bitmap(1, 1);
+
+            try
+            {
+                bitmap = new Bitmap(
+                width,
+                height,
+                stride,
+                System.Drawing.Imaging.PixelFormat.Format1bppIndexed,
+                Marshal.UnsafeAddrOfPinnedArrayElement(bytes, index));
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("An error occured generating the bitmap.", exception.Message);
+            }
+            return bitmap;
+
+            /*
             return new Bitmap(
                 width,
                 height,
                 stride,
                 System.Drawing.Imaging.PixelFormat.Format1bppIndexed,
-                Marshal.UnsafeAddrOfPinnedArrayElement(bytes, 0));
+                Marshal.UnsafeAddrOfPinnedArrayElement(bytes, index));
+            */
         }
 
         private void ExitMenuClick(object sender, EventArgs e)
@@ -278,18 +296,18 @@ namespace MemoryViewer
 
             if (sfd.FileName.ToLower().Contains(".iff"))
             {
-
                 BuildIFFandWrite(sfd.FileName, byteSelection);// bytes);
             }
         }
+
         private string SeperateString(string input)
         {
-            string test = "";
+            string value = "";
             foreach (char c in input)
             {
-                test += c + ",";
+                value += c + ",";
             }
-            return test;
+            return value;
         }
 
         private void VScrollBar_Scroll(object sender, ScrollEventArgs e)
@@ -304,9 +322,7 @@ namespace MemoryViewer
                 if (bytes.Length > 0)
                 {
                     imagePointer = stride * e.NewValue;
-
-                    Bitmap bm = new Bitmap(width, height, width, System.Drawing.Imaging.PixelFormat.Format1bppIndexed, Marshal.UnsafeAddrOfPinnedArrayElement(bytes, imagePointer));
-                    canvas.BackgroundImage = bm;
+                    canvas.BackgroundImage = SetCanvas(bytes, imagePointer);
                     label1.Text = imagePointer.ToString("X6");
                 }
             }
