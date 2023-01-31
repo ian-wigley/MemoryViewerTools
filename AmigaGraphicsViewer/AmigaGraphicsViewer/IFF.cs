@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 
-namespace MemoryViewer
+namespace MemoryAndGraphicsViewer
 {
     public class IFF
     {
