@@ -1,4 +1,4 @@
-﻿namespace MemoryViewer
+﻿namespace MemoryAndGraphicsViewer
 {
     public class Bitplane
     {
