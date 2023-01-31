@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Windows.Forms;
 
-namespace MemoryViewer
+namespace MemoryAndGraphicsViewer
 {
     public partial class MemoryLocations : Form
     {
