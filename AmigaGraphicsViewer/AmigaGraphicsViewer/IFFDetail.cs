@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace MemoryViewer
+namespace MemoryAndGraphicsViewer
 {
     public partial class IFFDetail : Form
     {
