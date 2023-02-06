@@ -13,34 +13,43 @@ namespace BinToAssembly
         private List<string> illegalOpcodes = new List<string>();
         private Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
 
-        public Parser68000()
+        public byte[] LoadData(string fileName)
         {
+            try
+            {
+                return File.ReadAllBytes(fileName);
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Error occured whilst loading data", exception.Message);
+                return new byte[0];
+            }
         }
 
-        public void ParseFileContent(string fileName, PopulateOpCodeList populateOpCodeList, TextBox textBox,
-    ref List<string> lineNumbers, ref List<string> code)
+        public void ParseFileContent(
+            byte[] data,
+            PopulateOpCodeList populateOpCodeList,
+            TextBox textBox,
+            ref List<string> lineNumbers,
+            ref List<string> code
+            )
         {
             textBox.Clear();
-            var fileContent = File.ReadAllBytes(fileName);
             int filePosition = 0;
             int lineNumber = 0;
             int pc = 0;
             var m_OpCodes = populateOpCodeList.GetOpCodes;
-            while (filePosition < fileContent.Length)
+            while (filePosition < data.Length)
             {
 
                 string rte = "0100111001110011";
                 string strHex = Convert.ToInt32(rte, 2).ToString("X");
                 string rts = "0100111001110101";
-                
+
                 // lookup the first 4 bits of each byte (Nybble)
-                int opCode = fileContent[filePosition];// << 2 + fileContent[filePosition+1];
-                int t = fileContent[filePosition] << 8;
-                int e = t + fileContent[filePosition + 1];
-
-
-
-
+                int opCode = data[filePosition];// << 2 + fileContent[filePosition+1];
+                int t = data[filePosition] << 8;
+                int e = t + data[filePosition + 1];
 
                 lineNumber = startAddress + filePosition;
                 lineNumbers.Add(lineNumber.ToString("X4"));
@@ -54,7 +63,7 @@ namespace BinToAssembly
                 {
                     if (oc.code == opCode.ToString("X2"))
                     {
-                        ConvertToAssembly(oc, ref line, ref filePosition, fileContent, lineNumber, pc, ref dataStatements, ref illegalOpcodes);
+                        ConvertToAssembly(oc, ref line, ref filePosition, data, lineNumber, pc, ref dataStatements, ref illegalOpcodes);
                         found = true;
                     }
                 }
