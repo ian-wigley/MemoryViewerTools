@@ -107,5 +107,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="6502-codes.xml" />
+    <Content Include="68000-codes.xml" />
+    <Content Include="68xx-codes.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
