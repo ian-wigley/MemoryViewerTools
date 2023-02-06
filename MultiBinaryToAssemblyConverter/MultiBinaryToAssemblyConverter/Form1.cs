@@ -48,9 +48,10 @@ namespace BinToAssembly
             generateLabelsToolStripMenuItem.Enabled = false;
             leftWindowToolStripMenuItem.Enabled = false;
             rightWindowToolStripMenuItem.Enabled = false;
-            comboBox1.Items.Insert(0, m6502);
-            comboBox1.Items.Insert(1, m68xx);
-            comboBox1.Items.Insert(2, m68000);
+            comboBox1.Items.Insert(0, m68000);
+            //comboBox1.Items.Insert(0, m6502);
+            //comboBox1.Items.Insert(1, m68xx);
+            //comboBox1.Items.Insert(2, m68000);
             comboBox1.SelectedIndex = 0;
 
             populateOpCodeList.Init(comboBox1.Items[0].ToString());
@@ -243,7 +244,8 @@ namespace BinToAssembly
                     if (comboBox1.Text.Equals(m68000))
                     {
                         Parser68000 p68000 = new Parser68000();
-                        p68000.ParseFileContent(openFileDialog.FileName, populateOpCodeList, textBox1, ref lineNumbers, ref code);
+                        var data = p68000.LoadData(openFileDialog.FileName);
+                        p68000.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
                     }
                 }
 
