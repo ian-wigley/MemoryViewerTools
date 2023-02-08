@@ -47,7 +47,7 @@ namespace BinToAssembly
             comboBox1.DataSource = items;
         }
 
-        private void button1_Click(object sender, System.EventArgs e)
+        private void Button1_Click(object sender, System.EventArgs e)
         {
             DialogResult = DialogResult.OK;
             Close();
