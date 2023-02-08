@@ -8,10 +8,10 @@ using System.ComponentModel.Design;
 
 namespace BinToAssembly
 {
-    public partial class Form1 : Form
+    public partial class BinaryConverter : Form
     {
-        private string label = "label";
-        private string branch = "branch";
+        private readonly string label = "label";
+        private readonly string branch = "branch";
         private int labelCount = 0;
         private int branchCount = 0;
         private int startAddress = 0;
@@ -28,7 +28,7 @@ namespace BinToAssembly
         private Dictionary<string, string> labelLoc = new Dictionary<string, string>();
         private Dictionary<string, string> branchLoc = new Dictionary<string, string>();
 
-        private PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
+        private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
 
         private ByteViewer byteviewer;
 
@@ -36,7 +36,7 @@ namespace BinToAssembly
         private const string m68xx = "68xx";
         private const string m68000 = "68000";
 
-        public Form1()
+        public BinaryConverter()
         {
             InitializeComponent();
 
@@ -57,7 +57,13 @@ namespace BinToAssembly
             populateOpCodeList.Init(comboBox1.Items[0].ToString());
         }
 
-        private void AddLabels(string start, string end, bool replaceIllegalOpcodes, Dictionary<string, string[]> bucket, int firstOccurance, int lastOccurrance)
+        private void AddLabels(
+            string start,
+            string end,
+            bool replaceIllegalOpcodes,
+            Dictionary<string, string[]> bucket,
+            int firstOccurance,
+            int lastOccurrance)
         {
             textBox2.Clear();
             ClearRightWindow();
@@ -74,9 +80,8 @@ namespace BinToAssembly
 
                 if (lineDetails.Length > 1)
                 {
-                    string[] dataValue;
                     // Replace the Illegal Opcodes with data statement
-                    if (replaceIllegalOpcodes && bucket.TryGetValue(lineDetails[0], out dataValue))
+                    if (replaceIllegalOpcodes && bucket.TryGetValue(lineDetails[0], out string[] dataValue))
                     {
                         foreach (string str in dataValue)
                         {
@@ -205,7 +210,7 @@ namespace BinToAssembly
             rightWindowToolStripMenuItem.Enabled = true;
         }
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -254,12 +259,12 @@ namespace BinToAssembly
             }
         }
 
-        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
-        private void generateLabels()
+        private void GenerateLabels()
         {
             char[] startAdress = new char[lineNumbers[0].Length];
             char[] endAdress = new char[lineNumbers[lineNumbers.Count - 1].Length];
@@ -318,9 +323,8 @@ namespace BinToAssembly
 
                     for (int i = firstOccurance; i < lastOccurrance; i++)
                     {
-                        string[] dataValue;
                         // Replace the Illegal Opcodes with data statement
-                        if (dataStatements.TryGetValue(i.ToString("X4"), out dataValue))
+                        if (dataStatements.TryGetValue(i.ToString("X4"), out string[] dataValue))
                         {
                             replacedWithDataCollection.Add(i.ToString("X4"), dataValue);
                         }
@@ -338,7 +342,12 @@ namespace BinToAssembly
                     {
                         convertToBytes = true;
                     }
-                    AddLabels(ms.GetSelectedMemStartLocation, ms.GetSelectedMemEndLocation, convertToBytes, replacedWithDataCollection, firstOccurance, lastOccurrance);
+                    AddLabels(ms.GetSelectedMemStartLocation, 
+                        ms.GetSelectedMemEndLocation, 
+                        convertToBytes, 
+                        replacedWithDataCollection, 
+                        firstOccurance, 
+                        lastOccurrance);
                 }
                 else
                 {
@@ -368,17 +377,22 @@ namespace BinToAssembly
             branchLoc.Clear();
         }
 
-        private void leftWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        private void LeftWindowToolStripMenuItem_Click(
+            object sender,
+            EventArgs e)
         {
             Save(code);
         }
 
-        private void rightWindowToolStripMenuItem_Click(object sender, EventArgs e)
+        private void RightWindowToolStripMenuItem_Click(
+            object sender, 
+            EventArgs e)
         {
             Save(passThree);
         }
 
-        private void Save(List<string> collection)
+        private void Save(
+            List<string> collection)
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog
             {
@@ -395,12 +409,16 @@ namespace BinToAssembly
             }
         }
 
-        private void generateLabelsToolStripMenuItem_Click(object sender, EventArgs e)
+        private void GenerateLabelsToolStripMenuItem_Click(
+            object sender, 
+            EventArgs e)
         {
-            generateLabels();
+            GenerateLabels();
         }
 
-        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
+        private void ClearToolStripMenuItem_Click(
+            object sender, 
+            EventArgs e)
         {
             ClearCollections();
             textBox1.Clear();

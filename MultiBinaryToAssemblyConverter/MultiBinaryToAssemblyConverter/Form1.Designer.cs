@@ -8,7 +8,7 @@ using System.ComponentModel.Design;
 
 namespace BinToAssembly
 {
-    partial class Form1
+    partial class BinaryConverter
     {
         /// <summary>
         /// Required designer variable.
@@ -93,7 +93,7 @@ namespace BinToAssembly
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
             this.openToolStripMenuItem.Text = "Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -109,28 +109,28 @@ namespace BinToAssembly
             this.leftWindowToolStripMenuItem.Name = "leftWindowToolStripMenuItem";
             this.leftWindowToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.leftWindowToolStripMenuItem.Text = "Left Window";
-            this.leftWindowToolStripMenuItem.Click += new System.EventHandler(this.leftWindowToolStripMenuItem_Click);
+            this.leftWindowToolStripMenuItem.Click += new System.EventHandler(this.LeftWindowToolStripMenuItem_Click);
             // 
             // rightWindowToolStripMenuItem
             // 
             this.rightWindowToolStripMenuItem.Name = "rightWindowToolStripMenuItem";
             this.rightWindowToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.rightWindowToolStripMenuItem.Text = "Right Window";
-            this.rightWindowToolStripMenuItem.Click += new System.EventHandler(this.rightWindowToolStripMenuItem_Click);
+            this.rightWindowToolStripMenuItem.Click += new System.EventHandler(this.RightWindowToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
             this.clearToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
             this.clearToolStripMenuItem.Text = "Clear";
-            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // editToolStripMenuItem
             // 
@@ -145,7 +145,7 @@ namespace BinToAssembly
             this.generateLabelsToolStripMenuItem.Name = "generateLabelsToolStripMenuItem";
             this.generateLabelsToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.generateLabelsToolStripMenuItem.Text = "Generate Labels";
-            this.generateLabelsToolStripMenuItem.Click += new System.EventHandler(this.generateLabelsToolStripMenuItem_Click);
+            this.generateLabelsToolStripMenuItem.Click += new System.EventHandler(this.GenerateLabelsToolStripMenuItem_Click);
             // 
             // textBox2
             // 
