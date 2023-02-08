@@ -12,7 +12,9 @@ namespace BinToAssembly
         public string GetSelectedMemStartLocation { get { return comboBox1.Text + comboBox2.Text + comboBox3.Text + comboBox4.Text; } }
         public string GetSelectedMemEndLocation { get { return comboBox5.Text + comboBox6.Text + comboBox7.Text + comboBox8.Text; } }
 
-        public MemorySelector(char[] startAdress, char[] endAdress)
+        public MemorySelector(
+            char[] startAdress, 
+            char[] endAdress)
         {
             InitializeComponent();
 
@@ -43,7 +45,8 @@ namespace BinToAssembly
             comboBox4.Text = startAdress[3].ToString();
         }
 
-        private void InitialiseComboBoxes(ComboBox comboBox)
+        private void InitialiseComboBoxes(
+            ComboBox comboBox)
         {
             comboBox.BindingContext = new BindingContext();
             comboBox.DisplayMember = "Text";
@@ -51,7 +54,9 @@ namespace BinToAssembly
             comboBox.DataSource = memValues;
         }
 
-        private void button1_Click(object sender, System.EventArgs e)
+        private void Button1_Click(
+            object sender, 
+            System.EventArgs e)
         {
             this.DialogResult = DialogResult.OK;
             Close();
