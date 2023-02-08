@@ -11,7 +11,13 @@ namespace BinToAssembly
         private string m_prefix = "";
         private string m_suffix = "";
 
-        public OpCode(string code, string name, int numberOfBytes, string prefix, string suffix, bool illegal)
+        public OpCode(
+            string code, 
+            string name, 
+            int numberOfBytes, 
+            string prefix, 
+            string suffix, 
+            bool illegal)
         {
             m_code = code;
             m_name = name;

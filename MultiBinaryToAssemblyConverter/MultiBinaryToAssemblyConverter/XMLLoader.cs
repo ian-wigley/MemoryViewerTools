@@ -7,7 +7,7 @@ namespace BinToAssembly
     public class XMLLoader
     {
         private bool valid = false;
-        public bool setValid { set { valid = value; } }
+        public bool SetValid { set { valid = value; } }
 
         public XMLLoader()
         {

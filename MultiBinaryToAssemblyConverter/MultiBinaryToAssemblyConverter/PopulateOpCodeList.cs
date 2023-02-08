@@ -12,11 +12,12 @@ namespace BinToAssembly
 
         private XMLLoader xmlLoader = new XMLLoader();
 
-        public void Init(string processor)
+        public void Init(
+            string processor)
         {
             this.processor = processor;
             m_OpCodes.Clear();
-            xmlLoader.setValid = false;
+            xmlLoader.SetValid = false;
             xmlLoader.Load(m_OpCodes, processor);
         }
     }
