@@ -17,7 +17,10 @@ namespace BinToAssembly
 
         public Parser68xx() { }
 
-        public void ParseFileContent(string fileName, PopulateOpCodeList populateOpCodeList, TextBox textBox)
+        public void ParseFileContent(
+            string fileName, 
+            PopulateOpCodeList populateOpCodeList, 
+            TextBox textBox)
         {
             textBox.Clear();
             var fileContent = File.ReadAllBytes(fileName);
@@ -67,8 +70,15 @@ namespace BinToAssembly
             //leftWindowToolStripMenuItem.Enabled = true;
         }
 
-        private void ConvertToAssembly (OpCode oc, ref string line, ref int filePosition, byte[] fileStuff, int lineNumber,
-            int pc, ref Dictionary<string, string[]> dataStatements, ref List<string> illegalOpCodes)
+        private void ConvertToAssembly (
+            OpCode oc, 
+            ref string line, 
+            ref int filePosition, 
+            byte[] fileStuff, int 
+            lineNumber,
+            int pc, 
+            ref Dictionary<string, string[]> dataStatements, 
+            ref List<string> illegalOpCodes)
         {
             string[] temp;
             if (oc.numberOfBytes == 1)

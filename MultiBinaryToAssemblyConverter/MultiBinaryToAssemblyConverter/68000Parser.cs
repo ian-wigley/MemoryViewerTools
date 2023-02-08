@@ -95,8 +95,16 @@ namespace BinToAssembly
             //leftWindowToolStripMenuItem.Enabled = true;
         }
 
-        private void ConvertToAssembly(OpCode oc, ref string line, ref int filePosition, byte[] fileStuff, int lineNumber,
-            int pc, ref Dictionary<string, string[]> dataStatements, ref List<string> illegalOpCodes)
+        private void ConvertToAssembly(
+            OpCode oc, 
+            ref string line, 
+            ref int filePosition, 
+            byte[] fileStuff, 
+            int lineNumber,
+            int pc, 
+            ref Dictionary<string, string[]> 
+            dataStatements, ref List<string> 
+            illegalOpCodes)
         {
             string[] temp;
             if (oc.numberOfBytes == 1)
@@ -318,8 +326,6 @@ namespace BinToAssembly
                 }
             }
 
-
-
             else if (oc.numberOfBytes == 3 && (filePosition < fileStuff.Length - 3))
             {
                 if (oc.illegal)
@@ -342,6 +348,5 @@ namespace BinToAssembly
                 filePosition = fileStuff.Length;
             }
         }
-
     }
 }
