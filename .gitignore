@@ -1,4 +1,5 @@
 AmigaGraphicsViewer/.vs/
+AmigaGraphicsViewer/AmigaGraphicsViewer.v12.suo
 AmigaGraphicsViewer/AmigaGraphicsViewer/obj/
 AmigaGraphicsViewer/AmigaGraphicsViewer/bin/
 MemoryViewer/MemoryViewer/MemoryViewer/obj/
@@ -7,4 +8,7 @@ MultiBinaryToAssemblyConverter/.vs/
 MultiBinaryToAssemblyConverter/MultiBinaryToAssemblyConverter/bin/
 MultiBinaryToAssemblyConverter/MultiBinaryToAssemblyConverter/obj/
 MultiBinaryToAssemblyConverter/MultiBinaryToAssemblyConverter/old/
-AmigaGraphicsViewer/AmigaGraphicsViewer.v12.suo
+MultiBinaryToAssemblyConverter/MultiBinaryToAssemblyConverterTests/bin/
+MultiBinaryToAssemblyConverter/MultiBinaryToAssemblyConverterTests/obj/
+MultiBinaryToAssemblyConverter/packages/MSTest.TestAdapter.2.1.2/
+MultiBinaryToAssemblyConverter/packages/MSTest.TestFramework.2.1.2/
