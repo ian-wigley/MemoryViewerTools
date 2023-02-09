@@ -9,14 +9,10 @@ namespace BinToAssembly
         private bool valid = false;
         public bool SetValid { set { valid = value; } }
 
-        public XMLLoader()
-        {
-        }
-
         public void Load(List<OpCode> m_OpCodes, string processor)
         {
-            string s = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "\\" + processor + "-codes.xml";
-            XmlTextReader reader = new XmlTextReader(s);
+            string xmlOpCodes = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "\\" + processor + "-codes.xml";
+            XmlTextReader reader = new XmlTextReader(xmlOpCodes);
             while (reader.Read())
             {
                 switch (reader.NodeType)
@@ -29,9 +25,6 @@ namespace BinToAssembly
                         if (valid)
                         {
                             string[] split = reader.Value.Split('.');
-                            //Regex separators = new Regex(@"((?,)|(?=,)|(?<=,))");
-                            ////string[] split = reader.Value.Split(new string[] { separators.ToString() }, StringSplitOptions.None); //Split(',');
-                            //string[] split = separators.Split(reader.Value);
                             m_OpCodes.Add(new OpCode(split[0], split[1], int.Parse(split[2]), split[3], split[4], bool.Parse(split[5])));
                         }
 
@@ -41,7 +34,6 @@ namespace BinToAssembly
                         }
 
                         break;
-                    // Display the end of the element.
                     case XmlNodeType.EndElement:
                         break;
                 }
