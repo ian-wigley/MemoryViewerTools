@@ -13,7 +13,7 @@
   <code>06.AND.2...false</code>
   <code>07.ANDI.2...false</code>
   <code>08.ASL,ASR.2...false</code>
-  <code>09.Bcc.2...false</code>
+  <code>09.BCC.2...false</code>
   <code>0879.BCHG.6.#$.,$.false</code>
   <code>11.BCLR.2...false</code>
   <code>6008.BRA.2...false</code>
