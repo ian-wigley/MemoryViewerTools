@@ -10,7 +10,9 @@ namespace BinToAssembly
 
         public List<OpCode> GetOpCodes { get { return m_OpCodes; } }
 
-        private XMLLoader xmlLoader = new XMLLoader();
+        public OpCode GetOpCode(int value) { return m_OpCodes[value]; }
+
+        private readonly XMLLoader xmlLoader = new XMLLoader();
 
         public void Init(
             string processor)
