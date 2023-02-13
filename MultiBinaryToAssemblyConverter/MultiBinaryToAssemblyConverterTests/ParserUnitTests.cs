@@ -15,5 +15,11 @@ namespace MultiBinaryToAssemblyConverterTests
             Parser68000 parser = new Parser68000();
             Assert.IsNotNull(parser);
         }
+        [TestMethod]
+        public void TestConvertToAssembly()
+        {
+            Parser68000 parser = new Parser68000();
+            parser.ConvertToAssembly();
+        }
     }
 }
