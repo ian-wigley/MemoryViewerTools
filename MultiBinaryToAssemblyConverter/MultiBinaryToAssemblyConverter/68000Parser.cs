@@ -41,42 +41,21 @@ namespace BinToAssembly
             var m_OpCodes = populateOpCodeList.GetOpCodes;
             while (filePosition < data.Length - 4)
             {
-
-                string rte = "0100111001110011";
-                string strHex = Convert.ToInt32(rte, 2).ToString("X");
-                string rts = "0100111001110101";
-
                 // lookup the first 4 bits of each byte (Nybble)
-                //int opCode = fileContent[filePosition];// << 2 + fileContent[filePosition+1];
-                int t = data[filePosition] << 8;
-                int opCode = t + data[filePosition + 1]; //<- opCode 
-
-                // Opcodes come from 2 bytes
-                if (filePosition == 32)
-                {
-                    //byte bytes = System.Convert.ToByte(0x0839);
-                    byte[] bytes = BitConverter.GetBytes(0x0839);
-                    //[0] = 57
-                    //[1] = 8
-                    //[2] = 0
-                    //[3] = 0
-                    // 68k is Big Endian
-                    // Increment by 2 bytes
-                    var x = opCode.ToString("X4");
-                }
-
+                int byteOne = data[filePosition] << 8;
+                int opCode = byteOne + data[filePosition + 1];
 
                 lineNumber = startAddress + filePosition;
                 lineNumbers.Add(lineNumber.ToString("X4"));
                 string line = (startAddress + filePosition).ToString("X4");
-                line += "  " + opCode.ToString("X4"); // 2");
+                line += "  " + opCode.ToString("X4");
                 pc = startAddress + filePosition;
 
                 bool found = false;
 
                 foreach (OpCode oc in m_OpCodes)
                 {
-                    if (oc.code == opCode.ToString("X4")) //X2"))
+                    if (oc.code == opCode.ToString("X4"))
                     {
                         ConvertToAssembly(oc, ref line, ref filePosition, data, lineNumber, pc, ref dataStatements, ref illegalOpcodes);
                         found = true;
@@ -91,11 +70,9 @@ namespace BinToAssembly
             // Use a monospaced font
             textBox.Font = new Font(FontFamily.GenericMonospace, textBox.Font.Size);
             textBox.Lines = code.ToArray();
-            //generate.Enabled = true;
-            //leftWindowToolStripMenuItem.Enabled = true;
         }
 
-        private void ConvertToAssembly(
+        public void ConvertToAssembly(
             OpCode oc, 
             ref string line, 
             ref int filePosition, 
@@ -118,7 +95,7 @@ namespace BinToAssembly
                 temp = new string[1] { "!byte $" + oc.code };
                 dataStatements.Add(pc.ToString("X4"), temp);
                 line += "          " + oc.name;
-                filePosition += 2; // 1;
+                filePosition += 2;
             }
             if (oc.numberOfBytes == 2)
             {
@@ -140,7 +117,7 @@ namespace BinToAssembly
 
                     byte t1 = unchecked(fileStuff[filePosition + 2]);
                     byte t2 = unchecked(fileStuff[filePosition + 3]);
-                    Int16 i = BitConverter.ToInt16(new byte[] { t2, t1 }, 0);
+                    short i = BitConverter.ToInt16(new byte[] { t2, t1 }, 0);
 
                     //line += "       " + oc.name + " " + s1.ToString("X4") + s2.ToString("X4");
                     line += "       " + oc.name + " " + i.ToString() + ",(a6)";
