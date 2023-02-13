@@ -32,7 +32,7 @@
   <code>0C39.CMPI.6.#$.,$.false</code>
   <code>21.CMPM.2...false</code>
   <code>22.cpGEN.2...false</code>
-  <code>23.DBcc.2...false</code>
+  <code>23.DBCC.2...false</code>
   <code>51C8.DBF.2.D0.,#$.false</code>
   <code>24.DIVS.2...false</code>
   <code>25.DIVU.2...false</code>
