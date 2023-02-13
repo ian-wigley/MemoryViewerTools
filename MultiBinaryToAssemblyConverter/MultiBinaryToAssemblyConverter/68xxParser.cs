@@ -51,7 +51,6 @@ namespace BinToAssembly
                     if (oc.code == opCode.ToString("X2"))
                     {
                         ConvertToAssembly(oc, ref line, ref filePosition, fileContent, lineNumber, pc, ref dataStatements, ref illegalOpcodes);
-                        //oc.GetCode(ref line, ref filePosition, fileContent, lineNumber, pc, ref dataStatements, ref illegalOpcodes);
                         found = true;
                     }
                 }
@@ -60,14 +59,10 @@ namespace BinToAssembly
                 }
 
                 code.Add(line);
-                // Testing Hack
-                // filePosition++;
             }
             // Use a monospaced font
             textBox.Font = new Font(FontFamily.GenericMonospace, textBox.Font.Size);
             textBox.Lines = code.ToArray();
-            //generate.Enabled = true;
-            //leftWindowToolStripMenuItem.Enabled = true;
         }
 
         private void ConvertToAssembly (
