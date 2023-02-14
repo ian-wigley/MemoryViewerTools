@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<codes>
+  <processor>68000</processor>
+  <code>00.ABCD.2...false</code>
+  <code>0600.ADD.2...false</code>
+  <code>0611.ADD.2.#$.,(A1).false</code>
+  <code>5239.ADD.2.#$.,$.false</code>
+  <code>5240.ADD.2...false</code>
+  <code>D5C1.ADDA.1...false</code>
+  <code>03.ADDI.2...false</code>
+  <code>04.ADDQ.2...false</code>
+  <code>05.ADDX.2...false</code>
+  <code>06.AND.2...false</code>
+  <code>07.ANDI.2...false</code>
+  <code>08.ASL,ASR.2...false</code>
+  <code>09.BCC.2...false</code>
+  <code>0879.BCHG.6.#$.,$.false</code>
+  <code>11.BCLR.2...false</code>
+  <code>6008.BRA.2...false</code>
+  <code>08F9.BSET.6.#$.,$.false</code>
+  <code>6100.BSR.2...false</code>
+  <code>0828.BTST.2.#.,$.false</code>
+  <code>0839.BTST.2.#.,$.false</code>
+  <code>16.CHK.2...false</code>
+  <code>4268.CLR(w) A0.2...false</code>
+  <code>42A8.CLR(l) A0.2...false</code>
+  <code>4280.CLR(l) D0.1...false</code>
+  <code>4281.CLR(l) D1.1...false</code>
+  <code>0C11.CMP.2...false</code>
+  <code>B3FC.CMPA.4.#$.,A1.false</code>
+  <code>B5FC.CMPA.4.#$.,A2.false</code>
+  <code>0C39.CMPI.6.#$.,$.false</code>
+  <code>21.CMPM.2...false</code>
+  <code>22.cpGEN.2...false</code>
+  <code>23.DBCC.2...false</code>
+  <code>51C8.DBF.2.D0.,#$.false</code>
+  <code>24.DIVS.2...false</code>
+  <code>25.DIVU.2...false</code>
+  <code>26.EOR.2...false</code>
+  <code>27.EORI.2...false</code>
+  <code>28.EORICCR.2...false</code>
+  <code>29.EORISR.2...false</code>
+  <code>30.EXG.2...false</code>
+  <code>31.EXT.2...false</code>
+  <code>32.EXTB.2...false</code>
+  <code>33.ILLEGAL.2...false</code>
+  <code>4ED5.JMP.2...false</code>
+  <code>4EB9.JSR.4.$..false</code>
+  <code>4EAE.JSR.2...false</code>
+  <code>41F9.LEA.4.$.,A0.false</code>
+  <code>43F9.LEA.4.$.,A1.false</code>
+  <code>45F9.LEA.4.$.,A2.false</code>
+  <code>47F9.LEA.4.$.,A3.false</code>
+  <code>49EC.LEA.2.$.,A4.false</code>
+  <code>49F9.LEA.4.$.,A4.false</code>
+  <code>37.LINK.2...false</code>
+  <code>38.LSL,LSR.2...false</code>
+  <code>1200.MOVE(b).1.D0.,D1.false</code>
+  <code>1211.MOVE(b).1.(A1).,D1.false</code>
+  <code>1219.MOVE(b).1...false</code>
+  <code>1281.MOVE(b).1.D1.,(A1).false</code>
+  <code>12E9.MOVE(b).2.(A1).,(A1)+.false</code>
+  <code>13D1.MOVE(b).4.(A1).,$.false</code>
+  <code>13FC.MOVE(b).6.#$.,$.false</code>
+  <code>317C.MOVE(w).4.#$.,$.false</code>
+  <code>217C.MOVE(l).6.#$.,$.false</code>
+  <code>2279.MOVEA.4.$.,A1.false</code>
+  <code>23C9.MOVE(l).4.A1.,$.false</code>
+  <code>289A.MOVE(l).1.(A2)+.,(A4).false</code>
+  <code>296A.MOVE(l).6.A2.,$.false</code>
+  <code>2C78.MOVEA.2.,..false</code>
+  <code>2C79.MOVEA.4.$.,A6.false</code>
+  <code>303C.MOVE(w).2...false</code>
+  <code>33D2.MOVE(w).4.(A2).,$.false</code>
+  <code>3412.MOVE(w).1.(A2).,D2.false</code>
+  <code>3482.MOVE(w).1.D2.,(A2).false</code>
+  <code>34EA.MOVE(w).2.(A2).,(A2)+.false</code>
+  <code>41.MOVEtoCCR.2...false</code>
+  <code>42.MOVEfromSR.2...false</code>
+  <code>43.MOVEtoSR.2...false</code>
+  <code>44.MOVEUSP.2...false</code>
+  <code>48E7.MOVEM.2...false</code>
+  <code>4CDF.MOVEM.2...false</code>
+  <code>46.MOVEP.2...false</code>
+  <code>47.MOVEQ.2...false</code>
+  <code>C3FC.MULS.2...false</code>
+  <code>49.MULU.2...false</code>
+  <code>50.NBCD.2...false</code>
+  <code>51.NEG.2...false</code>
+  <code>52.NEGX.2...false</code>
+  <code>4E71.NOP.1...false</code>
+  <code>54.NOT.2...false</code>
+  <code>55.OR.2...false</code>
+  <code>56.ORI.2...false</code>
+  <code>486E.PEA.2...false</code>
+  <code>58.RESET.2...false</code>
+  <code>59.ROL,ROR.2...false</code>
+  <code>e5e1.ROXL -(A1).1...false</code>
+  <code>e5e2.ROXL -(A2).1...false</code>
+  <code>e5e3.ROXL -(A3).1...false</code>
+  <code>e5e4.ROXL -(A4).1...false</code>
+  <code>e5e5.ROXL -(A5).1...false</code>
+  <code>e5e6.ROXL -(A6).1...false</code>
+  <code>61.RTE.2...false</code>
+  <code>62.RTR.2...false</code>
+  <code>4E75.RTS.1...false</code>
+  <code>64.SBCD.2...false</code>
+  <code>65.Scc.2...false</code>
+  <code>66.STOP.2...false</code>
+  <code>0401.SUB.2...false</code>
+  <code>0439.SUB.6...false</code>
+  <code>68.SUBA.2...false</code>
+  <code>69.SUBI.2...false</code>
+  <code>70.SUBQ.2...false</code>
+  <code>71.SUBX.2...false</code>
+  <code>72.SWAP.2...false</code>
+  <code>73.TAS.2...false</code>
+  <code>74.TRAP.2...false</code>
+  <code>75.TRAPV.2...false</code>
+  <code>4A11.TST(b).2...false</code>
+  <code>4A13.TST.2...false</code>
+  <code>77.UNLK.2...false</code>
+  <code>6600.BNE(W).2...false</code>
+  <code>66F6.BNE.2...false</code>
+  <code>6700.BEQ.2...false</code>
+  <code>6000.???.2...false</code>
+</codes>
