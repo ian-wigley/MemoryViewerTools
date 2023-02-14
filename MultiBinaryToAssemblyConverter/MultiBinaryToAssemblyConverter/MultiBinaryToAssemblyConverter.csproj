@@ -108,9 +108,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="6502-codes.xml" />
-    <Content Include="68000-codes.xml" />
-    <Content Include="68xx-codes.xml" />
+    <Content Include="6502-codes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="68000-codes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="68xx-codes.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
