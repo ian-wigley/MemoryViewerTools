@@ -9,17 +9,27 @@ namespace MultiBinaryToAssemblyConverterTests
     [TestClass]
     public class ParserUnitTests
     {
+        private PopulateOpCodeList InitOpCodeList()
+        {
+            PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
+            populateOpCodeList.Init("68000");
+            return populateOpCodeList;
+        }
+
         [TestMethod]
         public void Test68000Parser()
         {
             Parser68000 parser = new Parser68000();
             Assert.IsNotNull(parser);
         }
+
         [TestMethod]
-        public void TestConvertToAssembly()
+        public void TestRTSOpcode()
         {
-            Parser68000 parser = new Parser68000();
-            parser.ConvertToAssembly();
+            int opCode = 20085;
+            var oc = InitOpCodeList().GetOpCode(opCode.ToString("X4"));
+            Assert.IsTrue(oc.name == "RTS");
+            Assert.IsTrue(oc.code == "4E75");
         }
     }
 }
