@@ -342,11 +342,11 @@ namespace BinToAssembly
                     {
                         convertToBytes = true;
                     }
-                    AddLabels(ms.GetSelectedMemStartLocation, 
-                        ms.GetSelectedMemEndLocation, 
-                        convertToBytes, 
-                        replacedWithDataCollection, 
-                        firstOccurance, 
+                    AddLabels(ms.GetSelectedMemStartLocation,
+                        ms.GetSelectedMemEndLocation,
+                        convertToBytes,
+                        replacedWithDataCollection,
+                        firstOccurance,
                         lastOccurrance);
                 }
                 else
@@ -385,7 +385,7 @@ namespace BinToAssembly
         }
 
         private void RightWindowToolStripMenuItem_Click(
-            object sender, 
+            object sender,
             EventArgs e)
         {
             Save(passThree);
@@ -410,14 +410,14 @@ namespace BinToAssembly
         }
 
         private void GenerateLabelsToolStripMenuItem_Click(
-            object sender, 
+            object sender,
             EventArgs e)
         {
             GenerateLabels();
         }
 
         private void ClearToolStripMenuItem_Click(
-            object sender, 
+            object sender,
             EventArgs e)
         {
             ClearCollections();
