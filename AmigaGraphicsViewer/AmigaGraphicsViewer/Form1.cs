@@ -25,6 +25,7 @@ namespace MemoryAndGraphicsViewer
         {
             stride = width;
             InitializeComponent();
+            canvas.MouseWheel += CanvasMouseWheel;
             InitializeForm();
             byteviewer = new ByteViewer
             {
@@ -110,6 +111,21 @@ namespace MemoryAndGraphicsViewer
             bmapHeight.Text = "Height: " + height.ToString();
 
             ResumeLayout(false);
+        }
+
+        // https://www.youtube.com/watch?v=POJBq_a1Ea4
+        private void CanvasMouseWheel(object sender, MouseEventArgs e)
+        {
+            if (e.Delta > 0)
+            {
+                canvas.Width += 10;
+                canvas.Height += 10;
+            }
+            else
+            {
+                canvas.Width -= 10;
+                canvas.Height -= 10;
+            }
         }
 
         // Changes the display mode of the byte viewer according to the  
