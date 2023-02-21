@@ -42,22 +42,24 @@ namespace MemoryAndGraphicsViewer
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.canvas = new System.Windows.Forms.PictureBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.bmapHeight = new System.Windows.Forms.Label();
             this.bmapWidth = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.CopyDataLabel = new System.Windows.Forms.Label();
-            this.Copy = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.VScrollBar = new System.Windows.Forms.VScrollBar();
-            this.canvas = new System.Windows.Forms.PictureBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.CopyDataLabel = new System.Windows.Forms.Label();
+            this.Copy = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -134,7 +136,7 @@ namespace MemoryAndGraphicsViewer
             // 
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(776, 791);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Memory Viewer";
@@ -145,7 +147,7 @@ namespace MemoryAndGraphicsViewer
             this.tabPage2.Controls.Add(this.groupBox1);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(776, 791);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Bitmap Viewer";
@@ -153,15 +155,7 @@ namespace MemoryAndGraphicsViewer
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.bmapHeight);
-            this.groupBox1.Controls.Add(this.bmapWidth);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.CopyDataLabel);
-            this.groupBox1.Controls.Add(this.Copy);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.VScrollBar);
+            this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.canvas);
             this.groupBox1.Location = new System.Drawing.Point(8, 6);
             this.groupBox1.Name = "groupBox1";
@@ -170,96 +164,12 @@ namespace MemoryAndGraphicsViewer
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Memory";
             // 
-            // bmapHeight
-            // 
-            this.bmapHeight.AutoSize = true;
-            this.bmapHeight.Location = new System.Drawing.Point(19, 93);
-            this.bmapHeight.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.bmapHeight.Name = "bmapHeight";
-            this.bmapHeight.Size = new System.Drawing.Size(41, 13);
-            this.bmapHeight.TabIndex = 11;
-            this.bmapHeight.Text = "Height:";
-            // 
-            // bmapWidth
-            // 
-            this.bmapWidth.AutoSize = true;
-            this.bmapWidth.Location = new System.Drawing.Point(19, 75);
-            this.bmapWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.bmapWidth.Name = "bmapWidth";
-            this.bmapWidth.Size = new System.Drawing.Size(38, 13);
-            this.bmapWidth.TabIndex = 10;
-            this.bmapWidth.Text = "Width:";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(19, 56);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(63, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "Bitmap size:";
-            // 
-            // CopyDataLabel
-            // 
-            this.CopyDataLabel.AutoSize = true;
-            this.CopyDataLabel.Location = new System.Drawing.Point(324, 372);
-            this.CopyDataLabel.Name = "CopyDataLabel";
-            this.CopyDataLabel.Size = new System.Drawing.Size(124, 13);
-            this.CopyDataLabel.TabIndex = 8;
-            this.CopyDataLabel.Text = "Copy Screen Data to IFF";
-            // 
-            // Copy
-            // 
-            this.Copy.Location = new System.Drawing.Point(344, 388);
-            this.Copy.Name = "Copy";
-            this.Copy.Size = new System.Drawing.Size(75, 23);
-            this.Copy.TabIndex = 7;
-            this.Copy.Text = "Copy";
-            this.Copy.UseVisualStyleBackColor = true;
-            this.Copy.Click += new System.EventHandler(this.IFFButton_Click);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(171, 37);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(16, 13);
-            this.label3.TabIndex = 6;
-            this.label3.Text = "->";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(18, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(94, 13);
-            this.label2.TabIndex = 5;
-            this.label2.Text = "Memory Location :";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(118, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(48, 13);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "0x00000";
-            // 
-            // VScrollBar
-            // 
-            this.VScrollBar.LargeChange = 1;
-            this.VScrollBar.Location = new System.Drawing.Point(526, 90);
-            this.VScrollBar.Name = "VScrollBar";
-            this.VScrollBar.Size = new System.Drawing.Size(22, 174);
-            this.VScrollBar.TabIndex = 3;
-            this.VScrollBar.Scroll += new System.Windows.Forms.ScrollEventHandler(this.VScrollBar_Scroll);
-            // 
             // canvas
             // 
-            this.canvas.Location = new System.Drawing.Point(190, 42);
+            this.canvas.Location = new System.Drawing.Point(199, 31);
             this.canvas.Name = "canvas";
             this.canvas.Size = new System.Drawing.Size(320, 256);
+            this.canvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.canvas.TabIndex = 1;
             this.canvas.TabStop = false;
             // 
@@ -270,6 +180,106 @@ namespace MemoryAndGraphicsViewer
             this.groupBox2.Size = new System.Drawing.Size(200, 100);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.CopyDataLabel);
+            this.groupBox3.Controls.Add(this.Copy);
+            this.groupBox3.Controls.Add(this.VScrollBar);
+            this.groupBox3.Controls.Add(this.bmapHeight);
+            this.groupBox3.Controls.Add(this.bmapWidth);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.label3);
+            this.groupBox3.Controls.Add(this.label2);
+            this.groupBox3.Controls.Add(this.label1);
+            this.groupBox3.Location = new System.Drawing.Point(9, 9);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(184, 398);
+            this.groupBox3.TabIndex = 12;
+            this.groupBox3.TabStop = false;
+            // 
+            // bmapHeight
+            // 
+            this.bmapHeight.AutoSize = true;
+            this.bmapHeight.Location = new System.Drawing.Point(10, 75);
+            this.bmapHeight.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.bmapHeight.Name = "bmapHeight";
+            this.bmapHeight.Size = new System.Drawing.Size(41, 13);
+            this.bmapHeight.TabIndex = 17;
+            this.bmapHeight.Text = "Height:";
+            // 
+            // bmapWidth
+            // 
+            this.bmapWidth.AutoSize = true;
+            this.bmapWidth.Location = new System.Drawing.Point(10, 58);
+            this.bmapWidth.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.bmapWidth.Name = "bmapWidth";
+            this.bmapWidth.Size = new System.Drawing.Size(38, 13);
+            this.bmapWidth.TabIndex = 16;
+            this.bmapWidth.Text = "Width:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(11, 39);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(63, 13);
+            this.label5.TabIndex = 15;
+            this.label5.Text = "Bitmap size:";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(163, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(16, 13);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "->";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(10, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(94, 13);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "Memory Location :";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(110, 21);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(48, 13);
+            this.label1.TabIndex = 12;
+            this.label1.Text = "0x00000";
+            // 
+            // VScrollBar
+            // 
+            this.VScrollBar.LargeChange = 1;
+            this.VScrollBar.Location = new System.Drawing.Point(152, 58);
+            this.VScrollBar.Name = "VScrollBar";
+            this.VScrollBar.Size = new System.Drawing.Size(22, 174);
+            this.VScrollBar.TabIndex = 18;
+            // 
+            // CopyDataLabel
+            // 
+            this.CopyDataLabel.AutoSize = true;
+            this.CopyDataLabel.Location = new System.Drawing.Point(34, 348);
+            this.CopyDataLabel.Name = "CopyDataLabel";
+            this.CopyDataLabel.Size = new System.Drawing.Size(124, 13);
+            this.CopyDataLabel.TabIndex = 20;
+            this.CopyDataLabel.Text = "Copy Screen Data to IFF";
+            // 
+            // Copy
+            // 
+            this.Copy.Location = new System.Drawing.Point(54, 364);
+            this.Copy.Name = "Copy";
+            this.Copy.Size = new System.Drawing.Size(75, 23);
+            this.Copy.TabIndex = 19;
+            this.Copy.Text = "Copy";
+            this.Copy.UseVisualStyleBackColor = true;
             // 
             // GraphicsViewer
             // 
@@ -288,8 +298,9 @@ namespace MemoryAndGraphicsViewer
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -305,20 +316,21 @@ namespace MemoryAndGraphicsViewer
         private TabControl tabControl1;
         private TabPage tabPage2;
         private GroupBox groupBox1;
-        private Label label1;
-        private VScrollBar VScrollBar;
         private PictureBox canvas;
         private TabPage tabPage1;
         private GroupBox groupBox2;
-        private Label label3;
-        private Label label2;
-        private Label CopyDataLabel;
-        private Button Copy;
         private ToolStripMenuItem editToolStripMenuItem;
         private ToolStripMenuItem findToolStripMenuItem;
+        private GroupBox groupBox3;
+        private Label CopyDataLabel;
+        private Button Copy;
+        private VScrollBar VScrollBar;
         private Label bmapHeight;
         private Label bmapWidth;
         private Label label5;
+        private Label label3;
+        private Label label2;
+        private Label label1;
     }
 }
 
