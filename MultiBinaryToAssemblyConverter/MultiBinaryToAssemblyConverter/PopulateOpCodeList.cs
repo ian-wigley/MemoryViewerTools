@@ -11,8 +11,9 @@ namespace BinToAssembly
 
         public List<OpCode> GetOpCodes { get { return m_OpCodes; } }
 
-        public OpCode GetOpCode(string value) {
-            return m_OpCodes.FirstOrDefault(opCode => opCode.code.Equals(value));
+        public OpCode GetOpCode(string value)
+        {
+            return m_OpCodes.FirstOrDefault(opCode => opCode.Code.Equals(value));
         }
 
         private readonly XMLLoader xmlLoader = new XMLLoader();
