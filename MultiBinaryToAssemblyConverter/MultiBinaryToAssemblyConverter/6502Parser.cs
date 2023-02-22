@@ -32,7 +32,7 @@ namespace BinToAssembly
                 pc = startAddress + filePosition;
                 foreach (OpCode oc in m_OpCodes)
                 {
-                    if (oc.code == opCode.ToString("X2"))
+                    if (oc.Code == opCode.ToString("X2"))
                     {
                         ConvertToAssembly(oc, ref line, ref filePosition, fileContent, lineNumber, pc, ref dataStatements, ref illegalOpcodes);
                         //oc.GetCode(          ref line, ref filePosition, fileContent, lineNumber, pc, ref dataStatements, ref illegalOpcodes);
@@ -51,64 +51,64 @@ namespace BinToAssembly
             int pc, ref Dictionary<string, string[]> dataStatements, ref List<string> illegalOpCodes)
         {
             string[] temp;
-            if (oc.numberOfBytes == 1)
+            if (oc.NumberOfBytes == 1)
             {
-                if (oc.illegal)
+                if (oc.Illegal)
                 {
                     // Add the programme counter location to the list of illegal opcodes found
                     illegalOpCodes.Add(pc.ToString("X4"));
                 }
 
-                temp = new string[1] { "!byte $" + oc.code };
+                temp = new string[1] { "!byte $" + oc.Code };
                 dataStatements.Add(pc.ToString("X4"), temp);
-                line += "          " + oc.name;
+                line += "          " + oc.Name;
                 filePosition += 1;
             }
-            if (oc.numberOfBytes == 2)
+            if (oc.NumberOfBytes == 2)
             {
-                if (oc.illegal)
+                if (oc.Illegal)
                 {
                     illegalOpCodes.Add(pc.ToString("X4"));
                 }
                 temp = new string[2];
-                temp[0] = "!byte $" + oc.code;
+                temp[0] = "!byte $" + oc.Code;
                 temp[1] = "!byte $" + fileStuff[filePosition + 1].ToString("X2");
                 dataStatements.Add(pc.ToString("X4"), temp);
                 line += " " + fileStuff[filePosition + 1].ToString("X2");
 
-                if (oc.name.Contains("BCC") || oc.name.Contains("BCS") ||
-                    oc.name.Contains("BEQ") || oc.name.Contains("BMI") ||
-                    oc.name.Contains("BNE") || oc.name.Contains("BPL") ||
-                    oc.name.Contains("BVC") || oc.name.Contains("BVS"))
+                if (oc.Name.Contains("BCC") || oc.Name.Contains("BCS") ||
+                    oc.Name.Contains("BEQ") || oc.Name.Contains("BMI") ||
+                    oc.Name.Contains("BNE") || oc.Name.Contains("BPL") ||
+                    oc.Name.Contains("BVC") || oc.Name.Contains("BVS"))
                 {
                     sbyte s = unchecked((sbyte)fileStuff[filePosition + 1]);
                     s += 2;
-                    line += "       " + oc.name + " " + oc.prefix + (pc + s).ToString("X4");
+                    line += "       " + oc.Name + " " + oc.Prefix + (pc + s).ToString("X4");
                 }
                 else
                 {
-                    line += "       " + oc.name + " " + oc.prefix + fileStuff[filePosition + 1].ToString("X2") + oc.suffix;
+                    line += "       " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 1].ToString("X2") + oc.Suffix;
                 }
                 filePosition += 2;
             }
-            else if (oc.numberOfBytes == 3 && (filePosition < fileStuff.Length - 3))
+            else if (oc.NumberOfBytes == 3 && (filePosition < fileStuff.Length - 3))
             {
-                if (oc.illegal)
+                if (oc.Illegal)
                 {
                     illegalOpCodes.Add(pc.ToString("X4"));
                 }
 
                 temp = new string[3];
-                temp[0] = "!byte $" + oc.code;
+                temp[0] = "!byte $" + oc.Code;
                 temp[1] = "!byte $" + fileStuff[filePosition + 1].ToString("X2");
                 temp[2] = "!byte $" + fileStuff[filePosition + 2].ToString("X2");
                 dataStatements.Add(pc.ToString("X4"), temp);
 
                 line += " " + fileStuff[filePosition + 1].ToString("X2") + " " + fileStuff[filePosition + 2].ToString("X2");
-                line += "    " + oc.name + " " + oc.prefix + fileStuff[filePosition + 2].ToString("X2") + fileStuff[filePosition + 1].ToString("X2") + oc.suffix;
+                line += "    " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 2].ToString("X2") + fileStuff[filePosition + 1].ToString("X2") + oc.Suffix;
                 filePosition += 3;
             }
-            else if (oc.numberOfBytes == 3 && (filePosition == fileStuff.Length - 2))
+            else if (oc.NumberOfBytes == 3 && (filePosition == fileStuff.Length - 2))
             {
                 filePosition = fileStuff.Length;
             }
