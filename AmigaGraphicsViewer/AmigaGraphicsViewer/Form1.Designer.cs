@@ -42,24 +42,26 @@ namespace MemoryAndGraphicsViewer
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.canvas = new System.Windows.Forms.PictureBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.CopyDataLabel = new System.Windows.Forms.Label();
+            this.Copy = new System.Windows.Forms.Button();
+            this.VScrollBar = new System.Windows.Forms.VScrollBar();
             this.bmapHeight = new System.Windows.Forms.Label();
             this.bmapWidth = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.VScrollBar = new System.Windows.Forms.VScrollBar();
-            this.CopyDataLabel = new System.Windows.Forms.Label();
-            this.Copy = new System.Windows.Forms.Button();
+            this.canvas = new System.Windows.Forms.PictureBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -155,31 +157,14 @@ namespace MemoryAndGraphicsViewer
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Controls.Add(this.groupBox3);
-            this.groupBox1.Controls.Add(this.canvas);
             this.groupBox1.Location = new System.Drawing.Point(8, 6);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(760, 467);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Memory";
-            // 
-            // canvas
-            // 
-            this.canvas.Location = new System.Drawing.Point(199, 31);
-            this.canvas.Name = "canvas";
-            this.canvas.Size = new System.Drawing.Size(320, 256);
-            this.canvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.canvas.TabIndex = 1;
-            this.canvas.TabStop = false;
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Location = new System.Drawing.Point(0, 0);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 100);
-            this.groupBox2.TabIndex = 0;
-            this.groupBox2.TabStop = false;
             // 
             // groupBox3
             // 
@@ -197,6 +182,32 @@ namespace MemoryAndGraphicsViewer
             this.groupBox3.Size = new System.Drawing.Size(184, 398);
             this.groupBox3.TabIndex = 12;
             this.groupBox3.TabStop = false;
+            // 
+            // CopyDataLabel
+            // 
+            this.CopyDataLabel.AutoSize = true;
+            this.CopyDataLabel.Location = new System.Drawing.Point(34, 348);
+            this.CopyDataLabel.Name = "CopyDataLabel";
+            this.CopyDataLabel.Size = new System.Drawing.Size(124, 13);
+            this.CopyDataLabel.TabIndex = 20;
+            this.CopyDataLabel.Text = "Copy Screen Data to IFF";
+            // 
+            // Copy
+            // 
+            this.Copy.Location = new System.Drawing.Point(54, 364);
+            this.Copy.Name = "Copy";
+            this.Copy.Size = new System.Drawing.Size(75, 23);
+            this.Copy.TabIndex = 19;
+            this.Copy.Text = "Copy";
+            this.Copy.UseVisualStyleBackColor = true;
+            // 
+            // VScrollBar
+            // 
+            this.VScrollBar.LargeChange = 1;
+            this.VScrollBar.Location = new System.Drawing.Point(152, 58);
+            this.VScrollBar.Name = "VScrollBar";
+            this.VScrollBar.Size = new System.Drawing.Size(22, 174);
+            this.VScrollBar.TabIndex = 18;
             // 
             // bmapHeight
             // 
@@ -255,31 +266,31 @@ namespace MemoryAndGraphicsViewer
             this.label1.TabIndex = 12;
             this.label1.Text = "0x00000";
             // 
-            // VScrollBar
+            // canvas
             // 
-            this.VScrollBar.LargeChange = 1;
-            this.VScrollBar.Location = new System.Drawing.Point(152, 58);
-            this.VScrollBar.Name = "VScrollBar";
-            this.VScrollBar.Size = new System.Drawing.Size(22, 174);
-            this.VScrollBar.TabIndex = 18;
+            this.canvas.Location = new System.Drawing.Point(3, 3);
+            this.canvas.Name = "canvas";
+            this.canvas.Size = new System.Drawing.Size(320, 256);
+            this.canvas.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.canvas.TabIndex = 1;
+            this.canvas.TabStop = false;
             // 
-            // CopyDataLabel
+            // groupBox2
             // 
-            this.CopyDataLabel.AutoSize = true;
-            this.CopyDataLabel.Location = new System.Drawing.Point(34, 348);
-            this.CopyDataLabel.Name = "CopyDataLabel";
-            this.CopyDataLabel.Size = new System.Drawing.Size(124, 13);
-            this.CopyDataLabel.TabIndex = 20;
-            this.CopyDataLabel.Text = "Copy Screen Data to IFF";
+            this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(200, 100);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
             // 
-            // Copy
+            // panel1
             // 
-            this.Copy.Location = new System.Drawing.Point(54, 364);
-            this.Copy.Name = "Copy";
-            this.Copy.Size = new System.Drawing.Size(75, 23);
-            this.Copy.TabIndex = 19;
-            this.Copy.Text = "Copy";
-            this.Copy.UseVisualStyleBackColor = true;
+            this.panel1.AutoScroll = true;
+            this.panel1.Controls.Add(this.canvas);
+            this.panel1.Location = new System.Drawing.Point(199, 19);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(476, 388);
+            this.panel1.TabIndex = 13;
             // 
             // GraphicsViewer
             // 
@@ -298,9 +309,10 @@ namespace MemoryAndGraphicsViewer
             this.tabControl1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.canvas)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -331,6 +343,7 @@ namespace MemoryAndGraphicsViewer
         private Label label3;
         private Label label2;
         private Label label1;
+        private Panel panel1;
     }
 }
 
