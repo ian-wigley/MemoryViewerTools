@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -220,91 +217,94 @@ namespace MemoryAndGraphicsViewer
 
         private void SaveAsMenu_Click(object sender, EventArgs e)
         {
-            SaveFileDialog sfd = new SaveFileDialog
-            {
-                Filter = "IFF file (*.iff)|*.iff|CSV file (*.csv)|*.csv|Binary file (*.bin)|*.bin|Text file (*.txt)|*.txt|All files (*.*)|*.*",
-                AddExtension = true
-            };
 
-            if (sfd.ShowDialog() != DialogResult.OK)
-            {
-                return;
-            }
+            // Not implemented
 
-            byte[] bytes = byteviewer.GetBytes();
-            int len = bytes.Length;
+            //SaveFileDialog sfd = new SaveFileDialog
+            //{
+            //    Filter = "IFF file (*.iff)|*.iff|CSV file (*.csv)|*.csv|Binary file (*.bin)|*.bin|Text file (*.txt)|*.txt|All files (*.*)|*.*",
+            //    AddExtension = true
+            //};
 
-            if (sfd.FileName.ToLower().Contains(".bin"))
-            {
-                DialogResult result = MessageBox.Show("Do you want to save a chunk of memory ?", "Oy !", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    MemoryLocations ms = new MemoryLocations(len);
-                    if (ms.ShowDialog() == DialogResult.OK)
-                    {
-                        CopyDataAndWrite(ms.GetMemLowLoc, ms.GetMemHighLoc, bytes, sfd.FileName);
-                    }
-                }
-                //// Create a copy of the original byte array as specified by the user
-                //byte[] userSelecion = new byte[0x10000];
-                //int count = 0;
-                //for(int i = 0x31000; i < (0x31000 + 0x10000); i++)
-                //{
-                //    userSelecion[count++] = bytes[i];
-                //}
-                //File.WriteAllBytes(sfd.FileName, userSelecion);
-            }
+            //if (sfd.ShowDialog() != DialogResult.OK)
+            //{
+            //    return;
+            //}
+
+            //byte[] bytes = byteviewer.GetBytes();
+            //int len = bytes.Length;
+
+            //if (sfd.FileName.ToLower().Contains(".bin"))
+            //{
+            //    DialogResult result = MessageBox.Show("Do you want to save a chunk of memory ?", "Oy !", MessageBoxButtons.YesNo);
+            //    if (result == DialogResult.Yes)
+            //    {
+            //        MemoryLocations ms = new MemoryLocations(len);
+            //        if (ms.ShowDialog() == DialogResult.OK)
+            //        {
+            //            CopyDataAndWrite(ms.GetMemLowLoc, ms.GetMemHighLoc, bytes, sfd.FileName);
+            //        }
+            //    }
+            //    //// Create a copy of the original byte array as specified by the user
+            //    //byte[] userSelecion = new byte[0x10000];
+            //    //int count = 0;
+            //    //for(int i = 0x31000; i < (0x31000 + 0x10000); i++)
+            //    //{
+            //    //    userSelecion[count++] = bytes[i];
+            //    //}
+            //    //File.WriteAllBytes(sfd.FileName, userSelecion);
+            //}
 
 
-            if (sfd.FileName.ToLower().Contains(".csv"))
-            {
-                //byte[] copy = new byte[0x4c];// bytes.Length - 0x0853];
-                //int count = 0;
-                //for (int i = 0x0854; i < 0x8a0; i++) // bytes.Length; i++)
-                //{
-                //    copy[count++] = bytes[i];
-                //}
-                List<string> datawords = new List<string>();
-                for (int i = 0; i < bytes.Length - 4; i += 4) // bytes.Length; i++)
-                {
-                    //string hex = bytes[i].ToString("X2");// + bytes[i + 1].ToString("X2");// "03c";//x3c";
-                    var s = SeperateString(string.Join("", bytes[i].ToString("X2").Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0'))));
-                    var t = SeperateString(string.Join("", bytes[i + 1].ToString("X2").Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0'))));
-                    var u = SeperateString(string.Join("", bytes[i + 2].ToString("X2").Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0'))));
-                    var v = SeperateString(string.Join("", bytes[i + 3].ToString("X2").Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0'))));
+            //if (sfd.FileName.ToLower().Contains(".csv"))
+            //{
+            //    //byte[] copy = new byte[0x4c];// bytes.Length - 0x0853];
+            //    //int count = 0;
+            //    //for (int i = 0x0854; i < 0x8a0; i++) // bytes.Length; i++)
+            //    //{
+            //    //    copy[count++] = bytes[i];
+            //    //}
+            //    List<string> datawords = new List<string>();
+            //    for (int i = 0; i < bytes.Length - 4; i += 4) // bytes.Length; i++)
+            //    {
+            //        //string hex = bytes[i].ToString("X2");// + bytes[i + 1].ToString("X2");// "03c";//x3c";
+            //        var s = SeperateString(string.Join("", bytes[i].ToString("X2").Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0'))));
+            //        var t = SeperateString(string.Join("", bytes[i + 1].ToString("X2").Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0'))));
+            //        var u = SeperateString(string.Join("", bytes[i + 2].ToString("X2").Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0'))));
+            //        var v = SeperateString(string.Join("", bytes[i + 3].ToString("X2").Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0'))));
 
-                    datawords.Add(s + t + " " + u + v);
+            //        datawords.Add(s + t + " " + u + v);
 
-                    //datawords.Add("dc.w $" + bytes[i].ToString("X2") + bytes[i + 1].ToString("X2")
-                    //    + ",$" + bytes[i + 2].ToString("X2") + bytes[i + 3].ToString("X2")
-                    //    + " %" + s
-                    //    + " %" + t
-                    //    + " %" + u
-                    //    + " %" + v
-                    //    );
-                }
+            //        //datawords.Add("dc.w $" + bytes[i].ToString("X2") + bytes[i + 1].ToString("X2")
+            //        //    + ",$" + bytes[i + 2].ToString("X2") + bytes[i + 3].ToString("X2")
+            //        //    + " %" + s
+            //        //    + " %" + t
+            //        //    + " %" + u
+            //        //    + " %" + v
+            //        //    );
+            //    }
 
-                // string binary = "%" + string.Join(", %", bytes.Select(x => Convert.ToString(x, 2/*NumberFormatInfo.InvariantInfo*/).PadLeft(8, '0') + "\n"));
-                // string hex = "03c";//x3c";
-                // var s = string.Join("", hex.Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0')));
+            //    // string binary = "%" + string.Join(", %", bytes.Select(x => Convert.ToString(x, 2/*NumberFormatInfo.InvariantInfo*/).PadLeft(8, '0') + "\n"));
+            //    // string hex = "03c";//x3c";
+            //    // var s = string.Join("", hex.Select(x => Convert.ToString(Convert.ToInt32(x + "", 16), 2).PadLeft(4, '0')));
 
-                File.WriteAllLines(sfd.FileName, datawords);
-            }
-            if (sfd.FileName.ToLower().Contains(".txt"))
-            {
-                string[] stringArray = new string[bytes.Length];
-                for (int i = 0; i < bytes.Length; i++)
-                {
-                    stringArray[i] = bytes[i].ToString();
-                }
-                //File.WriteAllLines(sfd.FileName, stringArray);
-                File.WriteAllBytes(sfd.FileName, bytes);
-            }
+            //    File.WriteAllLines(sfd.FileName, datawords);
+            //}
+            //if (sfd.FileName.ToLower().Contains(".txt"))
+            //{
+            //    string[] stringArray = new string[bytes.Length];
+            //    for (int i = 0; i < bytes.Length; i++)
+            //    {
+            //        stringArray[i] = bytes[i].ToString();
+            //    }
+            //    //File.WriteAllLines(sfd.FileName, stringArray);
+            //    File.WriteAllBytes(sfd.FileName, bytes);
+            //}
 
-            if (sfd.FileName.ToLower().Contains(".iff"))
-            {
-                BuildIFFandWrite(sfd.FileName, byteSelection);
-            }
+            //if (sfd.FileName.ToLower().Contains(".iff"))
+            //{
+            //    BuildIFFandWrite(sfd.FileName, byteSelection);
+            //}
         }
 
         private string SeperateString(string input)
