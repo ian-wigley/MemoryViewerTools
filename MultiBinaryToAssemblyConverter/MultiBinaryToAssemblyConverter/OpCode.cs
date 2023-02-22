@@ -27,12 +27,22 @@ namespace BinToAssembly
             m_illegal = illegal;
         }
 
-        public string code { get { return m_code; } }
-        public string name { get { return m_name; } }
-        public int numberOfBytes { get { return m_numberOfBytes; } }
-        public string prefix { get { return m_prefix; } }
-        public string suffix { get { return m_suffix; } }
-        public bool illegal { get { return m_illegal; } }
+        public string Code { get { return m_code; } }
+        public string Name { get { return m_name; } }
+        public int NumberOfBytes { get { return m_numberOfBytes; } }
+        public string Prefix { get { return m_prefix; } }
+        public string Suffix { get { return m_suffix; } }
+        public bool Illegal { get { return m_illegal; } }
+
+        /// <summary>
+        /// Build a Formated string containing the relevaent OpCode detail.
+        /// </summary>
+        /// <returns>The formated string.</returns>
+        public string Format(ref int filePosition, byte[] binaryFileData)
+        {
+            filePosition += 1;
+            return "       " + Name + " " + Prefix;
+        }
   
     }
 }
