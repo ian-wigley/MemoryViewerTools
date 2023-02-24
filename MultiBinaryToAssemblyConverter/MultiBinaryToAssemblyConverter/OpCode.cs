@@ -12,11 +12,11 @@ namespace BinToAssembly
         private string m_suffix = "";
 
         public OpCode(
-            string code, 
-            string name, 
-            int numberOfBytes, 
-            string prefix, 
-            string suffix, 
+            string code,
+            string name,
+            int numberOfBytes,
+            string prefix,
+            string suffix,
             bool illegal)
         {
             m_code = code;
@@ -38,11 +38,16 @@ namespace BinToAssembly
         /// Build a Formated string containing the relevaent OpCode detail.
         /// </summary>
         /// <returns>The formated string.</returns>
-        public string Format(ref int filePosition, byte[] binaryFileData)
+        public string Format(ref int filePosition, ref short[] binaryFileData)
         {
             filePosition += 1;
-            return "       " + Name + " " + Prefix;
+            string hex = "";
+
+            for (int i = 0; i < binaryFileData.Length; i++)
+            {
+                hex += binaryFileData[i].ToString("X4");
+            }
+            return "       " + Name + " " + Prefix + hex;
         }
-  
     }
 }
