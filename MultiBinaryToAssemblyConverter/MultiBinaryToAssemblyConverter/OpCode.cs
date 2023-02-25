@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace BinToAssembly
 {
@@ -10,6 +12,7 @@ namespace BinToAssembly
         private int m_numberOfBytes = 0;
         private string m_prefix = "";
         private string m_suffix = "";
+        private MethodInfo m_methodInfo;
 
         public OpCode(
             string code,
@@ -17,7 +20,8 @@ namespace BinToAssembly
             int numberOfBytes,
             string prefix,
             string suffix,
-            bool illegal)
+            bool illegal
+            )
         {
             m_code = code;
             m_name = name;
@@ -25,6 +29,8 @@ namespace BinToAssembly
             m_prefix = prefix;
             m_suffix = suffix;
             m_illegal = illegal;
+            Type type = typeof(OpCode);
+            m_methodInfo = type.GetMethod(name);
         }
 
         public string Code { get { return m_code; } }
@@ -38,16 +44,28 @@ namespace BinToAssembly
         /// Build a Formated string containing the relevaent OpCode detail.
         /// </summary>
         /// <returns>The formated string.</returns>
-        public string Format(ref int filePosition, ref short[] binaryFileData)
+        public string Format(ref int filePosition, ref ushort[] binaryFileData)
         {
             filePosition += 1;
             string hex = "";
 
-            for (int i = 0; i < binaryFileData.Length; i++)
+            if (NumberOfBytes > 4)
             {
-                hex += binaryFileData[i].ToString("X4");
+                m_methodInfo.Invoke(m_name, null);
+            }
+            else
+            {
+                for (int i = 0; i < binaryFileData.Length; i++)
+                {
+                    hex += binaryFileData[i].ToString("X4");
+                }
             }
             return "       " + Name + " " + Prefix + hex;
+        }
+
+        public void JSR()
+        {
+            var breakpoint = true;
         }
     }
 }
