@@ -61,7 +61,7 @@ namespace MultiBinaryToAssemblyConverterTests
             int opCode = 0x4e75;
             var oc = InitOpCodeList().GetOpCode(opCode.ToString("X4"));
             int testInt = 1;
-            var data = new short[1];
+            var data = new ushort[1];
             var formatted = oc.Format(ref testInt, ref data);
             Assert.IsTrue(formatted.Contains("RTS"));
         }
@@ -72,7 +72,7 @@ namespace MultiBinaryToAssemblyConverterTests
             int opCode = 0x13fc;
             var oc = InitOpCodeList().GetOpCode(opCode.ToString("X4"));
             int testInt = 1;
-            var data = new short[1];
+            var data = new ushort[1];
             var formatted = oc.Format(ref testInt, ref data);
             Assert.IsTrue(formatted.Contains("MOVE.B"));
         }
@@ -83,19 +83,21 @@ namespace MultiBinaryToAssemblyConverterTests
             int opCode = 0x4eb9;
             var oc = InitOpCodeList().GetOpCode(opCode.ToString("X4"));
             int testInt = 1;
-            var data = new short[] { 0x0004, 0x0014 };
+            var data = new ushort[] { 0x0004, 0x0014 };
             var formatted = oc.Format(ref testInt, ref data);
             Assert.IsTrue(formatted.Contains("JSR"));
         }
 
-        [DataRow(0x4eb9, "JSR", new short[] { 0x0004, 0x0014 })]
+        [DataRow(0x4eb9, "JSR $00040014", new short[] { 0x0004, 0x0014 })]
+        [DataRow(0x13fc, "MOVE.B #$01,$0006c2a0", new ushort[] { 0x0001, 0x0006, 0xc2a0 })]
+        [DataRow(0x08f9, "BSET.B #$0001,$00bfe001", new ushort[] { 0x0001, 0x00bf, 0xe001 })]
         [DataTestMethod]
-        public void TestMultiOpcodes(int op, string name, short[] data)
+        public void TestMultiOpcodes(int op, string expected, ushort[] data)
         {
             var oc = InitOpCodeList().GetOpCode(op.ToString("X4"));
             int testInt = 1;
             var formatted = oc.Format(ref testInt, ref data);
-            Assert.IsTrue(formatted.Contains("JSR $00040014"));
+            Assert.IsTrue(formatted.Contains(expected));
         }
 
 
