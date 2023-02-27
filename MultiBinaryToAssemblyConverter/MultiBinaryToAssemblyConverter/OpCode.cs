@@ -13,6 +13,7 @@ namespace BinToAssembly
         private string m_prefix = "";
         private string m_suffix = "";
         private MethodInfo m_methodInfo;
+        private string m_methodName;
 
         public OpCode(
             string code,
@@ -20,6 +21,7 @@ namespace BinToAssembly
             int numberOfBytes,
             string prefix,
             string suffix,
+            string methodName,
             bool illegal
             )
         {
@@ -28,9 +30,10 @@ namespace BinToAssembly
             m_numberOfBytes = numberOfBytes;
             m_prefix = prefix;
             m_suffix = suffix;
-            m_illegal = illegal;
+            m_methodName = methodName;// + "()";
             Type type = typeof(OpCode);
-            m_methodInfo = type.GetMethod(name);
+            m_methodInfo = type.GetMethod(methodName);
+            m_illegal = illegal;
         }
 
         public string Code { get { return m_code; } }
@@ -44,28 +47,39 @@ namespace BinToAssembly
         /// Build a Formated string containing the relevaent OpCode detail.
         /// </summary>
         /// <returns>The formated string.</returns>
-        public string Format(ref int filePosition, ref ushort[] binaryFileData)
+        public string Format(ref int filePosition, ushort[] binaryFileData)
         {
             filePosition += 1;
-            string hex = "";
+            string detail = "";
 
-            if (NumberOfBytes > 4)
+            // If additional formatting is required, bounce out to the relevant method.
+            if (m_methodInfo != null)
             {
-                m_methodInfo.Invoke(m_name, null);
+                var parameters = new object[] { binaryFileData };
+                detail += (string)m_methodInfo.Invoke(this, parameters);
             }
-            else
-            {
-                for (int i = 0; i < binaryFileData.Length; i++)
-                {
-                    hex += binaryFileData[i].ToString("X4");
-                }
-            }
-            return "       " + Name + " " + Prefix + hex;
+
+            return "       " + Name + " " + Prefix + detail;
         }
 
-        public void JSR()
+        public string Hex(ushort[] binaryFileData)
         {
-            var breakpoint = true;
+            string hex = "";
+            for (int i = 0; i < binaryFileData.Length; i++)
+            {
+                hex += binaryFileData[i].ToString("X4");
+            }
+            return hex;
+        }
+
+        public string JSR(ushort[] binaryFileData)
+        {
+            return Hex(binaryFileData);
+        }
+
+        public string MOVE_B(ushort[] binaryFileData)
+        {
+            return "01,$0006c2a0";
         }
     }
 }
