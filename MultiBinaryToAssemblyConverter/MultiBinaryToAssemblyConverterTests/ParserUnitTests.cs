@@ -62,7 +62,7 @@ namespace MultiBinaryToAssemblyConverterTests
             var oc = InitOpCodeList().GetOpCode(opCode.ToString("X4"));
             int testInt = 1;
             var data = new ushort[1];
-            var formatted = oc.Format(ref testInt, ref data);
+            var formatted = oc.Format(ref testInt, data);
             Assert.IsTrue(formatted.Contains("RTS"));
         }
 
@@ -73,7 +73,7 @@ namespace MultiBinaryToAssemblyConverterTests
             var oc = InitOpCodeList().GetOpCode(opCode.ToString("X4"));
             int testInt = 1;
             var data = new ushort[1];
-            var formatted = oc.Format(ref testInt, ref data);
+            var formatted = oc.Format(ref testInt, data);
             Assert.IsTrue(formatted.Contains("MOVE.B"));
         }
 
@@ -84,7 +84,7 @@ namespace MultiBinaryToAssemblyConverterTests
             var oc = InitOpCodeList().GetOpCode(opCode.ToString("X4"));
             int testInt = 1;
             var data = new ushort[] { 0x0004, 0x0014 };
-            var formatted = oc.Format(ref testInt, ref data);
+            var formatted = oc.Format(ref testInt, data);
             Assert.IsTrue(formatted.Contains("JSR"));
         }
 
@@ -96,7 +96,7 @@ namespace MultiBinaryToAssemblyConverterTests
         {
             var oc = InitOpCodeList().GetOpCode(op.ToString("X4"));
             int testInt = 1;
-            var formatted = oc.Format(ref testInt, ref data);
+            var formatted = oc.Format(ref testInt, data);
             Assert.IsTrue(formatted.Contains(expected));
         }
 
