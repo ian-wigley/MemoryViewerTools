@@ -26,7 +26,8 @@ namespace BinToAssembly
                         {
                             // Split the line using the delimiter
                             string[] split = reader.Value.Split('¬');
-                            m_OpCodes.Add(new OpCode(split[0], split[1], int.Parse(split[2]), split[3], split[4], bool.Parse(split[5])));
+                            var method = split[1].Replace(".", "_");
+                            m_OpCodes.Add(new OpCode(split[0], split[1], int.Parse(split[2]), split[3], split[4], method, bool.Parse(split[5])));
                         }
 
                         if (reader.Value.Equals(processor))
