@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace BinToAssembly
@@ -30,7 +29,7 @@ namespace BinToAssembly
             m_numberOfBytes = numberOfBytes;
             m_prefix = prefix;
             m_suffix = suffix;
-            m_methodName = methodName;// + "()";
+            m_methodName = methodName;
             Type type = typeof(OpCode);
             m_methodInfo = type.GetMethod(methodName);
             m_illegal = illegal;
@@ -59,7 +58,7 @@ namespace BinToAssembly
                 detail += (string)m_methodInfo.Invoke(this, parameters);
             }
 
-            return "       " + Name + " " + Prefix + detail;
+            return "       " + Name + " " + detail;
         }
 
         public string Hex(ushort[] binaryFileData)
@@ -72,14 +71,77 @@ namespace BinToAssembly
             return hex;
         }
 
+        public string BNE_W(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string BSR(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string BSET_B(ushort[] binaryFileData)
+        {
+            string result = (binaryFileData[1].ToString("X4") + binaryFileData[2].ToString("X4")).ToLower();
+            return Prefix + unchecked((sbyte)binaryFileData[0]).ToString("X4").ToLower() + Suffix + result;
+        }
+
+        public string BTEST_B(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string CLR_W(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string CLR_L(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string CMP(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
         public string JSR(ushort[] binaryFileData)
         {
-            return Hex(binaryFileData);
+            return Prefix + Hex(binaryFileData);
+        }
+
+        public string LEA_L(ushort[] binaryFileData)
+        {
+            return "";
         }
 
         public string MOVE_B(ushort[] binaryFileData)
         {
-            return "01,$0006c2a0";
+            string result = (binaryFileData[1].ToString("X4") + binaryFileData[2].ToString("X4")).ToLower();
+            return Prefix + unchecked((sbyte)binaryFileData[0]).ToString("X2") + Suffix + result;
         }
+
+        public string MOVE_W(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string MOVE_L(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string MOVEA_L(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string RTS(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
     }
 }
