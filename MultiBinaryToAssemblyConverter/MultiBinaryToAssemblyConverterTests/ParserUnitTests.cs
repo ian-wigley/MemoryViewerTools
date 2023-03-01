@@ -91,6 +91,12 @@ namespace MultiBinaryToAssemblyConverterTests
         [DataRow(0x4eb9, "JSR $00040014", new short[] { 0x0004, 0x0014 })]
         [DataRow(0x13fc, "MOVE.B #$01,$0006c2a0", new ushort[] { 0x0001, 0x0006, 0xc2a0 })]
         [DataRow(0x08f9, "BSET.B #$0001,$00bfe001", new ushort[] { 0x0001, 0x00bf, 0xe001 })]
+        [DataRow(0x4eae, "JSR -132,(A6)", new ushort[] { 0xff7c })]
+        [DataRow(0x41f9, "LEA.L $00dff000,A0", new ushort[] { 0x00df, 0xf000 })]
+        [DataRow(0x217c, "MOVE.L #$000310c2,80(A0)", new ushort[] { 0x0003, 0x10c2, 0x0080 })]
+        [DataRow(0x317c, "MOVE.W #$8040,96(A0)", new ushort[] { 0x8040, 0x0096 })]
+        [DataRow(0x0c39, "CMP.B #$80,$00dff006", new ushort[] { 0x0080, 0x00df, 0xf006 })]
+        [DataRow(0x6600, "BNE.W #$fff6", new ushort[] { 0xfff6 })]
         [DataTestMethod]
         public void TestMultiOpcodes(int op, string expected, ushort[] data)
         {
@@ -100,8 +106,9 @@ namespace MultiBinaryToAssemblyConverterTests
             Assert.IsTrue(formatted.Contains(expected));
         }
 
-
         /*
+         * Example Code
+         * 
         00031000 4eb9 0004 0014           JSR $00040014
         00031006 13fc 0001 0006 c2a0      MOVE.B #$01,$0006c2a0 [00]
         0003100E 13fc 0001 0006 c18d      MOVE.B #$01,$0006c18d [00]
