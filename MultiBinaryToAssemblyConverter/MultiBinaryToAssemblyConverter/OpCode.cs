@@ -68,12 +68,12 @@ namespace BinToAssembly
             {
                 hex += binaryFileData[i].ToString("X4");
             }
-            return hex;
+            return hex.ToLower();
         }
 
         public string BNE_W(ushort[] binaryFileData)
         {
-            return "";
+            return Prefix + Hex(binaryFileData);
         }
 
         public string BSR(ushort[] binaryFileData)
@@ -102,19 +102,26 @@ namespace BinToAssembly
             return "";
         }
 
-        public string CMP(ushort[] binaryFileData)
+        public string CMP_B(ushort[] binaryFileData)
         {
-            return "";
+            return Prefix + binaryFileData[0].ToString("X2") + Suffix + (binaryFileData[1].ToString("X4") + binaryFileData[2].ToString("X4")).ToLower();
         }
 
         public string JSR(ushort[] binaryFileData)
         {
-            return Prefix + Hex(binaryFileData);
+            if (binaryFileData.Length == 1)
+            {
+                return "-132,(A6)";
+            }
+            else
+            {
+                return Prefix + Hex(binaryFileData);
+            }
         }
 
         public string LEA_L(ushort[] binaryFileData)
         {
-            return "";
+            return Prefix + Hex(binaryFileData) + Suffix;
         }
 
         public string MOVE_B(ushort[] binaryFileData)
@@ -125,12 +132,13 @@ namespace BinToAssembly
 
         public string MOVE_W(ushort[] binaryFileData)
         {
-            return "";
+            return Prefix + binaryFileData[0].ToString("X4") + "," + binaryFileData[1].ToString("X2") + "(A0)";
         }
 
         public string MOVE_L(ushort[] binaryFileData)
         {
-            return "";
+            string result = (binaryFileData[0].ToString("X4") + binaryFileData[1].ToString("X4")).ToLower();
+            return Prefix + result + "," + binaryFileData[2].ToString("X2") + "(A0)";
         }
 
         public string MOVEA_L(ushort[] binaryFileData)
