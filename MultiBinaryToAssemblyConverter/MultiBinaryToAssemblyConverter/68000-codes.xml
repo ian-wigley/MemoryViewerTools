@@ -120,7 +120,7 @@
   <code>4A11¬TST(b)¬2¬¬¬false</code>
   <code>4A13¬TST¬2¬¬¬false</code>
   <code>77¬UNLK¬2¬¬¬false</code>
-  <code>6600¬BNE.W¬2¬¬¬false</code>
+  <code>6600¬BNE.W¬2¬#$¬¬false</code>
   <code>66F6¬BNE¬2¬¬¬false</code>
   <code>6700¬BEQ¬2¬¬¬false</code>
   <code>6000¬???¬2¬¬¬false</code>
