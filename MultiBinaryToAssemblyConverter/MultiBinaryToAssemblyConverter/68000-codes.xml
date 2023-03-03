@@ -18,9 +18,9 @@
   <code>11¬BCLR¬2¬¬¬false</code>
   <code>6008¬BRA¬2¬¬¬false</code>
   <code>08F9¬BSET.B¬6¬#$¬,$¬false</code>
-  <code>6100¬BSR¬2¬¬¬false</code>
+  <code>6100¬BSR.W¬2¬#$¬¬false</code>
   <code>0828¬BTST¬2¬#¬,$¬false</code>
-  <code>0839¬BTST.B¬2¬#¬,$¬false</code>
+  <code>0839¬BTST.B¬2¬#$¬,$¬false</code>
   <code>16¬CHK¬2¬¬¬false</code>
   <code>4268¬CLR.W A0¬2¬¬¬false</code>
   <code>42A8¬CLR.L A0¬2¬¬¬false</code>
