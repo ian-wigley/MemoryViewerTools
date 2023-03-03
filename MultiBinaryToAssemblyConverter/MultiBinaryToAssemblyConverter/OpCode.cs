@@ -73,12 +73,13 @@ namespace BinToAssembly
 
         public string BNE_W(ushort[] binaryFileData)
         {
-            return Prefix + Hex(binaryFileData);
+            var difference = (0xffff - binaryFileData[0]) - 1;
+            return Prefix + Hex(binaryFileData) + " == " + difference.ToString();
         }
 
-        public string BSR(ushort[] binaryFileData)
+        public string BSR_W(ushort[] binaryFileData)
         {
-            return "";
+            return Prefix + Hex(binaryFileData);
         }
 
         public string BSET_B(ushort[] binaryFileData)
@@ -87,9 +88,10 @@ namespace BinToAssembly
             return Prefix + unchecked((sbyte)binaryFileData[0]).ToString("X4").ToLower() + Suffix + result;
         }
 
-        public string BTEST_B(ushort[] binaryFileData)
+        public string BTST_B(ushort[] binaryFileData)
         {
-            return "";
+            string result = (binaryFileData[1].ToString("X4") + binaryFileData[2].ToString("X4")).ToLower();
+            return Prefix + unchecked((sbyte)binaryFileData[0]).ToString("X4").ToLower() + Suffix + result;
         }
 
         public string CLR_W(ushort[] binaryFileData)
