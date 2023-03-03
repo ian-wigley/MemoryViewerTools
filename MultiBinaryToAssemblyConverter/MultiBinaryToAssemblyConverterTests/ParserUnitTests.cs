@@ -96,8 +96,10 @@ namespace MultiBinaryToAssemblyConverterTests
         [DataRow(0x217c, "MOVE.L #$000310c2,80(A0)", new ushort[] { 0x0003, 0x10c2, 0x0080 })]
         [DataRow(0x317c, "MOVE.W #$8040,96(A0)", new ushort[] { 0x8040, 0x0096 })]
         [DataRow(0x0c39, "CMP.B #$80,$00dff006", new ushort[] { 0x0080, 0x00df, 0xf006 })]
-        [DataRow(0x6600, "BNE.W #$fff6", new ushort[] { 0xfff6 })]
-        [DataRow(0x4e75, "RTS", new ushort[] {})]
+        [DataRow(0x6600, "BNE.W #$fff6 == 8", new ushort[] { 0xfff6 })]
+        [DataRow(0x0839, "BTST.B #$0006,$00bfe001", new ushort[] { 0x0006, 0x00bf, 0xe001 })]
+        [DataRow(0x6100, "BSR.W #$0696", new ushort[] { 0x0696 })]
+        [DataRow(0x4e75, "RTS", new ushort[] { })]
         [DataTestMethod]
         public void TestMultiOpcodes(int op, string expected, ushort[] data)
         {
