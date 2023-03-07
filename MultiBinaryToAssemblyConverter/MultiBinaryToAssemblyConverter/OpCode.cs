@@ -43,9 +43,9 @@ namespace BinToAssembly
         public bool Illegal { get { return m_illegal; } }
 
         /// <summary>
-        /// Build a Formated string containing the relevaent OpCode detail.
+        /// Build a Formatted string containing the relevant OpCode detail.
         /// </summary>
-        /// <returns>The formated string.</returns>
+        /// <returns>The formatted string.</returns>
         public string Format(ref int filePosition, ushort[] binaryFileData)
         {
             filePosition += 1;
@@ -71,10 +71,60 @@ namespace BinToAssembly
             return hex.ToLower();
         }
 
+        public string ABCD(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string ADD(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string ADDQ(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string AND(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string ASL(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string BCC(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string BCHG(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string BEQ(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string BMIQ(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
         public string BNE_W(ushort[] binaryFileData)
         {
             var difference = (0xffff - binaryFileData[0]) - 1;
             return Prefix + Hex(binaryFileData) + " == " + difference.ToString();
+        }
+
+        public string BRA(ushort[] binaryFileData)
+        {
+            return "";
         }
 
         public string BSR_W(ushort[] binaryFileData)
@@ -109,6 +159,16 @@ namespace BinToAssembly
             return Prefix + binaryFileData[0].ToString("X2") + Suffix + (binaryFileData[1].ToString("X4") + binaryFileData[2].ToString("X4")).ToLower();
         }
 
+        public string DBF(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string EOR(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
         public string JSR(ushort[] binaryFileData)
         {
             if (binaryFileData.Length == 1)
@@ -124,6 +184,11 @@ namespace BinToAssembly
         public string LEA_L(ushort[] binaryFileData)
         {
             return Prefix + Hex(binaryFileData) + Suffix;
+        }
+
+        public string LSR_W(ushort[] binaryFileData)
+        {
+            return "";
         }
 
         public string MOVE_B(ushort[] binaryFileData)
@@ -147,6 +212,51 @@ namespace BinToAssembly
         {
             string result = (binaryFileData[0].ToString("X4") + binaryFileData[1].ToString("X4")).ToLower();
             return Prefix + result + "," + Suffix;
+        }
+
+        public string MULU(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string NOP(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string NOT(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string OR(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string PEA_L(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string ROR(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string RTE(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string SWAP(ushort[] binaryFileData)
+        {
+            return "";
+        }
+
+        public string TST(ushort[] binaryFileData)
+        {
+            return "";
         }
     }
 }
