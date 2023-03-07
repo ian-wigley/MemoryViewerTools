@@ -148,11 +148,5 @@ namespace BinToAssembly
             string result = (binaryFileData[0].ToString("X4") + binaryFileData[1].ToString("X4")).ToLower();
             return Prefix + result + "," + Suffix;
         }
-
-        public string RTS(ushort[] binaryFileData)
-        {
-            return "";
-        }
-
     }
 }
