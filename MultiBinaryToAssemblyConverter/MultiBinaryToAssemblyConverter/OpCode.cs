@@ -219,11 +219,6 @@ namespace BinToAssembly
             return "";
         }
 
-        public string NOP(ushort[] binaryFileData)
-        {
-            return "";
-        }
-
         public string NOT(ushort[] binaryFileData)
         {
             return "";
@@ -240,11 +235,6 @@ namespace BinToAssembly
         }
 
         public string ROR(ushort[] binaryFileData)
-        {
-            return "";
-        }
-
-        public string RTE(ushort[] binaryFileData)
         {
             return "";
         }
