@@ -40,7 +40,7 @@ namespace BinToAssembly
         {
             InitializeComponent();
 
-            // Sets the byteviewer display mode.
+            // Sets the byte viewer display mode.
             byteviewer.SetDisplayMode(DisplayMode.Hexdump);
 
             MaximizeBox = false;
@@ -62,8 +62,8 @@ namespace BinToAssembly
             string end,
             bool replaceIllegalOpcodes,
             Dictionary<string, string[]> bucket,
-            int firstOccurance,
-            int lastOccurrance)
+            int firstOccurrence,
+            int lastOccurrence)
         {
             textBox2.Clear();
             ClearRightWindow();
@@ -101,11 +101,11 @@ namespace BinToAssembly
                                 passOne.Add(lineDetails[8] + " " + lineDetails[9]);
                                 break;
                             case "90": // BCC
-                            case "B0": // BCS 
+                            case "B0": // BCS
                             case "F0": // BEQ
-                            case "30": // BMI 
+                            case "30": // BMI
                             case "D0": // BNE
-                            case "10": // BPL 
+                            case "10": // BPL
                             case "50": // BVC
                             case "70": // BVS
                                 if (!branchLoc.Keys.Contains(lineDetails[11].Replace("$", "")))
@@ -181,7 +181,7 @@ namespace BinToAssembly
                     if (dets[0].ToUpper().Contains(memLocation.Key))
                     {
                         label = memLocation.Value + "          ";
-                        // The moemory address has been found add it another list
+                        // The memory address has been found add it another list
                         found.Add(memLocation.Key);
                     }
                 }
@@ -231,27 +231,33 @@ namespace BinToAssembly
 
                 ClearCollections();
                 textBox1.Clear();
-                MemoryLocation ml = new MemoryLocation();
-                if (ml.ShowDialog() == DialogResult.OK)
+                // Specify the memory location to load the `code` into.
+                // Useful for 6502, not 68000 relocatable code
+                if (comboBox1.Text.Equals(m6502))
                 {
-                    int.TryParse(ml.GetMemStartLocation, out startAddress);
-                    //                   ParseFileContent(openFileDialog.FileName);
-                    if (comboBox1.Text.Equals(m6502))
+                    MemoryLocation ml = new MemoryLocation();
+                    if (ml.ShowDialog() == DialogResult.OK)
                     {
-                        Parser6502 p6502 = new Parser6502();
-                        p6502.ParseFileContent(openFileDialog.FileName, populateOpCodeList, textBox1, ref lineNumbers, ref code);
+                        int.TryParse(ml.GetMemStartLocation, out startAddress);
+                        // ParseFileContent(openFileDialog.FileName);
+                        if (comboBox1.Text.Equals(m6502))
+                        {
+                            Parser6502 p6502 = new Parser6502();
+                            p6502.ParseFileContent(openFileDialog.FileName, populateOpCodeList, textBox1, ref lineNumbers, ref code);
+                        }
                     }
-                    if (comboBox1.Text.Equals(m68xx))
-                    {
-                        Parser68xx p68xx = new Parser68xx();
-                        p68xx.ParseFileContent(openFileDialog.FileName, populateOpCodeList, textBox1);
-                    }
-                    if (comboBox1.Text.Equals(m68000))
-                    {
-                        Parser68000 p68000 = new Parser68000();
-                        var data = p68000.LoadData(openFileDialog.FileName);
-                        p68000.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
-                    }
+                }
+
+                if (comboBox1.Text.Equals(m68xx))
+                {
+                    Parser68xx p68xx = new Parser68xx();
+                    p68xx.ParseFileContent(openFileDialog.FileName, populateOpCodeList, textBox1);
+                }
+                if (comboBox1.Text.Equals(m68000))
+                {
+                    Parser68000 p68000 = new Parser68000();
+                    var data = p68000.LoadData(openFileDialog.FileName);
+                    p68000.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
                 }
 
                 byteviewer.SetFile(openFileDialog.FileName);
@@ -266,23 +272,23 @@ namespace BinToAssembly
 
         private void GenerateLabels()
         {
-            char[] startAdress = new char[lineNumbers[0].Length];
-            char[] endAdress = new char[lineNumbers[lineNumbers.Count - 1].Length];
-            int firstOccurance = 0;
-            int lastOccurrance = 0;
+            char[] startAddress = new char[lineNumbers[0].Length];
+            char[] endAddress = new char[lineNumbers[lineNumbers.Count - 1].Length];
+            int firstOccurrence = 0;
+            int lastOccurrence = 0;
 
             int count = 0;
             foreach (char chr in lineNumbers[0])
             {
-                startAdress[count++] = chr;
+                startAddress[count++] = chr;
             }
             count = 0;
             foreach (char chr in lineNumbers[lineNumbers.Count - 1])
             {
-                endAdress[count++] = chr;
+                endAddress[count++] = chr;
             }
 
-            MemorySelector ms = new MemorySelector(startAdress, endAdress);
+            MemorySelector ms = new MemorySelector(startAddress, endAddress);
             if (ms.ShowDialog() == DialogResult.OK)
             {
                 int start = int.Parse(ms.GetSelectedMemStartLocation, System.Globalization.NumberStyles.HexNumber);
@@ -297,31 +303,31 @@ namespace BinToAssembly
                     {
                         if (illegalOpcodes.Contains(i.ToString("X4")))
                         {
-                            if (i > firstOccurance & !firstIllegalOpcodeFound)
+                            if (i > firstOccurrence & !firstIllegalOpcodeFound)
                             {
-                                firstOccurance = i;
+                                firstOccurrence = i;
                                 firstIllegalOpcodeFound = true;
                             }
-                            if (i > lastOccurrance)
+                            if (i > lastOccurrence)
                             {
-                                lastOccurrance = i;
+                                lastOccurrence = i;
                             }
                         }
                     }
 
-                    var temp = lastOccurrance.ToString("X4");
+                    var temp = lastOccurrence.ToString("X4");
                     int index = 0;
                     foreach (string str in code)
                     {
                         if (str.Contains(temp))
                         {
-                            // nudge the last Occurance along to the next valid opCode
-                            lastOccurrance = int.Parse(lineNumbers[++index], System.Globalization.NumberStyles.HexNumber);
+                            // nudge the last Occurrence along to the next valid opCode
+                            lastOccurrence = int.Parse(lineNumbers[++index], System.Globalization.NumberStyles.HexNumber);
                         }
                         index++;
                     }
 
-                    for (int i = firstOccurance; i < lastOccurrance; i++)
+                    for (int i = firstOccurrence; i < lastOccurrence; i++)
                     {
                         // Replace the Illegal Opcodes with data statement
                         if (dataStatements.TryGetValue(i.ToString("X4"), out string[] dataValue))
@@ -333,7 +339,7 @@ namespace BinToAssembly
                     DialogResult result = DialogResult.Yes;
                     if (firstIllegalOpcodeFound)
                     {
-                        result = MessageBox.Show("Illegal Opcodes found within the selection from : " + firstOccurance.ToString("X4") + " to " + lastOccurrance.ToString("X4") + "\n"
+                        result = MessageBox.Show("Illegal Opcodes found within the selection from : " + firstOccurrence.ToString("X4") + " to " + lastOccurrence.ToString("X4") + "\n"
                         + "Replace Illegal Opcodes with data statements ?", " ", MessageBoxButtons.YesNo);
                     }
 
@@ -346,8 +352,8 @@ namespace BinToAssembly
                         ms.GetSelectedMemEndLocation,
                         convertToBytes,
                         replacedWithDataCollection,
-                        firstOccurance,
-                        lastOccurrance);
+                        firstOccurrence,
+                        lastOccurrence);
                 }
                 else
                 {
