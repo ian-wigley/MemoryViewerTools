@@ -200,7 +200,7 @@ namespace BinToAssembly
             if (oc.NumberOfBytes == 6)
             {
                 line += " " + binaryFileData[filePosition + 2].ToString("X2");
-                if (oc.Name.Contains("MOVE")) //A"))
+                if (oc.Name.Contains("MOVE"))
                 {
                     //if (oc.name.Contains("MOVE(b)") || oc.name.Contains("MOVE(w)") || oc.name.Contains("MOVE(l)"))
                     //{
@@ -210,22 +210,23 @@ namespace BinToAssembly
                     sbyte s3 = unchecked((sbyte)binaryFileData[filePosition + 5]);
                     sbyte s4 = unchecked((sbyte)binaryFileData[filePosition + 6]);
                     sbyte s5 = unchecked((sbyte)binaryFileData[filePosition + 7]);
-                    if (oc.Name.Contains("MOVE(l)"))
+                    if (oc.Name.Contains("MOVE.L"))
                     {
                         //0003103E 217c 0003 10c2 0080      MOVE.L #$000310c2,(A0,$0080) == $00000080 [00fc0836]
-                        //003E  217C 00       MOVE(l) 03,10C20080
+                        // 003E  217C 00       MOVE(l) 03,10C20080
                         line += "       " + oc.Name + " " + oc.Prefix + binaryFileData[filePosition + 3].ToString("X2") + s2.ToString("X2") + s3.ToString("X2") +
                             /*s4.ToString("X2") +*/ oc.Suffix + s5.ToString("X2") + "(A0)";
                         //filePosition += 8;// 6;// 2;
                     }
-                    if (oc.Name.Contains("MOVE(b)"))
+                    if (oc.Name.Contains("MOVE.B"))
                     {
                         //00031006 13fc 0001 0006 c2a0      MOVE.B #$01,$0006c2a0 [00]
                         line += "       " + oc.Name + " " + oc.Prefix + s1.ToString("X2") + oc.Suffix + s2.ToString("X2") + s3.ToString("X2") +
                             s4.ToString("X2") + s5.ToString("X2");
                     }
-                    else
+                    if (oc.Name.Contains("MOVE.W"))
                     {
+                        bool todo = true;
                         ////MOVEA.L $00000004 [00c00276],A6
                         //line += "       " + oc.name + " " + oc.prefix + s1.ToString("X2") + s2.ToString("X2") + s3.ToString("X2") + s4.ToString("X2") + s5.ToString("X2") + oc.suffix;
                         ////line += "       " + oc.name + " " + oc.prefix + fileStuff[filePosition + 3].ToString("X2") + s2.ToString("X2") + s3.ToString("X2") +
