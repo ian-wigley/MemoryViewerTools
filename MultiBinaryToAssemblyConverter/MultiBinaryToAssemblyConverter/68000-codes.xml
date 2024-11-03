@@ -19,7 +19,7 @@
   <code>6008¬BRA¬2¬¬¬false</code>
   <code>08F9¬BSET.B¬6¬#$¬,$¬false</code>
   <code>6100¬BSR.W¬2¬#$¬¬false</code>
-  <code>0828¬BTST¬2¬#¬,$¬false</code>
+  <code>0828¬BTST¬4¬#¬,$¬false</code>
   <code>0839¬BTST.B¬2¬#$¬,$¬false</code>
   <code>16¬CHK¬2¬¬¬false</code>
   <code>4268¬CLR.W A0¬2¬¬¬false</code>
@@ -108,7 +108,7 @@
   <code>65¬Scc¬2¬¬¬false</code>
   <code>66¬STOP¬2¬¬¬false</code>
   <code>0401¬SUB¬2¬¬¬false</code>
-  <code>0439¬SUB¬6¬¬¬false</code>
+  <code>0439¬SUB¬6¬#$¬,$¬false</code>
   <code>68¬SUBA¬2¬¬¬false</code>
   <code>69¬SUBI¬2¬¬¬false</code>
   <code>70¬SUBQ¬2¬¬¬false</code>
