@@ -131,6 +131,11 @@ namespace BinToAssembly
                 {
                     BSR(oc, ref line, ref filePosition, binaryFileData, pc);
                 }
+                else if (oc.Name.Contains("CLR"))
+                {
+                    line += "       " + oc.Name;
+                    filePosition += 2;
+                }
                 else if (oc.Name.Contains("MOVEM"))
                 {
                     line += "       " + oc.Name + " " + "D0-D7/A0-A6,-(A7)";
@@ -190,11 +195,16 @@ namespace BinToAssembly
                     line += "       " + oc.Name + " " + oc.Prefix + binaryFileData[filePosition + 3].ToString("X2") + s2.ToString("X2") + s3.ToString("X2") + oc.Suffix;
                     filePosition += 6;
                 }
-                else
+                else if (oc.Name.Contains("BTST"))
                 {
-                    line += "       " + oc.Name + " Not implemented yet";
-                    filePosition += 6;
+                    BTST(oc, ref line, ref filePosition, binaryFileData);
                 }
+
+                //else
+                //{
+                //    line += "       " + oc.Name + " Not implemented yet";
+                //    filePosition += 6;
+                //}
             }
 
             if (oc.NumberOfBytes == 6)
@@ -226,7 +236,7 @@ namespace BinToAssembly
                     }
                     if (oc.Name.Contains("MOVE.W"))
                     {
-                        bool todo = true;
+                        line += "       " + oc.Name + " ";
                         ////MOVEA.L $00000004 [00c00276],A6
                         //line += "       " + oc.name + " " + oc.prefix + s1.ToString("X2") + s2.ToString("X2") + s3.ToString("X2") + s4.ToString("X2") + s5.ToString("X2") + oc.suffix;
                         ////line += "       " + oc.name + " " + oc.prefix + fileStuff[filePosition + 3].ToString("X2") + s2.ToString("X2") + s3.ToString("X2") +
@@ -235,20 +245,19 @@ namespace BinToAssembly
                     }
                     filePosition += 8;// 6;// 2;
                 }
-
                 else if (oc.Name.Contains("CMPI"))
                 {
                     line += "       " + oc.Name + " " + oc.Prefix;
                     line += binaryFileData[filePosition + 3].ToString("X2") + oc.Suffix;
                     line += binaryFileData[filePosition + 5].ToString("X2") + binaryFileData[filePosition + 6].ToString("X2") + binaryFileData[filePosition + 7].ToString("X2");
-                    filePosition += 8;// 6;
+                    filePosition += 8;
                 }
                 else if (oc.Name.Contains("BCHG"))
                 {
                     line += "       " + oc.Name + " " + oc.Prefix;
                     line += binaryFileData[filePosition + 3].ToString("X2") + oc.Suffix;
                     line += binaryFileData[filePosition + 5].ToString("X2") + binaryFileData[filePosition + 6].ToString("X2") + binaryFileData[filePosition + 7].ToString("X2");
-                    filePosition += 8;// 6;
+                    filePosition += 8;
                 }
                 else if (oc.Name.Contains("BSET"))
                 {
@@ -261,11 +270,20 @@ namespace BinToAssembly
                     line += n;
                     filePosition += 4;// 2;
                 }
-                else
+                else if (oc.Name.Contains("SUB"))
                 {
-                    line += "       " + oc.Name + " Not implemented yet";
+                    sbyte s = unchecked((sbyte)binaryFileData[filePosition + 4]);
+                    sbyte s1 = unchecked((sbyte)binaryFileData[filePosition + 5]);
+                    sbyte s2 = unchecked((sbyte)binaryFileData[filePosition + 6]);
+                    sbyte s3 = unchecked((sbyte)binaryFileData[filePosition + 7]);
+                    line += "       " + oc.Name + " " + oc.Prefix + binaryFileData[filePosition + 3].ToString("X2") + oc.Suffix + s1.ToString("X2") + s2.ToString("X2") + s3.ToString("X2");
                     filePosition += 8;
                 }
+                //else
+                //{
+                //    line += "       " + oc.Name + " Not implemented yet";
+                //    filePosition += 8;
+                //}
             }
 
             else if (oc.NumberOfBytes == 3 && (filePosition < binaryFileData.Length - 3))
