@@ -57,7 +57,7 @@
   <code>38¬LSL,LSR¬2¬¬¬false</code>
   <code>1200¬MOVE.B¬1¬D0¬,D1¬false</code>
   <code>1211¬MOVE.B¬1¬(A1)¬,D1¬false</code>
-  <code>1219¬MOVE.B¬1¬¬¬false</code>
+  <code>1219¬MOVE.B¬1¬(A1)+¬,D1¬false</code>
   <code>1281¬MOVE.B¬1¬D1¬,(A1)¬false</code>
   <code>12E9¬MOVE.B¬2¬(A1)¬,(A1)+¬false</code>
   <code>13D1¬MOVE.B¬4¬(A1)¬,$¬false</code>
