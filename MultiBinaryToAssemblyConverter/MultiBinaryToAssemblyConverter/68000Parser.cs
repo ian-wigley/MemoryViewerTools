@@ -90,7 +90,14 @@ namespace BinToAssembly
 
                 temp = new string[1] { "!byte $" + oc.Code };
                 dataStatements.Add(pc.ToString("X4"), temp);
-                line += "          " + oc.Name;
+                if (oc.Name.Contains("MOVE"))
+                {
+                    MOVE(oc, ref line, ref filePosition, binaryFileData);
+                }
+                else
+                {
+                    line += "          " + oc.Name;
+                }
                 filePosition += 2;
             }
             if (oc.NumberOfBytes == 2)
@@ -336,5 +343,11 @@ namespace BinToAssembly
             line += "       " + oc.Name + " " + i.ToString() + ",(a6)";
             filePosition += 2;
         }
+
+        private void MOVE(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += "          " + oc.Name + " " + oc.Prefix + oc.Suffix; ;
+        }
+
     }
 }
