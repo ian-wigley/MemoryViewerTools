@@ -250,7 +250,7 @@ namespace BinToAssembly
                         ////    /*s4.ToString("X2") +*/ "," + oc.suffix + s5.ToString("X2");
 
                     }
-                    filePosition += 8;// 6;// 2;
+                    filePosition += 8;
                 }
                 else if (oc.Name.Contains("CMPI"))
                 {
@@ -286,11 +286,11 @@ namespace BinToAssembly
                     line += "       " + oc.Name + " " + oc.Prefix + binaryFileData[filePosition + 3].ToString("X2") + oc.Suffix + s1.ToString("X2") + s2.ToString("X2") + s3.ToString("X2");
                     filePosition += 8;
                 }
-                //else
-                //{
-                //    line += "       " + oc.Name + " Not implemented yet";
-                //    filePosition += 8;
-                //}
+                else
+                {
+                    line += "       " + oc.Name + " Not implemented yet";
+                    filePosition += 8;
+                }
             }
 
             else if (oc.NumberOfBytes == 3 && (filePosition < binaryFileData.Length - 3))
@@ -346,7 +346,7 @@ namespace BinToAssembly
 
         private void MOVE(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
         {
-            line += "          " + oc.Name + " " + oc.Prefix + oc.Suffix; ;
+            line += "          " + oc.Name + " " + oc.Prefix + oc.Suffix;
         }
 
     }
