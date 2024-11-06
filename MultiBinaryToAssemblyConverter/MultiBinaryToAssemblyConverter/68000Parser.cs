@@ -79,6 +79,18 @@ namespace BinToAssembly
             dataStatements, ref List<string> 
             illegalOpCodes)
         {
+            switch (oc.Code) {
+                // Move
+                case "1200":
+                case "48E7":
+                    MOVE(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                default:
+                    break;
+                        }
+
+
             string[] temp;
             if (oc.NumberOfBytes == 1)
             {
@@ -347,6 +359,7 @@ namespace BinToAssembly
         private void MOVE(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
         {
             line += "          " + oc.Name + " " + oc.Prefix + oc.Suffix;
+            filePosition += oc.NumberOfBytes;
         }
 
     }
