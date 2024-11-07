@@ -69,297 +69,206 @@ namespace BinToAssembly
         }
 
         public void ConvertToAssembly(
-            OpCode oc, 
-            ref string line, 
-            ref int filePosition, 
-            byte[] binaryFileData, 
+            OpCode oc,
+            ref string line,
+            ref int filePosition,
+            byte[] binaryFileData,
             int? lineNumber,
-            int pc, 
-            ref Dictionary<string, string[]> 
-            dataStatements, ref List<string> 
+            int pc,
+            ref Dictionary<string, string[]>
+            dataStatements, ref List<string>
             illegalOpCodes)
         {
-            switch (oc.Code) {
-                // Move
+            switch (oc.Code)
+            {
+                case "51C8":
+                    DBF(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "4E75":
+                    RTS(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "c3fc":
+                    MULS(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "0600":
+                case "5240":
+                case "D5C1":
+                    ADD(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "4A13":
+                    TST(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "6000":
+                    BRA(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "41":
+                case "42":
+                case "43":
+                case "44":
+                case "46":
+                case "47":
                 case "1200":
+                case "1211":
+                case "1219":
+                case "1281":
+                case "12E9":
+                case "13D1":
+                case "13FC":
+                case "317C":
+                case "217C":
+                case "2279":
+                case "23C9":
+                case "289A":
+                case "296A":
+                case "2C78":
+                case "2C79":
+                case "303C":
+                case "33D2":
+                case "3412":
+                case "3482":
+                case "34EA":
                 case "48E7":
+                case "4CDF":
                     MOVE(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "41F9":
+                case "43F9":
+                case "45F9":
+                case "47F9":
+                case "49EC":
+                case "49F9":
+                    LEA(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "4268":
+                case "42A8":
+                case "4280":
+                case "4281":
+                    CLR(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "0828":
+                case "0839":
+                    BTST(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "6700":
+                    BEQ(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+
+                case "6600":
+                case "66F6":
+                    BNE(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "0439":
+                    SUB(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "0C11":
+                case "B21B":
+                    CMP(oc, ref line, ref filePosition, binaryFileData);
+                    break;
+
+                case "6100":
+                    BSR(oc, ref line, ref filePosition, binaryFileData);
                     break;
 
                 default:
+                    filePosition = binaryFileData.Length;
                     break;
-                        }
-
-
-            string[] temp;
-            if (oc.NumberOfBytes == 1)
-            {
-                if (oc.Illegal)
-                {
-                    // Add the programme counter location to the list of illegal opcodes found
-                    illegalOpCodes.Add(pc.ToString("X4"));
-                }
-
-                temp = new string[1] { "!byte $" + oc.Code };
-                dataStatements.Add(pc.ToString("X4"), temp);
-                if (oc.Name.Contains("MOVE"))
-                {
-                    MOVE(oc, ref line, ref filePosition, binaryFileData);
-                }
-                else
-                {
-                    line += "          " + oc.Name;
-                }
-                filePosition += 2;
-            }
-            if (oc.NumberOfBytes == 2)
-            {
-                if (oc.Illegal)
-                {
-                    illegalOpCodes.Add(pc.ToString("X4"));
-                }
-                temp = new string[2] { "!byte $" + oc.Code, "!byte $" + binaryFileData[filePosition + 1].ToString("X2") };
-                dataStatements.Add(pc.ToString("X4"), temp);
-                line += " " + binaryFileData[filePosition + 2].ToString("X2");
-
-                if (oc.Name.Contains("JSR"))
-                {
-                    JSR(oc, ref line, ref filePosition, binaryFileData);
-                }
-
-                else if (oc.Name.Contains("BTST"))
-                {
-                    BTST(oc, ref line, ref filePosition, binaryFileData);
-                }
-
-                // BNE $START + $????
-                // If the Opcode Names are branches ...
-                else if (oc.Name.Contains("BRA") ||
-                    oc.Name.Contains("BCC") || oc.Name.Contains("BCS") ||
-                    oc.Name.Contains("BEQ") || oc.Name.Contains("BMI") ||
-                    oc.Name.Contains("BNE") || oc.Name.Contains("BPL") ||
-                    oc.Name.Contains("BVC") || oc.Name.Contains("BVS"))
-                {
-                    sbyte s = unchecked((sbyte)binaryFileData[filePosition + 1]);
-                    s += 2;
-                    line += "       " + oc.Name + " " + oc.Prefix + (pc + s).ToString("X4");
-                    filePosition += 2;
-                }
-
-                else if (oc.Name.Contains("BSR"))
-                {
-                    BSR(oc, ref line, ref filePosition, binaryFileData, pc);
-                }
-                else if (oc.Name.Contains("CLR"))
-                {
-                    line += "       " + oc.Name;
-                    filePosition += 2;
-                }
-                else if (oc.Name.Contains("MOVEM"))
-                {
-                    line += "       " + oc.Name + " " + "D0-D7/A0-A6,-(A7)";
-                    filePosition += 2;
-                }
-
-                else
-                {
-                    line += "       " + oc.Name + " " + oc.Prefix + binaryFileData[filePosition + 1].ToString("X2") + oc.Suffix;
-                    filePosition += 2;
-                }
-                filePosition += 2;
             }
 
-            if (oc.NumberOfBytes == 4)
-            {
-                line += " " + binaryFileData[filePosition + 2].ToString("X2");
-
-                if (oc.Name.Contains("JSR"))
-                {
-                    sbyte s1 = unchecked((sbyte)binaryFileData[filePosition + 3]);
-                    sbyte s2 = unchecked((sbyte)binaryFileData[filePosition + 4]);
-                    sbyte s3 = unchecked((sbyte)binaryFileData[filePosition + 5]);
-                    line += binaryFileData[filePosition + 3].ToString("X2") + binaryFileData[filePosition + 4].ToString("X2") + binaryFileData[filePosition + 5].ToString("X2") + " " +
-                        oc.Name + " " + oc.Prefix + s1.ToString("X2") + s2.ToString("X2") + s3.ToString("X2");
-                    filePosition += 6;
-                }
-
-                else if (oc.Name.Contains("MOVE"))
-                {
-                    sbyte s0 = unchecked((sbyte)binaryFileData[filePosition + 2]);
-                    sbyte s1 = unchecked((sbyte)binaryFileData[filePosition + 3]);
-                    sbyte s2 = unchecked((sbyte)binaryFileData[filePosition + 4]);
-                    sbyte s3 = unchecked((sbyte)binaryFileData[filePosition + 5]);
-
-                    if (oc.Name.Contains("MOVEA")) // 2C79
-                    {
-                        //line += "       " + oc.name + " " + oc.prefix + fileStuff[filePosition + 3].ToString("X2") + s2.ToString("X2") + s3.ToString("X2") + oc.suffix;
-                        line += "       " + oc.Name + " " + oc.Prefix + s1.ToString("X2") + s2.ToString("X2") + s3.ToString("X2") + oc.Suffix;
-                    }
-
-                    else
-                    {
-                        //00031046 317c 8040 0096           MOVE.W #$8040,(A0,$0096) == $00000096 [0840]
-                        //line += "       " + oc.name + " " + oc.prefix + fileStuff[filePosition + 3].ToString("X2") + "," + oc.suffix + s2.ToString("X2") + s3.ToString("X2");
-                        line += "       " + oc.Name + " " + oc.Prefix + s0.ToString("X2") + s1.ToString("X2") + oc.Suffix + s2.ToString("X2") + s3.ToString("X2") + "(A0)";
-                    }
-
-                    filePosition += 6;
-                }
-
-                else if (oc.Name.Contains("LEA"))
-                {
-                    sbyte s1 = unchecked((sbyte)binaryFileData[filePosition + 3]);
-                    sbyte s2 = unchecked((sbyte)binaryFileData[filePosition + 4]);
-                    sbyte s3 = unchecked((sbyte)binaryFileData[filePosition + 5]);
-                    line += "       " + oc.Name + " " + oc.Prefix + binaryFileData[filePosition + 3].ToString("X2") + s2.ToString("X2") + s3.ToString("X2") + oc.Suffix;
-                    filePosition += 6;
-                }
-                else if (oc.Name.Contains("BTST"))
-                {
-                    BTST(oc, ref line, ref filePosition, binaryFileData);
-                }
-
-                //else
-                //{
-                //    line += "       " + oc.Name + " Not implemented yet";
-                //    filePosition += 6;
-                //}
-            }
-
-            if (oc.NumberOfBytes == 6)
-            {
-                line += " " + binaryFileData[filePosition + 2].ToString("X2");
-                if (oc.Name.Contains("MOVE"))
-                {
-                    //if (oc.name.Contains("MOVE(b)") || oc.name.Contains("MOVE(w)") || oc.name.Contains("MOVE(l)"))
-                    //{
-                    // 8 bytes ?
-                    sbyte s1 = unchecked((sbyte)binaryFileData[filePosition + 3]);
-                    sbyte s2 = unchecked((sbyte)binaryFileData[filePosition + 4]);
-                    sbyte s3 = unchecked((sbyte)binaryFileData[filePosition + 5]);
-                    sbyte s4 = unchecked((sbyte)binaryFileData[filePosition + 6]);
-                    sbyte s5 = unchecked((sbyte)binaryFileData[filePosition + 7]);
-                    if (oc.Name.Contains("MOVE.L"))
-                    {
-                        //0003103E 217c 0003 10c2 0080      MOVE.L #$000310c2,(A0,$0080) == $00000080 [00fc0836]
-                        // 003E  217C 00       MOVE(l) 03,10C20080
-                        line += "       " + oc.Name + " " + oc.Prefix + binaryFileData[filePosition + 3].ToString("X2") + s2.ToString("X2") + s3.ToString("X2") +
-                            /*s4.ToString("X2") +*/ oc.Suffix + s5.ToString("X2") + "(A0)";
-                        //filePosition += 8;// 6;// 2;
-                    }
-                    if (oc.Name.Contains("MOVE.B"))
-                    {
-                        //00031006 13fc 0001 0006 c2a0      MOVE.B #$01,$0006c2a0 [00]
-                        line += "       " + oc.Name + " " + oc.Prefix + s1.ToString("X2") + oc.Suffix + s2.ToString("X2") + s3.ToString("X2") +
-                            s4.ToString("X2") + s5.ToString("X2");
-                    }
-                    if (oc.Name.Contains("MOVE.W"))
-                    {
-                        line += "       " + oc.Name + " ";
-                        ////MOVEA.L $00000004 [00c00276],A6
-                        //line += "       " + oc.name + " " + oc.prefix + s1.ToString("X2") + s2.ToString("X2") + s3.ToString("X2") + s4.ToString("X2") + s5.ToString("X2") + oc.suffix;
-                        ////line += "       " + oc.name + " " + oc.prefix + fileStuff[filePosition + 3].ToString("X2") + s2.ToString("X2") + s3.ToString("X2") +
-                        ////    /*s4.ToString("X2") +*/ "," + oc.suffix + s5.ToString("X2");
-
-                    }
-                    filePosition += 8;
-                }
-                else if (oc.Name.Contains("CMPI"))
-                {
-                    line += "       " + oc.Name + " " + oc.Prefix;
-                    line += binaryFileData[filePosition + 3].ToString("X2") + oc.Suffix;
-                    line += binaryFileData[filePosition + 5].ToString("X2") + binaryFileData[filePosition + 6].ToString("X2") + binaryFileData[filePosition + 7].ToString("X2");
-                    filePosition += 8;
-                }
-                else if (oc.Name.Contains("BCHG"))
-                {
-                    line += "       " + oc.Name + " " + oc.Prefix;
-                    line += binaryFileData[filePosition + 3].ToString("X2") + oc.Suffix;
-                    line += binaryFileData[filePosition + 5].ToString("X2") + binaryFileData[filePosition + 6].ToString("X2") + binaryFileData[filePosition + 7].ToString("X2");
-                    filePosition += 8;
-                }
-                else if (oc.Name.Contains("BSET"))
-                {
-                    sbyte s = unchecked((sbyte)binaryFileData[filePosition + 3]);
-                    line += "       " + oc.Name + " " + oc.Prefix + s.ToString("X2") + oc.Suffix;
-                    // Nudge the position counter along by 4
-                    filePosition += 4;
-                    //byte[] bytes = { fileStuff[filePosition + 0], fileStuff[filePosition + 1], fileStuff[filePosition + 2], fileStuff[filePosition + 3] };
-                    string n = /*fileStuff[filePosition + 0].ToString("X2") +*/ binaryFileData[filePosition + 1].ToString("X2") + binaryFileData[filePosition + 2].ToString("X2") + binaryFileData[filePosition + 3].ToString("X2");
-                    line += n;
-                    filePosition += 4;// 2;
-                }
-                else if (oc.Name.Contains("SUB"))
-                {
-                    sbyte s = unchecked((sbyte)binaryFileData[filePosition + 4]);
-                    sbyte s1 = unchecked((sbyte)binaryFileData[filePosition + 5]);
-                    sbyte s2 = unchecked((sbyte)binaryFileData[filePosition + 6]);
-                    sbyte s3 = unchecked((sbyte)binaryFileData[filePosition + 7]);
-                    line += "       " + oc.Name + " " + oc.Prefix + binaryFileData[filePosition + 3].ToString("X2") + oc.Suffix + s1.ToString("X2") + s2.ToString("X2") + s3.ToString("X2");
-                    filePosition += 8;
-                }
-                else
-                {
-                    line += "       " + oc.Name + " Not implemented yet";
-                    filePosition += 8;
-                }
-            }
-
-            else if (oc.NumberOfBytes == 3 && (filePosition < binaryFileData.Length - 3))
-            {
-                if (oc.Illegal)
-                {
-                    illegalOpCodes.Add(pc.ToString("X4"));
-                }
-
-                temp = new string[3];
-                temp[0] = "!byte $" + oc.Code;
-                temp[1] = "!byte $" + binaryFileData[filePosition + 1].ToString("X2");
-                temp[2] = "!byte $" + binaryFileData[filePosition + 2].ToString("X2");
-                dataStatements.Add(pc.ToString("X4"), temp);
-
-                line += " " + binaryFileData[filePosition + 1].ToString("X2") + " " + binaryFileData[filePosition + 2].ToString("X2");
-                line += "    " + oc.Name + " " + oc.Prefix + binaryFileData[filePosition + 2].ToString("X2") + binaryFileData[filePosition + 1].ToString("X2") + oc.Suffix;
-                filePosition += 3;
-            }
-            else if (oc.NumberOfBytes == 3 && (filePosition == binaryFileData.Length - 2))
-            {
-                filePosition = binaryFileData.Length;
-            }
         }
 
-        private void BSR(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData, int pc)
+
+
+        private void DBF(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
         {
-            byte s = unchecked(binaryFileData[filePosition + 2]);
-            byte s1 = unchecked(binaryFileData[filePosition + 3]);
-            var i = BitConverter.ToInt16(new byte[] { s1, s }, 0);
-            line += "       " + oc.Name + " " + oc.Prefix + (pc + 2 + i /*s*/).ToString("X4");
-            filePosition += 2;
+            line += oc.Detail(ref filePosition, binaryFileData);
         }
+
+        private void RTS(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += oc.Detail(ref filePosition, binaryFileData);
+        }
+
+        private void MULS(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += oc.Detail(ref filePosition, binaryFileData);
+        }
+
+
+        private void ADD(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += oc.Detail(ref filePosition, binaryFileData);
+        }
+
+
+        private void TST(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += oc.Detail(ref filePosition, binaryFileData);
+        }
+
+
+        private void BRA(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += oc.Detail(ref filePosition, binaryFileData);
+        }
+
+        private void BEQ(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += oc.Detail(ref filePosition, binaryFileData);
+        }
+
+        private void BNE(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += oc.Detail(ref filePosition, binaryFileData);
+        }
+
+        private void BSR(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += oc.Detail(ref filePosition, binaryFileData);
+        }
+
 
         private void BTST(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
         {
-            sbyte s = unchecked((sbyte)binaryFileData[filePosition + 3]);
-            line += "       " + oc.Name + " " + oc.Prefix + s.ToString("X2") + oc.Suffix;
-            // Nudge the position counter along by 4
-            filePosition += 4;
-            line += binaryFileData[filePosition + 1].ToString("X2") + binaryFileData[filePosition + 2].ToString("X2") + binaryFileData[filePosition + 3].ToString("X2");
-            filePosition += 2;
+            line += oc.Detail(ref filePosition, binaryFileData);
         }
 
-        private void JSR(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        private void CLR(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
         {
-            byte t1 = unchecked(binaryFileData[filePosition + 2]);
-            byte t2 = unchecked(binaryFileData[filePosition + 3]);
-            short i = BitConverter.ToInt16(new byte[] { t2, t1 }, 0);
-            line += "       " + oc.Name + " " + i.ToString() + ",(a6)";
-            filePosition += 2;
+            line += oc.Detail(ref filePosition, binaryFileData);
+        }
+
+        private void CMP(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += oc.Detail(ref filePosition, binaryFileData);
+        }
+
+
+        private void LEA(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += oc.Detail(ref filePosition, binaryFileData);
         }
 
         private void MOVE(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
         {
-            line += "          " + oc.Name + " " + oc.Prefix + oc.Suffix;
-            filePosition += oc.NumberOfBytes;
+            line += oc.Detail(ref filePosition, binaryFileData);
+        }
+
+        private void SUB(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
+        {
+            line += oc.Detail(ref filePosition, binaryFileData);
         }
 
     }
