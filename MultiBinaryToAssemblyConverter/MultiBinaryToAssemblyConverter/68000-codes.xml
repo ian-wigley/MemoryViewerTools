@@ -5,7 +5,7 @@
   <code>0600¬ADD¬2¬¬¬false</code>
   <code>0611¬ADD¬2¬#$¬,(A1)¬false</code>
   <code>5239¬ADD¬2¬#$¬,$¬false</code>
-  <code>5240¬ADD¬2¬¬¬false</code>
+  <code>5240¬ADDQ¬1¬#$¬,D0¬false</code>
   <code>D5C1¬ADDA¬1¬¬¬false</code>
   <code>03¬ADDI¬2¬¬¬false</code>
   <code>04¬ADDQ¬2¬¬¬false</code>
@@ -27,7 +27,7 @@
   <code>4280¬CLR.L D0¬1¬¬¬false</code>
   <code>4281¬CLR.L D1¬1¬¬¬false</code>
   <code>0C11¬CMP¬2¬¬¬false</code>
-  <code>B21B¬CMP.B¬2¬(a3)+¬,D1¬false</code>
+  <code>B21B¬CMP.B¬1¬(a3)+¬,D1¬false</code>
   <code>B3FC¬CMPA¬4¬#$¬,A1¬false</code>
   <code>B5FC¬CMPA¬4¬#$¬,A2¬false</code>
   <code>0C39¬CMP.B¬6¬#$¬,$¬false</code>
@@ -80,7 +80,7 @@
   <code>42¬MOVEfromSR¬2¬¬¬false</code>
   <code>43¬MOVEtoSR¬2¬¬¬false</code>
   <code>44¬MOVEUSP¬2¬¬¬false</code>
-  <code>48E7¬MOVEM¬2¬¬¬false</code>
+  <code>48E7¬MOVEM¬2¬D0-D7/A0-A6¬,-(A7)¬false</code>
   <code>4CDF¬MOVEM¬2¬¬¬false</code>
   <code>46¬MOVEP¬2¬¬¬false</code>
   <code>47¬MOVEQ¬2¬¬¬false</code>
@@ -119,10 +119,10 @@
   <code>74¬TRAP¬2¬¬¬false</code>
   <code>75¬TRAPV¬2¬¬¬false</code>
   <code>4A11¬TST¬2¬¬¬false</code>
-  <code>4A13¬TST¬2¬¬¬false</code>
+  <code>4A13¬TST¬1¬(A3)¬¬false</code>
   <code>77¬UNLK¬2¬¬¬false</code>
   <code>6600¬BNE.W¬2¬#$¬¬false</code>
   <code>66F6¬BNE¬2¬¬¬false</code>
   <code>6700¬BEQ¬2¬¬¬false</code>
-  <code>6000¬???¬2¬¬¬false</code>
+  <code>6000¬BRA¬2¬¬¬false</code>
 </codes>
