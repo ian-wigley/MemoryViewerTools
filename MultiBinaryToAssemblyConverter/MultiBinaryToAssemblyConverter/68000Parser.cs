@@ -89,7 +89,7 @@ namespace BinToAssembly
                     RTS(oc, ref line, ref filePosition, binaryFileData);
                     break;
 
-                case "c3fc":
+                case "C3FC":
                     MULS(oc, ref line, ref filePosition, binaryFileData);
                     break;
 
@@ -99,6 +99,7 @@ namespace BinToAssembly
                     ADD(oc, ref line, ref filePosition, binaryFileData);
                     break;
 
+                case "4A11":
                 case "4A13":
                     TST(oc, ref line, ref filePosition, binaryFileData);
                     break;
@@ -169,6 +170,7 @@ namespace BinToAssembly
                     BNE(oc, ref line, ref filePosition, binaryFileData);
                     break;
 
+                case "0401":
                 case "0439":
                     SUB(oc, ref line, ref filePosition, binaryFileData);
                     break;
