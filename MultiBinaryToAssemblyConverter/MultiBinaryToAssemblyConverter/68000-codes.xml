@@ -68,7 +68,7 @@
   <code>2279¬MOVEA¬4¬$¬,A1¬false</code>
   <code>23C9¬MOVE.L¬4¬A1¬,$¬false</code>
   <code>289A¬MOVE.L¬1¬(A2)+¬,(A4)¬false</code>
-  <code>296A¬MOVE.L¬6¬A2¬,$¬false</code>
+  <code>296A¬MOVE.L¬4¬A2¬,$¬false</code>
   <code>2C78¬MOVEA¬2¬,¬¬false</code>
   <code>2C79¬MOVEA.L¬4¬$¬,A6¬false</code>
   <code>303C¬MOVE.W¬2¬¬¬false</code>
