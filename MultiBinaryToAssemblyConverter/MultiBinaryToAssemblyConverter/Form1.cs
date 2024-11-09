@@ -256,7 +256,7 @@ namespace BinToAssembly
                 if (comboBox1.Text.Equals(m68000))
                 {
                     Parser68000 p68000 = new Parser68000();
-                    var data = p68000.LoadData(openFileDialog.FileName);
+                    var data = p68000.LoadBinaryData(openFileDialog.FileName);
                     p68000.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
                 }
 
