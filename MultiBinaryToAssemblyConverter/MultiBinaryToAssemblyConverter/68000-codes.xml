@@ -81,7 +81,7 @@
   <code>43¬MOVEtoSR¬2¬¬¬false</code>
   <code>44¬MOVEUSP¬2¬¬¬false</code>
   <code>48E7¬MOVEM¬2¬D0-D7/A0-A6¬,-(A7)¬false</code>
-  <code>4CDF¬MOVEM¬2¬¬¬false</code>
+  <code>4CDF¬MOVEM¬2¬(A7)+¬,D0-D7/A0-A6¬false</code>
   <code>46¬MOVEP¬2¬¬¬false</code>
   <code>47¬MOVEQ¬2¬¬¬false</code>
   <code>C3FC¬MULS¬2¬¬¬false</code>
@@ -118,7 +118,7 @@
   <code>73¬TAS¬2¬¬¬false</code>
   <code>74¬TRAP¬2¬¬¬false</code>
   <code>75¬TRAPV¬2¬¬¬false</code>
-  <code>4A11¬TST¬2¬¬¬false</code>
+  <code>4A11¬TST¬1¬(A1)¬¬false</code>
   <code>4A13¬TST¬1¬(A3)¬¬false</code>
   <code>77¬UNLK¬2¬¬¬false</code>
   <code>6600¬BNE.W¬2¬#$¬¬false</code>
