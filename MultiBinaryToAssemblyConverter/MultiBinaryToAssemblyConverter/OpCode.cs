@@ -42,6 +42,51 @@ namespace BinToAssembly
         public string Suffix { get { return m_suffix; } }
         public bool Illegal { get { return m_illegal; } }
 
+
+        public string Detail(ref int filePosition, byte[] binaryFileData)
+        {
+            string elementOne = "";
+            string elementTwo = "";
+            string elementThree = "";
+            string elementFour = "";
+
+            elementOne = ((short)binaryFileData[filePosition++]).ToString("X2") +
+                    ((short)binaryFileData[filePosition++]).ToString("X2");
+
+            if (NumberOfBytes == 2)
+            {
+                elementTwo = ((short)binaryFileData[filePosition++]).ToString("X2") +
+                    ((short)binaryFileData[filePosition++]).ToString("X2");
+            }
+
+            if (NumberOfBytes == 4)
+            {
+                elementTwo = ((short)binaryFileData[filePosition++]).ToString("X2") +
+                ((short)binaryFileData[filePosition++]).ToString("X2");
+                elementThree = ((short)binaryFileData[filePosition++]).ToString("X2") +
+                    ((short)binaryFileData[filePosition++]).ToString("X2");
+            }
+
+            if (NumberOfBytes == 6)
+            {
+                elementTwo = ((short)binaryFileData[filePosition++]).ToString("X2") +
+                            ((short)binaryFileData[filePosition++]).ToString("X2");
+                elementThree = ((short)binaryFileData[filePosition++]).ToString("X2") +
+                               ((short)binaryFileData[filePosition++]).ToString("X2");
+                elementFour = ((short)binaryFileData[filePosition++]).ToString("X2") +
+                               ((short)binaryFileData[filePosition++]).ToString("X2");
+            }
+
+            if (elementOne.Contains("48E7"))
+            {
+                elementTwo = "";
+            }
+            //}
+            string retunLine = "          " + Name + " " + Prefix + elementTwo + elementThree + Suffix + elementFour;
+            return retunLine;
+        }
+
+
         /// <summary>
         /// Build a Formatted string containing the relevant OpCode detail.
         /// </summary>
