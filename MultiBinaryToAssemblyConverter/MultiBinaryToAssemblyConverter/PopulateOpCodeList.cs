@@ -8,7 +8,6 @@ namespace BinToAssembly
         private readonly List<OpCode> m_OpCodes = new List<OpCode>();
         private string processor = "";
         public string GetProcessor { get { return processor; } }
-
         public List<OpCode> GetOpCodes { get { return m_OpCodes; } }
 
         public OpCode GetOpCode(string value)
@@ -18,8 +17,7 @@ namespace BinToAssembly
 
         private readonly XMLLoader xmlLoader = new XMLLoader();
 
-        public void Init(
-            string processor)
+        public void Init(string processor)
         {
             this.processor = processor;
             m_OpCodes.Clear();
