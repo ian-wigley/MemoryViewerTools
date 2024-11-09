@@ -12,7 +12,7 @@ namespace BinToAssembly
         private List<string> illegalOpcodes = new List<string>();
         private Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
 
-        public byte[] LoadData(string fileName)
+        public byte[] LoadBinaryData(string fileName)
         {
             try
             {
@@ -53,7 +53,8 @@ namespace BinToAssembly
 
                 if (oc != null)
                 {
-                    ConvertToAssembly(oc, ref line, ref filePosition, data, lineNumber, pc, ref dataStatements, ref illegalOpcodes);
+                    //ConvertToAssembly(oc, ref line, ref filePosition, data, lineNumber, pc, ref dataStatements, ref illegalOpcodes);
+                    ConvertToAssembly(oc, ref line, ref filePosition, data, lineNumber, pc, ref dataStatements);
                     found = true;
                 }
 
@@ -75,37 +76,37 @@ namespace BinToAssembly
             byte[] binaryFileData,
             int? lineNumber,
             int pc,
-            ref Dictionary<string, string[]>
-            dataStatements, ref List<string>
-            illegalOpCodes)
+            ref Dictionary<string, string[]> dataStatements 
+            //ref List<string> illegalOpCodes
+            )
         {
             switch (oc.Code)
             {
                 case "51C8":
-                    DBF(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "4E75":
-                    RTS(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "C3FC":
-                    MULS(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "0600":
                 case "5240":
                 case "D5C1":
-                    ADD(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "4A11":
                 case "4A13":
-                    TST(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "6000":
-                    BRA(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "41":
@@ -136,7 +137,7 @@ namespace BinToAssembly
                 case "34EA":
                 case "48E7":
                 case "4CDF":
-                    MOVE(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "41F9":
@@ -145,133 +146,49 @@ namespace BinToAssembly
                 case "47F9":
                 case "49EC":
                 case "49F9":
-                    LEA(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "4268":
                 case "42A8":
                 case "4280":
                 case "4281":
-                    CLR(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "0828":
                 case "0839":
-                    BTST(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "6700":
-                    BEQ(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
 
                 case "6600":
                 case "66F6":
-                    BNE(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "0401":
                 case "0439":
-                    SUB(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "0C11":
                 case "B21B":
-                    CMP(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 case "6100":
-                    BSR(oc, ref line, ref filePosition, binaryFileData);
+                    line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
                 default:
                     filePosition = binaryFileData.Length;
                     break;
             }
-
         }
-
-
-
-        private void DBF(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-        private void RTS(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-        private void MULS(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-
-        private void ADD(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-
-        private void TST(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-
-        private void BRA(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-        private void BEQ(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-        private void BNE(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-        private void BSR(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-
-        private void BTST(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-        private void CLR(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-        private void CMP(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-
-        private void LEA(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-        private void MOVE(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
-        private void SUB(OpCode oc, ref string line, ref int filePosition, byte[] binaryFileData)
-        {
-            line += oc.Detail(ref filePosition, binaryFileData);
-        }
-
     }
 }
