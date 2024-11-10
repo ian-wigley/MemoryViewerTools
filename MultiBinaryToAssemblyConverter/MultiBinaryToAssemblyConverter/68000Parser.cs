@@ -9,7 +9,6 @@ namespace BinToAssembly
     public class Parser68000
     {
         private readonly int startAddress = 0;
-        private List<string> illegalOpcodes = new List<string>();
         private Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
 
         public byte[] LoadBinaryData(string fileName)
@@ -20,7 +19,7 @@ namespace BinToAssembly
             }
             catch (Exception exception)
             {
-                MessageBox.Show("Error occured whilst loading data", exception.Message);
+                MessageBox.Show("Error occured whilst loading data ", exception.Message);
                 return new byte[0];
             }
         }
@@ -40,20 +39,18 @@ namespace BinToAssembly
                 // lookup the first 4 bits of each byte (Nybble)
                 int byteOne = data[filePosition] << 8;
                 int opCode = byteOne + data[filePosition + 1];
-
                 int lineNumber = startAddress + filePosition;
                 lineNumbers.Add(lineNumber.ToString("X4"));
                 string line = (startAddress + filePosition).ToString("X4");
                 line += "  " + opCode.ToString("X4");
                 int pc = startAddress + filePosition;
-
                 bool found = false;
+
                 // Get the Opcode object
                 var oc = populateOpCodeList.GetOpCode(opCode.ToString("X4"));
 
                 if (oc != null)
                 {
-                    //ConvertToAssembly(oc, ref line, ref filePosition, data, lineNumber, pc, ref dataStatements, ref illegalOpcodes);
                     ConvertToAssembly(oc, ref line, ref filePosition, data, lineNumber, pc, ref dataStatements);
                     found = true;
                 }
@@ -77,7 +74,6 @@ namespace BinToAssembly
             int? lineNumber,
             int pc,
             ref Dictionary<string, string[]> dataStatements 
-            //ref List<string> illegalOpCodes
             )
         {
             switch (oc.Code)
@@ -85,30 +81,24 @@ namespace BinToAssembly
                 case "51C8":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "4E75":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "C3FC":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "0600":
                 case "5240":
                 case "D5C1":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "4A11":
                 case "4A13":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "6000":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "41":
                 case "42":
                 case "43":
@@ -139,7 +129,6 @@ namespace BinToAssembly
                 case "4CDF":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "41F9":
                 case "43F9":
                 case "45F9":
@@ -148,43 +137,34 @@ namespace BinToAssembly
                 case "49F9":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "4268":
                 case "42A8":
                 case "4280":
                 case "4281":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "0828":
                 case "0839":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "6700":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
-
                 case "6600":
                 case "66F6":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "0401":
                 case "0439":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "0C11":
                 case "B21B":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 case "6100":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
                 default:
                     filePosition = binaryFileData.Length;
                     break;
