@@ -5,9 +5,7 @@ namespace BinToAssembly
 {
     public class OpCode
     {
-        private string m_code { get; set; }
-        private bool m_illegal { get; set; }
-        private string m_name = "";
+         private string m_name = "";
         private int m_numberOfBytes = 0;
         private string m_prefix = "";
         private string m_suffix = "";
@@ -35,13 +33,14 @@ namespace BinToAssembly
             m_illegal = illegal;
         }
 
+        private string m_code { get; set; }
+        private bool m_illegal { get; set; }
         public string Code { get { return m_code; } }
         public string Name { get { return m_name; } }
         public int NumberOfBytes { get { return m_numberOfBytes; } }
         public string Prefix { get { return m_prefix; } }
         public string Suffix { get { return m_suffix; } }
         public bool Illegal { get { return m_illegal; } }
-
 
         public string Detail(ref int filePosition, byte[] binaryFileData)
         {
