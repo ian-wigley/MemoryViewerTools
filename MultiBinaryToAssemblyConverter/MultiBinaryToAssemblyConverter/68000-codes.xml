@@ -23,7 +23,7 @@
 	<code>0839¬BTST.B¬2¬#$¬,$¬false</code>
 	<code>16¬CHK¬2¬¬¬false</code>
 	<code>4268¬CLR.W A0¬2¬¬¬false</code>
-	<code>42A8¬CLR.L A0¬2¬¬¬false</code>
+	<code>42A8¬CLR.L¬2¬¬(A0)¬false</code>
 	<code>4280¬CLR.L D0¬1¬¬¬false</code>
 	<code>4281¬CLR.L D1¬1¬¬¬false</code>
 	<code>0C11¬CMP¬2¬¬¬false</code>
