@@ -87,7 +87,7 @@ namespace BinToAssembly
                 }
                 else
                 {
-                    line += "       " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 1].ToString("X2") + oc.Suffix;
+                    line += "       " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 1].ToString("X2") + oc.Midfix;
                 }
                 filePosition += 2;
             }
@@ -105,7 +105,7 @@ namespace BinToAssembly
                 dataStatements.Add(pc.ToString("X4"), temp);
 
                 line += " " + fileStuff[filePosition + 1].ToString("X2") + " " + fileStuff[filePosition + 2].ToString("X2");
-                line += "    " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 2].ToString("X2") + fileStuff[filePosition + 1].ToString("X2") + oc.Suffix;
+                line += "    " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 2].ToString("X2") + fileStuff[filePosition + 1].ToString("X2") + oc.Midfix;
                 filePosition += 3;
             }
             else if (oc.NumberOfBytes == 3 && (filePosition == fileStuff.Length - 2))
