@@ -112,7 +112,7 @@ namespace BinToAssembly
                 }
                 else
                 {
-                    line += "       " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 1].ToString("X2") + oc.Suffix;
+                    line += "       " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 1].ToString("X2") + oc.Midfix;
                 }
                 filePosition += 2;
             }
@@ -131,14 +131,14 @@ namespace BinToAssembly
 
                 line += " " + fileStuff[filePosition + 1].ToString("X2") + " " + fileStuff[filePosition + 2].ToString("X2");
                 //line += "    " + oc.name + " " + oc.prefix + fileStuff[filePosition + 2].ToString("X2") + fileStuff[filePosition + 1].ToString("X2") + oc.suffix;
-                line += "    " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 1].ToString("X2") + fileStuff[filePosition + 2].ToString("X2") + oc.Suffix;
+                line += "    " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 1].ToString("X2") + fileStuff[filePosition + 2].ToString("X2") + oc.Midfix;
                 filePosition += 3;
             }
             else if (oc.NumberOfBytes == 4 && (filePosition < fileStuff.Length - 4))
             {
                 temp = new string[4] { "!byte $" + oc.Code, "!byte $" + fileStuff[filePosition + 1].ToString("X2"), "!byte $" + fileStuff[filePosition + 2].ToString("X2"), "!byte $" + oc.Code };
                 line += " " + fileStuff[filePosition + 1].ToString("X2") + " " + fileStuff[filePosition + 2].ToString("X2");
-                line += "    " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 2].ToString("X2") + fileStuff[filePosition + 3].ToString("X2") + oc.Suffix;
+                line += "    " + oc.Name + " " + oc.Prefix + fileStuff[filePosition + 2].ToString("X2") + fileStuff[filePosition + 3].ToString("X2") + oc.Midfix;
                 filePosition += 4;
 
             }
