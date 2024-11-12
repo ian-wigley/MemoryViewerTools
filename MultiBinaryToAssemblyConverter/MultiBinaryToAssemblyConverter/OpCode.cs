@@ -5,9 +5,10 @@ namespace BinToAssembly
 {
     public class OpCode
     {
-         private string m_name = "";
+        private string m_name = "";
         private int m_numberOfBytes = 0;
         private string m_prefix = "";
+        private string m_midfix = "";
         private string m_suffix = "";
         private MethodInfo m_methodInfo;
         private string m_methodName;
@@ -17,20 +18,20 @@ namespace BinToAssembly
             string name,
             int numberOfBytes,
             string prefix,
+            string midfix,
             string suffix,
-            string methodName,
-            bool illegal
+            string methodName
             )
         {
             m_code = code;
             m_name = name;
             m_numberOfBytes = numberOfBytes;
             m_prefix = prefix;
+            m_midfix = midfix;
             m_suffix = suffix;
             m_methodName = methodName;
             Type type = typeof(OpCode);
             m_methodInfo = type.GetMethod(methodName);
-            m_illegal = illegal;
         }
 
         private string m_code { get; set; }
@@ -39,7 +40,7 @@ namespace BinToAssembly
         public string Name { get { return m_name; } }
         public int NumberOfBytes { get { return m_numberOfBytes; } }
         public string Prefix { get { return m_prefix; } }
-        public string Suffix { get { return m_suffix; } }
+        public string Midfix { get { return m_midfix; } }
         public bool Illegal { get { return m_illegal; } }
 
         public string Detail(ref int filePosition, byte[] binaryFileData)
@@ -81,7 +82,7 @@ namespace BinToAssembly
                 elementTwo = "";
             }
             //}
-            string retunLine = "          " + Name + " " + Prefix + elementTwo + elementThree + Suffix + elementFour;
+            string retunLine = "          " + Name + " " + Prefix + elementTwo + elementThree + Midfix + elementFour;
             return retunLine;
         }
 
@@ -179,13 +180,13 @@ namespace BinToAssembly
         public string BSET_B(ushort[] binaryFileData)
         {
             string result = (binaryFileData[1].ToString("X4") + binaryFileData[2].ToString("X4")).ToLower();
-            return Prefix + unchecked((sbyte)binaryFileData[0]).ToString("X4").ToLower() + Suffix + result;
+            return Prefix + unchecked((sbyte)binaryFileData[0]).ToString("X4").ToLower() + Midfix + result;
         }
 
         public string BTST_B(ushort[] binaryFileData)
         {
             string result = (binaryFileData[1].ToString("X4") + binaryFileData[2].ToString("X4")).ToLower();
-            return Prefix + unchecked((sbyte)binaryFileData[0]).ToString("X4").ToLower() + Suffix + result;
+            return Prefix + unchecked((sbyte)binaryFileData[0]).ToString("X4").ToLower() + Midfix + result;
         }
 
         public string CLR_W(ushort[] binaryFileData)
@@ -200,7 +201,7 @@ namespace BinToAssembly
 
         public string CMP_B(ushort[] binaryFileData)
         {
-            return Prefix + binaryFileData[0].ToString("X2") + Suffix + (binaryFileData[1].ToString("X4") + binaryFileData[2].ToString("X4")).ToLower();
+            return Prefix + binaryFileData[0].ToString("X2") + Midfix + (binaryFileData[1].ToString("X4") + binaryFileData[2].ToString("X4")).ToLower();
         }
 
         public string DBF(ushort[] binaryFileData)
@@ -227,7 +228,7 @@ namespace BinToAssembly
 
         public string LEA_L(ushort[] binaryFileData)
         {
-            return Prefix + Hex(binaryFileData) + Suffix;
+            return Prefix + Hex(binaryFileData) + Midfix;
         }
 
         public string LSR_W(ushort[] binaryFileData)
@@ -238,7 +239,7 @@ namespace BinToAssembly
         public string MOVE_B(ushort[] binaryFileData)
         {
             string result = (binaryFileData[1].ToString("X4") + binaryFileData[2].ToString("X4")).ToLower();
-            return Prefix + unchecked((sbyte)binaryFileData[0]).ToString("X2") + Suffix + result;
+            return Prefix + unchecked((sbyte)binaryFileData[0]).ToString("X2") + Midfix + result;
         }
 
         public string MOVE_W(ushort[] binaryFileData)
@@ -255,7 +256,7 @@ namespace BinToAssembly
         public string MOVEA_L(ushort[] binaryFileData)
         {
             string result = (binaryFileData[0].ToString("X4") + binaryFileData[1].ToString("X4")).ToLower();
-            return Prefix + result + "," + Suffix;
+            return Prefix + result + "," + Midfix;
         }
 
         public string MULU(ushort[] binaryFileData)
