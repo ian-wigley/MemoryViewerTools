@@ -8,6 +8,7 @@ namespace BinToAssembly
         private string m_name = "";
         private int m_numberOfBytes = 0;
         private string m_prefix = "";
+        private string m_firstfix = "";
         private string m_midfix = "";
         private string m_suffix = "";
         private MethodInfo m_methodInfo;
@@ -18,6 +19,7 @@ namespace BinToAssembly
             string name,
             int numberOfBytes,
             string prefix,
+            string firstfix,
             string midfix,
             string suffix,
             string methodName
@@ -27,6 +29,7 @@ namespace BinToAssembly
             m_name = name;
             m_numberOfBytes = numberOfBytes;
             m_prefix = prefix;
+            m_firstfix = firstfix;
             m_midfix = midfix;
             m_suffix = suffix;
             m_methodName = methodName;
@@ -40,7 +43,9 @@ namespace BinToAssembly
         public string Name { get { return m_name; } }
         public int NumberOfBytes { get { return m_numberOfBytes; } }
         public string Prefix { get { return m_prefix; } }
+        public string Firstfix { get { return m_firstfix; } }
         public string Midfix { get { return m_midfix; } }
+        public string Suffix { get { return m_suffix; } }
         public bool Illegal { get { return m_illegal; } }
 
         public string Detail(ref int filePosition, byte[] binaryFileData)
@@ -81,8 +86,8 @@ namespace BinToAssembly
             {
                 elementTwo = "";
             }
-            //}
-            string retunLine = "          " + Name + " " + Prefix + elementTwo + elementThree + Midfix + elementFour;
+
+            string retunLine = "          " + Name + " " + Prefix + elementTwo + Firstfix + elementThree + Midfix + elementFour + Suffix;
             return retunLine;
         }
 
