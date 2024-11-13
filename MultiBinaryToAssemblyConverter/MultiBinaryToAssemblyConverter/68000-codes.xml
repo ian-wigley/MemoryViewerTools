@@ -64,7 +64,7 @@
 	<code>13D1¬MOVE.B¬4¬(A1)¬,$¬¬</code>
 	<code>13FC¬MOVE.B¬6¬#$¬,$¬¬</code>
 	<code>317C¬MOVE.W¬4¬#$¬,$¬¬</code>
-	<code>217C¬MOVE.L¬6¬#$¬,$¬¬</code>
+	<code>217C¬MOVE.L¬6¬#$¬,$¬(A0)¬</code>
 	<code>2279¬MOVEA¬4¬$¬,A1¬¬</code>
 	<code>23C9¬MOVE.L¬4¬A1,$¬¬¬</code>
 	<code>289A¬MOVE.L¬1¬(A2)+¬,(A4)¬¬</code>
