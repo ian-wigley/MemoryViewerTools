@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <codes>
 	<processor>68000</processor>
-	<code>00¬ABCD¬2¬¬¬¬</code>
+	<code>0000¬OR.B¬2¬#$¬¬,D0¬</code>
 	<code>0600¬ADD¬2¬#$¬,D0¬¬</code>
 	<code>0611¬ADD¬2¬#$¬,(A1)¬¬</code>
 	<code>5239¬ADD¬2¬#$¬,$¬¬</code>
-	<code>5240¬ADDQ¬1¬#$¬,D0¬¬</code>
+	<code>5240¬ADDQ¬1¬#$01¬¬,D0¬</code>
 	<code>D5C1¬ADDA¬1¬D1¬,A2¬¬</code>
 	<code>03¬ADDI¬2¬¬¬¬</code>
 	<code>04¬ADDQ¬2¬¬¬¬</code>
@@ -18,9 +18,12 @@
 	<code>11¬BCLR¬2¬¬¬¬</code>
 	<code>6008¬BRA¬2¬¬¬¬</code>
 	<code>08F9¬BSET.B¬6¬#$¬,$¬¬</code>
+	
 	<code>6100¬BSR.W¬2¬#$¬¬¬</code>
+	
+	
 	<code>0828¬BTST¬4¬#¬,$¬¬</code>
-	<code>0839¬BTST.B¬2¬#$¬,$¬¬</code>
+	<code>0839¬BTST.B¬6¬#$¬,$¬¬</code>
 	<code>16¬CHK¬2¬¬¬¬</code>
 	<code>4268¬CLR.W A0¬2¬¬¬¬</code>
 	<code>42A8¬CLR.L¬2¬¬(A0)¬¬</code>
@@ -47,13 +50,16 @@
 	<code>33¬ILLEGAL¬2¬¬¬¬</code>
 	<code>4ED5¬JMP¬2¬¬¬¬</code>
 	<code>4EB9¬JSR¬4¬$¬¬¬</code>
-	<code>4EAE¬JSR¬2¬¬¬¬</code>
-	<code>41F9¬LEA.L¬4¬$¬,A0¬¬</code>
-	<code>43F9¬LEA¬4¬$¬,A1¬¬</code>
-	<code>45F9¬LEA¬4¬$¬,A2¬¬</code>
-	<code>47F9¬LEA¬4¬$¬,A3¬¬</code>
-	<code>49EC¬LEA¬2¬$¬,A4¬¬</code>
-	<code>49F9¬LEA¬4¬$¬,A4¬¬</code>
+	<code>4EAE¬JSR¬2¬$¬¬¬</code>
+	<code>41F9¬LEA.L¬4¬$¬¬,A0¬</code>
+	<code>43F9¬LEA¬4¬$¬¬,A1¬</code>
+	<code>43FA¬LEA¬2¬$¬¬,A1¬</code>
+	<code>45F9¬LEA¬4¬$¬¬,A2¬</code>
+	<code>47F9¬LEA¬4¬$¬¬,A3¬</code>
+	<code>49EC¬LEA¬2¬$¬¬,A4¬</code>
+	<code>49F9¬LEA¬4¬$¬¬,A4¬</code>
+	<code>4DF9¬LEA¬4¬$¬¬,A4¬</code>
+	
 	<code>37¬LINK¬2¬¬¬¬</code>
 	<code>38¬LSL,LSR¬2¬¬¬¬</code>
 	<code>1200¬MOVE.B¬1¬D0¬,D1¬¬</code>
@@ -62,20 +68,42 @@
 	<code>1281¬MOVE.B¬1¬D1¬,(A1)¬¬</code>
 	<code>12E9¬MOVE.B¬2¬(A1)¬,(A1)+¬¬</code>
 	<code>13D1¬MOVE.B¬4¬(A1)¬,$¬¬</code>
+	<code>1E3C¬MOVE.B¬2¬$¬,D7¬¬</code>
 	<code>13FC¬MOVE.B¬6¬#$¬,$¬¬</code>
+
 	<code>317C¬MOVE.W¬4¬#$¬,$¬¬</code>
-	<code>217C¬MOVE.L¬6¬#$¬,$¬(A0)¬</code>
-	<code>2279¬MOVEA¬4¬$¬,A1¬¬</code>
-	<code>23C9¬MOVE.L¬4¬A1,$¬¬¬</code>
-	<code>289A¬MOVE.L¬1¬(A2)+¬,(A4)¬¬</code>
-	<code>296A¬MOVE.L¬4¬A2,$¬,(A4)¬¬</code>
-	<code>2C78¬MOVEA¬2¬,¬¬¬</code>
-	<code>2C79¬MOVEA.L¬4¬$¬,A6¬¬</code>
+	<code>3C3C¬MOVE.W¬2¬#$¬,D6¬¬</code>
 	<code>303C¬MOVE.W¬2¬#$¬,D0¬¬</code>
+	
+	<code>323C¬MOVE.W¬2¬#$¬,D1¬¬</code>
+	<code>363C¬MOVE.W¬2¬#$¬,D3¬¬</code>	
+
 	<code>33D2¬MOVE.W¬4¬(A2)¬,$¬¬</code>
 	<code>3412¬MOVE.W¬1¬(A2)¬,D2¬¬</code>
 	<code>3482¬MOVE.W¬1¬D2¬,(A2)¬¬</code>
 	<code>34EA¬MOVE.W¬2¬(A2)¬,(A2)+¬¬</code>
+	<code>33EE¬MOVE.W¬6¬#$¬,$¬¬</code>
+	<code>3D7C¬MOVE.W¬4¬#$¬,$¬,A6¬</code>
+	<code>30C3¬MOVE.W¬1¬D3¬¬(A0)+,¬</code>
+
+	<code>30FC¬MOVE.W¬2¬#$¬¬(A0)+,¬</code>
+	
+	<code>203C¬MOVE.L¬4¬#$¬¬,$¬(A0)¬</code>
+	<code>223C¬MOVE.L¬4¬#$¬¬,$¬(A0)¬</code>
+	<code>217C¬MOVE.L¬6¬#$¬¬,$¬(A0)¬</code>
+	<code>23C0¬MOVE.L¬4¬D0,$¬¬¬</code>
+	<code>23C8¬MOVE.L¬4¬A0,$¬¬¬</code>
+
+	<code>23C9¬MOVE.L¬4¬A1,$¬¬¬</code>
+	<code>289A¬MOVE.L¬1¬(A2)+¬,(A4)¬¬</code>
+	<code>296A¬MOVE.L¬4¬A2,$¬¬,(A4)¬</code>
+	
+	<code>2279¬MOVEA¬4¬$¬,A1¬¬</code>
+	
+	<code>2C78¬MOVEA¬2¬¬¬,A6¬</code>
+	<code>2C79¬MOVEA.L¬4¬$¬,A6¬¬</code>
+
+	<code>7000¬MOVEQ¬1¬#$00¬¬,D0¬</code>
 	<code>41¬MOVEtoCCR¬2¬¬¬¬</code>
 	<code>42¬MOVEfromSR¬2¬¬¬¬</code>
 	<code>43¬MOVEtoSR¬2¬¬¬¬</code>
@@ -84,7 +112,7 @@
 	<code>4CDF¬MOVEM¬2¬(A7)+¬,D0-D7/A0-A6¬¬</code>
 	<code>46¬MOVEP¬2¬¬¬¬</code>
 	<code>47¬MOVEQ¬2¬¬¬¬</code>
-	<code>C3FC¬MULS¬2¬¬¬¬</code>
+	<code>C3FC¬MULS¬2¬#$¬¬,D1¬</code>
 	<code>49¬MULU¬2¬¬¬¬</code>
 	<code>50¬NBCD¬2¬¬¬¬</code>
 	<code>51¬NEG¬2¬¬¬¬</code>
