@@ -78,6 +78,9 @@ namespace BinToAssembly
         {
             switch (oc.Code)
             {
+                case "0000":
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
                 case "51C8":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
@@ -110,31 +113,45 @@ namespace BinToAssembly
                 case "1219":
                 case "1281":
                 case "12E9":
+                case "1E3C":
                 case "13D1":
                 case "13FC":
-                case "317C":
+                case "203C":
+                case "223C":
+                case "23C0":
                 case "217C":
                 case "2279":
+                case "23C8":
                 case "23C9":
                 case "289A":
                 case "296A":
                 case "2C78":
                 case "2C79":
                 case "303C":
+                case "30FC":
+                case "317C":
+                case "323C":
                 case "33D2":
+                case "33EE":
                 case "3412":
+                case "363C":
                 case "3482":
                 case "34EA":
+                case "3C3C":
+                case "3D7C":
                 case "48E7":
                 case "4CDF":
+                case "7000":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "41F9":
                 case "43F9":
+                case "43FA":
                 case "45F9":
                 case "47F9":
                 case "49EC":
                 case "49F9":
+                case "4DF9":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "4268":
@@ -163,6 +180,9 @@ namespace BinToAssembly
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "6100":
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
+                case "4EAE":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 default:
