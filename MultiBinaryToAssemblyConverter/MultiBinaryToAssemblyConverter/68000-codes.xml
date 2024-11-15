@@ -3,6 +3,8 @@
 	<processor>68000</processor>
 	<code>0000¬OR.B¬2¬#$¬¬,D0¬</code>
 	<code>0600¬ADD¬2¬#$¬,D0¬¬</code>
+	<code>D67C¬ADD.W¬2¬#$¬,D3¬¬</code>
+	<code>D27C¬ADD.W¬2¬#$¬,D1¬¬</code>
 	<code>0611¬ADD¬2¬#$¬,(A1)¬¬</code>
 	<code>5239¬ADD¬2¬#$¬,$¬¬</code>
 	<code>5240¬ADDQ¬1¬#$01¬¬,D0¬</code>
@@ -18,10 +20,7 @@
 	<code>11¬BCLR¬2¬¬¬¬</code>
 	<code>6008¬BRA¬2¬¬¬¬</code>
 	<code>08F9¬BSET.B¬6¬#$¬,$¬¬</code>
-	
 	<code>6100¬BSR.W¬2¬#$¬¬¬</code>
-	
-	
 	<code>0828¬BTST¬4¬#¬,$¬¬</code>
 	<code>0839¬BTST.B¬6¬#$¬,$¬¬</code>
 	<code>16¬CHK¬2¬¬¬¬</code>
@@ -70,39 +69,34 @@
 	<code>13D1¬MOVE.B¬4¬(A1)¬,$¬¬</code>
 	<code>1E3C¬MOVE.B¬2¬$¬,D7¬¬</code>
 	<code>13FC¬MOVE.B¬6¬#$¬,$¬¬</code>
-
 	<code>317C¬MOVE.W¬4¬#$¬,$¬¬</code>
 	<code>3C3C¬MOVE.W¬2¬#$¬,D6¬¬</code>
 	<code>303C¬MOVE.W¬2¬#$¬,D0¬¬</code>
-	
 	<code>323C¬MOVE.W¬2¬#$¬,D1¬¬</code>
 	<code>363C¬MOVE.W¬2¬#$¬,D3¬¬</code>	
-
 	<code>33D2¬MOVE.W¬4¬(A2)¬,$¬¬</code>
 	<code>3412¬MOVE.W¬1¬(A2)¬,D2¬¬</code>
 	<code>3482¬MOVE.W¬1¬D2¬,(A2)¬¬</code>
 	<code>34EA¬MOVE.W¬2¬(A2)¬,(A2)+¬¬</code>
 	<code>33EE¬MOVE.W¬6¬#$¬,$¬¬</code>
 	<code>3D7C¬MOVE.W¬4¬#$¬,$¬,A6¬</code>
+	<code>30C1¬MOVE.W¬1¬D1¬¬(A0)+,¬</code>
 	<code>30C3¬MOVE.W¬1¬D3¬¬(A0)+,¬</code>
-
-	<code>30FC¬MOVE.W¬2¬#$¬¬(A0)+,¬</code>
-	
+	<code>30FC¬MOVE.W¬2¬#$¬¬,(A0)+,¬</code>
 	<code>203C¬MOVE.L¬4¬#$¬¬,$¬(A0)¬</code>
 	<code>223C¬MOVE.L¬4¬#$¬¬,$¬(A0)¬</code>
 	<code>217C¬MOVE.L¬6¬#$¬¬,$¬(A0)¬</code>
 	<code>23C0¬MOVE.L¬4¬D0,$¬¬¬</code>
 	<code>23C8¬MOVE.L¬4¬A0,$¬¬¬</code>
-
 	<code>23C9¬MOVE.L¬4¬A1,$¬¬¬</code>
 	<code>289A¬MOVE.L¬1¬(A2)+¬,(A4)¬¬</code>
 	<code>296A¬MOVE.L¬4¬A2,$¬¬,(A4)¬</code>
-	
+	<code>2240¬MOVEA¬1¬D0¬,A1¬¬</code>
 	<code>2279¬MOVEA¬4¬$¬,A1¬¬</code>
-	
+	<code>2829¬MOVEA¬2¬A1¬¬,D4¬</code>
+	<code>207A¬MOVEA¬2¬PC¬¬,A0¬</code>
 	<code>2C78¬MOVEA¬2¬¬¬,A6¬</code>
-	<code>2C79¬MOVEA.L¬4¬$¬,A6¬¬</code>
-
+	<code>2C79¬MOVEA.L¬4¬$¬¬,A6¬</code>
 	<code>7000¬MOVEQ¬1¬#$00¬¬,D0¬</code>
 	<code>41¬MOVEtoCCR¬2¬¬¬¬</code>
 	<code>42¬MOVEfromSR¬2¬¬¬¬</code>
