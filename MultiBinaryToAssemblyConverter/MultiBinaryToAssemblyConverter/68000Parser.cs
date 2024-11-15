@@ -92,7 +92,9 @@ namespace BinToAssembly
                     break;
                 case "0600":
                 case "5240":
+                case "D27C":
                 case "D5C1":
+                case "D67C":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "4A11":
@@ -117,17 +119,22 @@ namespace BinToAssembly
                 case "13D1":
                 case "13FC":
                 case "203C":
+                case "207A":
                 case "223C":
+                case "2240":
                 case "23C0":
                 case "217C":
                 case "2279":
                 case "23C8":
                 case "23C9":
+                case "2829":
                 case "289A":
                 case "296A":
                 case "2C78":
                 case "2C79":
                 case "303C":
+                case "30C1":
+                case "30C3":
                 case "30FC":
                 case "317C":
                 case "323C":
