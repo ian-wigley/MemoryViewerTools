@@ -136,6 +136,7 @@
 	<code>69¬SUBI¬2¬¬¬¬</code>
 	<code>70¬SUBQ¬2¬¬¬¬</code>
 	<code>71¬SUBX¬2¬¬¬¬</code>
+	<code>927c¬SUB.W¬2¬#$¬¬D1¬</code>
 	<code>72¬SWAP¬2¬¬¬¬</code>
 	<code>73¬TAS¬2¬¬¬¬</code>
 	<code>74¬TRAP¬2¬¬¬¬</code>
