@@ -80,10 +80,13 @@ namespace BinToAssembly
             {
                 case "0000": // OR
                 case "0001":
+                case "0002":
                 case "0079":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "66CA": // BNE
+                case "66F2":
+                case "6772":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "6008": // BRA
@@ -138,6 +141,7 @@ namespace BinToAssembly
                 case "203C":
                 case "207A":
                 case "20B8":
+                case "2239":
                 case "223C":
                 case "2240":
                 case "23C0":
@@ -172,6 +176,10 @@ namespace BinToAssembly
                 case "4CDF":
                 case "7000":
                 case "7450":
+                case "2E6C":
+                case "7261":
+                case "7279":
+                case "7665":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "41F9":
@@ -208,11 +216,16 @@ namespace BinToAssembly
                 case "927C":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-                case "0C11":
+                case "0C11": // CMP
                 case "B21B":
+                case "B240":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-                case "6100":
+                case "6100": // BSR
+                case "6170":
+                case "6869":
+                case "6373":
+                case "6D6F":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "4EAE":
@@ -222,6 +235,14 @@ namespace BinToAssembly
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "4E71": // NOP
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
+                case "E289": // LSR
+                case "EE49":
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
+                case "0033": // ILLEGAL
+                case "7374":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 default:
