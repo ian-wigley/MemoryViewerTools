@@ -22,6 +22,9 @@
 	<code>0004¬ADDQ¬2¬¬¬¬</code>
 	<code>0005¬ADDX¬2¬¬¬¬</code>
 
+	<code>5261¬ADDQ¬2¬#$¬¬,-(A1)¬</code>
+	
+	
 	<code>0006¬AND¬2¬¬¬¬</code>
 	<code>0007¬ANDI¬2¬¬¬¬</code>
 	<code>0008¬ASL,ASR¬2¬¬¬¬</code>
@@ -33,8 +36,14 @@
 	<code>6100¬BSR.W¬2¬#$¬¬¬</code>
 	<code>6170¬BSR.W¬1¬#$¬¬¬</code>
 	<code>6869¬BVC.W¬1¬#$¬¬¬</code>
+	<code>6974¬BVS.B¬1¬#$¬¬¬</code>
+	
 	<code>6373¬BLS.W¬1¬#$¬¬¬</code>
 	<code>6D6F¬BLT.B¬1¬#$¬¬¬</code>
+	
+	<code>6C6F¬BGE.B¬1¬#$¬¬¬</code>
+	<code>6F70¬BLE.B¬1¬#$¬¬¬</code>
+	
 	
 	<code>0879¬BCHG.B¬6¬#$¬,$¬¬</code>
 	<code>0011¬BCLR¬2¬¬¬¬</code>
@@ -45,7 +54,7 @@
 
 	<code>0828¬BTST¬4¬#¬,$¬¬</code>
 	<code>0839¬BTST.B¬6¬#$¬,$¬¬</code>
-	<code>16¬CHK¬2¬¬¬¬</code>
+	<code>0016¬CHK¬2¬¬¬¬</code>
 
 	<code>4240¬CLR.W¬1¬D0¬¬¬</code>
 	<code>4268¬CLR.W A0¬2¬¬¬¬</code>
@@ -80,7 +89,13 @@
 	<code>0032¬EXTB¬2¬¬¬¬</code>
 	
 	<code>0033¬ILLEGAL¬2¬¬¬¬</code>
+	<code>494E¬ILLEGAL¬1¬¬¬¬</code>
+	<code>7331¬ILLEGAL¬1¬¬¬¬</code>
+	<code>7332¬ILLEGAL¬1¬¬¬¬</code>
 	<code>7374¬ILLEGAL¬1¬¬¬¬</code>
+	<code>7365¬ILLEGAL¬1¬¬¬¬</code>
+	<code>7761¬ILLEGAL¬1¬¬¬¬</code>
+	<code>FFFF¬ILLEGAL¬1¬¬¬¬</code>
 	
 	<code>4ED5¬JMP¬2¬¬¬¬</code>
 	<code>4EB9¬JSR¬4¬$¬¬¬</code>
@@ -190,14 +205,19 @@
 	<code>0064¬SBCD¬2¬¬¬¬</code>
 	<code>0065¬SCC¬2¬¬¬¬</code>
 	<code>0066¬STOP¬2¬¬¬¬</code>
+	
 	<code>0401¬SUB¬2¬#$¬,D1¬¬</code>
 	<code>0439¬SUB¬6¬#$¬,$¬¬</code>
 	<code>0068¬SUBA¬2¬¬¬¬</code>
 	<code>0069¬SUBI¬2¬¬¬¬</code>
 	<code>0070¬SUBQ¬2¬¬¬¬</code>
+	<code>5761¬SUBQ.W¬2¬#$¬¬,-(A1)¬</code>
+
+	
 	<code>0071¬SUBX¬2¬¬¬¬</code>
 	<code>927C¬SUB.W¬2¬#$¬¬D1¬</code>
 	<code>0072¬SWAP¬2¬¬¬¬</code>
+	
 	<code>0073¬TAS¬2¬¬¬¬</code>
 	<code>0074¬TRAP¬2¬¬¬¬</code>
 	<code>0075¬TRAPV¬2¬¬¬¬</code>
@@ -208,4 +228,11 @@
 	<code>66F6¬BNE¬2¬¬¬¬</code>
 	<code>6700¬BEQ¬2¬¬¬¬</code>
 	<code>6000¬BRA¬2¬¬¬¬</code>
+
+
+
+
+
+
+
 </codes>
