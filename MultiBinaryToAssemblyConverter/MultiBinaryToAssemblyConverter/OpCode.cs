@@ -82,6 +82,16 @@ namespace BinToAssembly
                                ((short)binaryFileData[filePosition++]).ToString("X2");
             }
 
+            if (NumberOfBytes == 8)
+            {
+                filePosition += 8;
+            }
+            if (NumberOfBytes == 12)
+            {
+                filePosition += 12;
+            }
+
+
             // Temporary fixes
 
             if (elementOne.Contains("48E7"))
