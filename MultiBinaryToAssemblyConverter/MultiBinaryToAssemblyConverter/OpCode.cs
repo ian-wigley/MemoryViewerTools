@@ -5,14 +5,14 @@ namespace BinToAssembly
 {
     public class OpCode
     {
-        private string m_name = "";
-        private int m_numberOfBytes = 0;
-        private string m_prefix = "";
-        private string m_firstfix = "";
-        private string m_midfix = "";
-        private string m_suffix = "";
-        private MethodInfo m_methodInfo;
-        private string m_methodName;
+        protected string m_name = "";
+        protected int m_numberOfBytes = 0;
+        protected string m_prefix = "";
+        protected string m_firstfix = "";
+        protected string m_midfix = "";
+        protected string m_suffix = "";
+        protected MethodInfo m_methodInfo;
+        protected string m_methodName;
 
         public OpCode(
             string code,
@@ -37,8 +37,8 @@ namespace BinToAssembly
             m_methodInfo = type.GetMethod(methodName);
         }
 
-        private string m_code { get; set; }
-        private bool m_illegal { get; set; }
+        public string m_code { get; set; }
+        public bool m_illegal { get; set; }
         public string Code { get { return m_code; } }
         public string Name { get { return m_name; } }
         public int NumberOfBytes { get { return m_numberOfBytes; } }
