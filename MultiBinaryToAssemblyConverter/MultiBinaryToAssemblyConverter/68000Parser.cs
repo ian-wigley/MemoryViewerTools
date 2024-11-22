@@ -81,6 +81,7 @@ namespace BinToAssembly
                 case "0000": // OR
                 case "0001":
                 case "0002":
+                case "0003":
                 case "0004":
                 case "0014":
                 case "0015":
@@ -97,7 +98,9 @@ namespace BinToAssembly
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "66CA": // BNE
+                case "66CE":
                 case "66F2":
+                case "670A": // BEQ
                 case "6772":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
@@ -122,6 +125,7 @@ namespace BinToAssembly
                 case "5243":
                 case "5261":
                 case "544B":
+                case "5480":
                 case "5C4B":
                 case "D27C":
                 case "D5C1":
@@ -137,6 +141,9 @@ namespace BinToAssembly
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "0A00": // EOR
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
+                case "E218": // ROR
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "0041": // MOVE
@@ -155,6 +162,8 @@ namespace BinToAssembly
                 case "13D1":
                 case "13FC":
                 case "1683":
+                case "2039":
+                case "2079":
                 case "203C":
                 case "207A":
                 case "20B8":
@@ -163,9 +172,13 @@ namespace BinToAssembly
                 case "2240":
                 case "23C0":
                 case "217C":
+                case "2209":
                 case "2279":
+                case "227A":
                 case "23C8":
                 case "23C9":
+                case "23E9":
+                case "23FC":
                 case "267A":
                 case "2829":
                 case "289A":
@@ -182,9 +195,13 @@ namespace BinToAssembly
                 case "323C":
                 case "33D2":
                 case "33EE":
+                case "33F0":
                 case "3412":
+                case "3481":
                 case "3607":
+                case "3613":
                 case "363C":
+                case "3681":
                 case "3482":
                 case "34EA":
                 case "3B7C":
@@ -237,8 +254,9 @@ namespace BinToAssembly
                 case "927C":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-                case "0C11": // CMP
+                case "0C00": // CMP
                 case "0C2D":
+                case "0C40":
                 case "B21B":
                 case "B240":
                     line += oc.Detail(ref filePosition, binaryFileData);
@@ -266,8 +284,15 @@ namespace BinToAssembly
                 case "EE49":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
+                case "4841": // SWAP
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
                 case "0008":
                 case "0033": // ILLEGAL
+                case "0888":
+                case "0BBB":
+                case "0CCC":
+                case "0FFF":
                 case "4143":
                 case "436F":
                 case "444D":
@@ -285,7 +310,10 @@ namespace BinToAssembly
                     break;
 
                 case "6572": // To sort & put into order ...
+                case "0111":
                 case "01B0":
+                case "0DDD":
+                case "0EEE":
                 case "6261":
                 case "7232":
                 case "696E":
@@ -364,6 +392,8 @@ namespace BinToAssembly
                 case "7068":
                 case "5F6C":
                 case "2E69":
+                case "0102": // BTST
+                case "0106":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
 
