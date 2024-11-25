@@ -91,6 +91,7 @@
 
 	<code>0008¬ILLEGAL¬1¬¬¬¬</code>
 	<code>0033¬ILLEGAL¬1¬¬¬¬</code>
+	<code>00E0¬ILLEGAL¬1¬¬¬¬</code>
 	<code>0888¬ILLEGAL¬1¬¬¬¬</code>
 	<code>0BBB¬ILLEGAL¬1¬¬¬¬</code>
 	<code>0CCC¬ILLEGAL¬1¬¬¬¬</code>
@@ -359,6 +360,15 @@
 	<code>5F6C¬SUBQ.W¬2¬#$¬¬,(A4)¬</code>
 	<code>2E69¬MOVEA.L¬2¬(A1)¬¬¬,A7¬</code>
 
-
-
+	<code>0777¬BCHG.B,¬10¬D3¬¬,A2¬</code>
+	<code>0333¬BTST.B,¬10¬D1¬¬,A3¬</code>
+	<code>0AAA¬EOR.L¬6¬#$¬¬,A2¬</code>
+	<code>0444¬SUB.W,¬2¬#$¬¬,D4¬</code>
+	<code>0222¬AND.B,¬2¬#$¬¬,-(A2)¬</code>
+	<code>0666¬ADD.W,¬2¬#$¬¬,-(A6)¬</code>
+	<code>5000¬ADDQ.B¬1¬#$¬¬,D0¬</code>
+	<code>0034¬OR.B¬4¬#$¬¬,A4¬</code>
+	<code>0108¬MOVEP.W,¬2¬A0¬¬,D0¬</code>
+	<code>010A¬MOVEP.W,¬2¬A2¬¬,D0¬</code>
+		
 </codes>
