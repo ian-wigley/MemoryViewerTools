@@ -332,8 +332,6 @@
 	<code>6465¬BCC.B¬1¬#$¬¬¬</code>
 	<code>6761¬BEQ.B¬1¬#$¬¬¬</code>
 	<code>656E¬BCS.B¬1¬#$¬¬¬</code>
-
-
 	<code>7068¬MOVEQ¬1¬#$¬¬,D0¬</code>
 	<code>706C¬MOVEQ¬1¬#$¬¬,D0¬</code>
 	<code>7836¬MOVEQ¬1¬#$¬¬,D4¬</code>
@@ -353,13 +351,11 @@
 	<code>786E¬MOVEQ¬1¬#$¬¬,D4¬</code>
 	<code>616D¬BSR.B¬1¬#$¬¬¬</code>
 	<code>5361¬SUBQ.W¬1¬#$¬¬,-(A1)¬</code>
-	
 	<code>0176¬BCHG.B¬2¬D0¬¬,(A6)¬</code>
 	<code>652D¬BCS.B¬1¬#$¬¬¬</code>
 	<code>0EEE¬CAS.L¬4¬D6¬¬,D3¬</code>
 	<code>5F6C¬SUBQ.W¬2¬#$¬¬,(A4)¬</code>
 	<code>2E69¬MOVEA.L¬2¬(A1)¬¬¬,A7¬</code>
-
 	<code>0777¬BCHG.B,¬10¬D3¬¬,A2¬</code>
 	<code>0333¬BTST.B,¬10¬D1¬¬,A3¬</code>
 	<code>0AAA¬EOR.L¬6¬#$¬¬,A2¬</code>
