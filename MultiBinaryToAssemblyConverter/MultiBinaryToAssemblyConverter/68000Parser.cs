@@ -42,7 +42,7 @@ namespace BinToAssembly
                 int lineNumber = startAddress + filePosition;
                 lineNumbers.Add(lineNumber.ToString("X4"));
                 string line = (startAddress + filePosition).ToString("X4");
-                line += "  " + opCode.ToString("X4");
+                line += " " + opCode.ToString("X4");
                 int pc = startAddress + filePosition;
                 bool found = false;
 
@@ -67,7 +67,7 @@ namespace BinToAssembly
         }
 
         public void ConvertToAssembly(
-            OpCode oc,
+            dynamic oc,
             ref string line,
             ref int filePosition,
             byte[] binaryFileData,
