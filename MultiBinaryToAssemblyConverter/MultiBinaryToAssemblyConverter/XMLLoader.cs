@@ -9,7 +9,7 @@ namespace BinToAssembly
         private bool valid = false;
         public bool SetValid { set { valid = value; } }
 
-        public void Load(List<OpCode> m_OpCodes, string processor)
+        public void Load(List<BaseOpCode> m_OpCodes, string processor)
         {
             string xmlOpCodes = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "\\" + processor + "-codes.xml";
             XmlTextReader reader = new XmlTextReader(xmlOpCodes);
