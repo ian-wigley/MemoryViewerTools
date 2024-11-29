@@ -11,17 +11,17 @@ namespace BinToAssembly
         private string processor = "";
         public string GetProcessor { get { return processor; } }
 
-        public dynamic GetOpCode(string value)
-        {
-            return m_OpCodes.FirstOrDefault(opCode => opCode.Code.Equals(value));
-        }
-
         public void Init(string processor)
         {
             this.processor = processor;
             m_OpCodes.Clear();
             xmlLoader.SetValid = false;
             xmlLoader.Load(m_OpCodes, processor);
+        }
+
+        public dynamic GetOpCode(string value)
+        {
+            return m_OpCodes.FirstOrDefault(opCode => opCode.Code.Equals(value));
         }
     }
 }
