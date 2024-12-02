@@ -27,7 +27,7 @@ namespace BinToAssembly
                             // Split the line using the delimiter
                             string[] split = reader.Value.Split('¬');
                             var method = split[1].Replace(".", "_");
-                            if(split[1].Contains("BNE")) 
+                            if(split[1].Contains("BNE") || split[1].Contains("BEQ")) 
                             {
                                 m_OpCodes.Add(new Branch(split[0], split[1], int.Parse(split[2]), split[3], split[4], split[5], split[6], method));
                             }
