@@ -432,5 +432,25 @@ namespace BinToAssembly
             byteviewer.SetBytes(new byte[] { });
             //lineNumbers = 0;
         }
+
+        private void OpenContextMenuItem_Click(
+            object sender,
+            EventArgs e)
+        {
+            // Get any highlighted text
+            string selectedText = this.textBox1.SelectedText;
+            string[] split = selectedText.Split('\n');
+            string [] text = this.textBox1.Lines;
+            this.textBox1.SelectedText = this.textBox1.SelectedText.Replace(split[0], "DC.W $0FFF");
+            // Todo finish implementation
+            int i = 0;
+        }
+
+        private void LabelGenerator_Click(object sender, EventArgs e)
+        {
+            // Todo finish implementation
+            GenerateLabels();
+            int i = 0;
+        }
     }
 }
