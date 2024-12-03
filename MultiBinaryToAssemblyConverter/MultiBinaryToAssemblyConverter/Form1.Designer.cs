@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-using System.ComponentModel.Design;
+﻿using System.Windows.Forms;
 
 namespace BinToAssembly
 {
@@ -36,7 +30,10 @@ namespace BinToAssembly
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.convert = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -50,6 +47,8 @@ namespace BinToAssembly
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.byteviewer = new System.ComponentModel.Design.ByteViewer();
+            this.labelGenerator = new System.Windows.Forms.Button();
+            this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -57,13 +56,27 @@ namespace BinToAssembly
             // 
             this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            this.textBox1.Location = new System.Drawing.Point(19, 47);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.ContextMenuStrip = this.contextMenuStrip1;
+            this.textBox1.Location = new System.Drawing.Point(14, 38);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(479, 651);
+            this.textBox1.Size = new System.Drawing.Size(460, 530);
             this.textBox1.TabIndex = 0;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.convert});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(158, 26);
+            this.contextMenuStrip1.Click += new System.EventHandler(this.OpenContextMenuItem_Click);
+            // 
+            // convert
+            // 
+            this.convert.Name = "convert";
+            this.convert.Size = new System.Drawing.Size(157, 22);
+            this.convert.Text = "Convert to Data";
             // 
             // menuStrip1
             // 
@@ -73,7 +86,8 @@ namespace BinToAssembly
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1045, 28);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.menuStrip1.Size = new System.Drawing.Size(1008, 24);
             this.menuStrip1.TabIndex = 1;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -85,13 +99,13 @@ namespace BinToAssembly
             this.clearToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(46, 24);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
@@ -101,34 +115,34 @@ namespace BinToAssembly
             this.leftWindowToolStripMenuItem,
             this.rightWindowToolStripMenuItem});
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             // 
             // leftWindowToolStripMenuItem
             // 
             this.leftWindowToolStripMenuItem.Name = "leftWindowToolStripMenuItem";
-            this.leftWindowToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.leftWindowToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.leftWindowToolStripMenuItem.Text = "Left Window";
             this.leftWindowToolStripMenuItem.Click += new System.EventHandler(this.LeftWindowToolStripMenuItem_Click);
             // 
             // rightWindowToolStripMenuItem
             // 
             this.rightWindowToolStripMenuItem.Name = "rightWindowToolStripMenuItem";
-            this.rightWindowToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
+            this.rightWindowToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.rightWindowToolStripMenuItem.Text = "Right Window";
             this.rightWindowToolStripMenuItem.Click += new System.EventHandler(this.RightWindowToolStripMenuItem_Click);
             // 
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(143, 26);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -137,13 +151,13 @@ namespace BinToAssembly
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generateLabelsToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // generateLabelsToolStripMenuItem
             // 
             this.generateLabelsToolStripMenuItem.Name = "generateLabelsToolStripMenuItem";
-            this.generateLabelsToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.generateLabelsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.generateLabelsToolStripMenuItem.Text = "Generate Labels";
             this.generateLabelsToolStripMenuItem.Click += new System.EventHandler(this.GenerateLabelsToolStripMenuItem_Click);
             // 
@@ -151,21 +165,19 @@ namespace BinToAssembly
             // 
             this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(520, 47);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Location = new System.Drawing.Point(527, 38);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(479, 651);
+            this.textBox2.Size = new System.Drawing.Size(460, 530);
             this.textBox2.TabIndex = 3;
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(425, 4);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBox1.Location = new System.Drawing.Point(436, 3);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(160, 24);
+            this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 4;
             // 
             // byteviewer
@@ -180,8 +192,12 @@ namespace BinToAssembly
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.byteviewer.Location = new System.Drawing.Point(79, 720);
-            this.byteviewer.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.Location = new System.Drawing.Point(168, 609);
             this.byteviewer.Name = "byteviewer";
             this.byteviewer.RowCount = 1;
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -189,14 +205,30 @@ namespace BinToAssembly
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.byteviewer.Size = new System.Drawing.Size(638, 283);
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.Size = new System.Drawing.Size(802, 236);
             this.byteviewer.TabIndex = 5;
             // 
-            // Form1
+            // labelGenerator
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.labelGenerator.Location = new System.Drawing.Point(443, 572);
+            this.labelGenerator.Name = "labelGenerator";
+            this.labelGenerator.Size = new System.Drawing.Size(111, 32);
+            this.labelGenerator.TabIndex = 6;
+            this.labelGenerator.Text = "Generate Labels";
+            this.labelGenerator.UseVisualStyleBackColor = true;
+            this.labelGenerator.Click += new System.EventHandler(this.LabelGenerator_Click);
+            // 
+            // BinaryConverter
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1045, 1055);
+            this.ClientSize = new System.Drawing.Size(1008, 857);
+            this.Controls.Add(this.labelGenerator);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -204,11 +236,11 @@ namespace BinToAssembly
             this.Controls.Add(this.byteviewer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form1";
+            this.Name = "BinaryConverter";
             this.Text = "Assembly Output";
+            this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -231,5 +263,8 @@ namespace BinToAssembly
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem generateLabelsToolStripMenuItem;
         private ToolStripMenuItem clearToolStripMenuItem;
+        private ContextMenuStrip contextMenuStrip1;
+        private ToolStripMenuItem convert;
+        private Button labelGenerator;
     }
 }
