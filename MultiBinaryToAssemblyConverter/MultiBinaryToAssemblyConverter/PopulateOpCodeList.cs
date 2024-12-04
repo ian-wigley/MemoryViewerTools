@@ -19,9 +19,16 @@ namespace BinToAssembly
             xmlLoader.Load(m_OpCodes, processor);
         }
 
-        public dynamic GetOpCode(string value)
+        //public dynamic GetOpCode(string value)
+        //{
+        //    return m_OpCodes.FirstOrDefault(opCode => opCode.Code.Equals(value));
+        //}
+
+        public dynamic GetOpCode(string t, string tt)
         {
-            return m_OpCodes.FirstOrDefault(opCode => opCode.Code.Equals(value));
+            return m_OpCodes.FirstOrDefault(opCode => opCode.m_codeOne.Equals(t) && opCode.m_codeTwo.Equals(tt));
+
         }
+
     }
 }
