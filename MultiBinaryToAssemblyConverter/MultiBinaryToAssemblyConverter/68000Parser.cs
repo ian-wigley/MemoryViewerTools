@@ -36,6 +36,9 @@ namespace BinToAssembly
             int filePosition = 0;
             while (filePosition < data.Length - 4)
             {
+                int firstByte = data[filePosition];
+                int secondByte = data[filePosition + 1];
+
                 // lookup the first 4 bits of each byte (Nybble)
                 int byteOne = data[filePosition] << 8;
                 int opCode = byteOne + data[filePosition + 1];
@@ -47,7 +50,7 @@ namespace BinToAssembly
                 bool found = false;
 
                 // Get the Opcode object
-                var oc = populateOpCodeList.GetOpCode(opCode.ToString("X4"));
+                var oc = populateOpCodeList.GetOpCode(firstByte.ToString("X2"), secondByte.ToString("X2"));
 
                 if (oc != null)
                 {
@@ -73,7 +76,7 @@ namespace BinToAssembly
             byte[] binaryFileData,
             int? lineNumber,
             int pc,
-            ref Dictionary<string, string[]> dataStatements 
+            ref Dictionary<string, string[]> dataStatements
             )
         {
             switch (oc.Code)
@@ -109,7 +112,7 @@ namespace BinToAssembly
                 case "6008": // BRA
                 case "60EC":
                     line += oc.Detail(ref filePosition, binaryFileData);
-                    break; 
+                    break;
                 case "51C8": // DBF
                 case "51CA":
                     line += oc.Detail(ref filePosition, binaryFileData);
