@@ -16,6 +16,10 @@ namespace BinToAssembly
 
         public BaseOpCode() { }
 
+        public string m_codeOne { get; set; }
+        public string m_codeTwo { get; set; }
+
+
         public string m_code { get; set; }
         public bool m_illegal { get; set; }
         public string Code { get { return m_code; } }
