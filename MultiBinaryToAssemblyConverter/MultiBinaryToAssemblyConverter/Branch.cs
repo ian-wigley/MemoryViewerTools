@@ -5,7 +5,8 @@ namespace BinToAssembly
     public class Branch : BaseOpCode
     {
         public Branch(
-            string code,
+            string codeOne,
+            string codeTwo,
             string name,
             int numberOfBytes,
             string prefix,
@@ -15,7 +16,9 @@ namespace BinToAssembly
             string methodName
             )
         {
-            m_code = code;
+            m_codeOne = codeOne;
+            m_codeTwo = codeTwo;
+            m_code = codeOne + codeTwo;
             m_name = name;
             m_numberOfBytes = numberOfBytes;
             m_prefix = prefix;
