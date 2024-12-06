@@ -10,8 +10,7 @@ namespace BinToAssembly
         protected string m_firstfix = "";
         protected string m_midfix = "";
         protected string m_suffix = "";
-        protected MethodInfo m_methodInfo;
-        protected string m_methodName;
+        protected string m_dataSize = "";
         protected string pad = "    ";
 
         public BaseOpCode() { }
