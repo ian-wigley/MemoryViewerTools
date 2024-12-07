@@ -13,7 +13,7 @@ namespace BinToAssembly
             string firstfix,
             string midfix,
             string suffix,
-            string methodName
+            string dataSize
             )
         {
             m_codeOne = codeOne;
@@ -25,9 +25,7 @@ namespace BinToAssembly
             m_firstfix = firstfix;
             m_midfix = midfix;
             m_suffix = suffix;
-            m_methodName = methodName;
-            Type type = typeof(OpCode);
-            m_methodInfo = type.GetMethod(methodName);
+            m_dataSize = dataSize;
         }
 
         public new string Detail(ref int filePosition, byte[] binaryFileData)
@@ -35,27 +33,38 @@ namespace BinToAssembly
             string elementOne = "";
             string elementTwo = "";
             string elementThree = "";
+            string binOne = pad;
+            string binTwo = pad;
 
             if (NumberOfBytes == 1)
             {
                 sbyte amount = unchecked((sbyte)binaryFileData[filePosition + 1]);
                 int result = filePosition + 2 + amount;
                 elementOne = result.ToString("X4");
+                binOne = elementOne;
                 filePosition += 2;
             }
 
-            if (NumberOfBytes == 2)
+            if (NumberOfBytes == 2 && !m_name.Equals("JSR"))
             {
                 filePosition += 2;
                 elementOne = ((short)binaryFileData[filePosition++]).ToString("X2") +
                     ((short)binaryFileData[filePosition++]).ToString("X2");
                 var amount = Convert.ToInt16(elementOne, 16);
                 int result = filePosition - NumberOfBytes + amount;
-                elementOne = result.ToString("X4");
+                binOne = elementOne;
+                elementOne = result.ToString("x4");
             }
 
-            string binOne = !elementOne.Equals("") ? elementOne : pad;
-            string binTwo = !elementTwo.Equals("") ? elementTwo : pad;
+            if (NumberOfBytes == 2 && m_name.Equals("JSR"))
+            {
+                filePosition += 2;
+                elementOne = ((short)binaryFileData[filePosition++]).ToString("X2") +
+                    ((short)binaryFileData[filePosition++]).ToString("X2");
+                var amount = Convert.ToInt16(elementOne, 16);
+                binOne = elementOne;
+                elementOne = amount.ToString();
+            }
 
             string retunLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
             return retunLine;
