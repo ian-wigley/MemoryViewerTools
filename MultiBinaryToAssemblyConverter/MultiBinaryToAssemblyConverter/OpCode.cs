@@ -13,7 +13,7 @@ namespace BinToAssembly
             string firstfix,
             string midfix,
             string suffix,
-            string methodName
+            string dataSize
             )
         {
             m_codeOne = codeOne;
@@ -25,9 +25,7 @@ namespace BinToAssembly
             m_firstfix = firstfix;
             m_midfix = midfix;
             m_suffix = suffix;
-            m_methodName = methodName;
-            Type type = typeof(OpCode);
-            m_methodInfo = type.GetMethod(methodName);
+            m_dataSize = dataSize;
         }
     }
 }
