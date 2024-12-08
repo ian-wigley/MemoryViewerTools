@@ -26,14 +26,15 @@ namespace BinToAssembly
                         {
                             // Split the line using the delimiter
                             string[] split = reader.Value.Split('¬');
-                            var method = split[1].Replace(".", "_");
-                            if(split[1].Contains("BNE") || split[1].Contains("BEQ")) 
+                            string name = split[2];
+                            GetDataType(name, out string dataSize);
+                            if(name.Contains("BNE") || name.Contains("BEQ") || name.Contains("JSR")) 
                             {
-                                m_OpCodes.Add(new Branch(split[0], split[1], split[2], int.Parse(split[3]), split[4], split[5], split[6], split[7], method));
+                                m_OpCodes.Add(new Branch(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
                             }
                             else
                             {
-                                m_OpCodes.Add(new OpCode(split[0], split[1], split[2], int.Parse(split[3]), split[4], split[5], split[6], split[7], method));
+                                m_OpCodes.Add(new OpCode(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
                             }
 
                         }
@@ -48,6 +49,16 @@ namespace BinToAssembly
                         break;
                 }
             }
+        }
+
+        private void GetDataType(string data, out string dataSize)
+        {
+            if (data.Contains("."))
+            {
+                int index = data.IndexOf(".");
+                dataSize = data.Substring(index + 1);
+            }
+            else { dataSize = "?"; }
         }
 
     }
