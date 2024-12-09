@@ -90,7 +90,7 @@ namespace BinToAssembly
                     }
                     else
                     {
-                        switch (lineDetails[2].ToUpper())
+                        switch (lineDetails[1])
                         {
                             case "20": // JSR
                             case "4C": // JMP
@@ -104,30 +104,20 @@ namespace BinToAssembly
                             case "B0": // BCS
                             case "F0": // BEQ
                             case "30": // BMI
-                            case "D0": // BNE
+                            case "6600": // BNE
                             case "10": // BPL
                             case "50": // BVC
                             case "70": // BVS
                                 if (!branchLoc.Keys.Contains(lineDetails[11].Replace("$", "")))
                                 {
-                                    branchLoc.Add(lineDetails[11].Replace("$", ""), branch + branchCount++.ToString());
+                                    branchLoc.Add(lineDetails[18].Replace("#$", ""), branch + branchCount++.ToString());
                                 }
-                                passOne.Add(lineDetails[10] + " " + lineDetails[11]);
+                                passOne.Add(lineDetails[17] + " " + lineDetails[18]);
                                 break;
                             default:
-                                if (lineDetails[3] == "" && lineDetails[4] == "")
-                                {
-                                    passOne.Add(lineDetails[12]);
-                                }
-                                else if (lineDetails[3] != "" && lineDetails[4] == "")
-                                {
-                                    passOne.Add(lineDetails[10] + " " + lineDetails[11]);
-                                }
-                                else if (lineDetails[3] != "" && lineDetails[4] != "")
-                                {
-                                    passOne.Add(lineDetails[8] + " " + lineDetails[9]);
-                                }
-                                break;
+                                int indexLength = lineDetails.Length;
+                                passOne.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
+                                break;                        
                         }
                     }
                 }
@@ -322,7 +312,7 @@ namespace BinToAssembly
                         if (str.Contains(temp))
                         {
                             // nudge the last Occurrence along to the next valid opCode
-                            lastOccurrence = int.Parse(lineNumbers[++index], System.Globalization.NumberStyles.HexNumber);
+                            //lastOccurrence = int.Parse(lineNumbers[++index], System.Globalization.NumberStyles.HexNumber);
                         }
                         index++;
                     }
