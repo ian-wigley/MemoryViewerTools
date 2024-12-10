@@ -296,8 +296,8 @@
 	<code>00¬47¬MOVEQ¬2¬¬¬¬</code>
 	<code>2E¬69¬MOVEA.L¬2¬(A1)¬¬¬,¬A7¬</code>
 	<code>78¬6E¬MOVEQ¬1¬#$¬¬,D4¬</code>
-	<code>01¬08¬MOVEP.W,¬2¬A0¬¬,D0¬</code>
-	<code>01¬0A¬MOVEP.W,¬2¬A2¬¬,D0¬</code>
+	<code>01¬08¬MOVEP.W¬2¬A0¬¬,D0¬</code>
+	<code>01¬0A¬MOVEP.W¬2¬A2¬¬,D0¬</code>
 
 	<code>C3¬FC¬MULS¬2¬#$¬¬,D1¬</code>
 	<code>00¬49¬MULU¬2¬¬¬¬</code>
