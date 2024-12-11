@@ -17,8 +17,6 @@ namespace BinToAssembly
 
         public string m_codeOne { get; set; }
         public string m_codeTwo { get; set; }
-
-
         public string m_code { get; set; }
         public bool m_illegal { get; set; }
         public string Code { get { return m_code; } }
@@ -30,7 +28,6 @@ namespace BinToAssembly
         public string Suffix { get { return m_suffix; } }
         public bool Illegal { get { return m_illegal; } }
 
-
         public string Detail(ref int filePosition, byte[] binaryFileData)
         {
             string elementOne = "";
@@ -41,26 +38,20 @@ namespace BinToAssembly
 
             if (NumberOfBytes == 2)
             {
-                elementOne = ((short)binaryFileData[filePosition++]).ToString("X2") +
-                    ((short)binaryFileData[filePosition++]).ToString("X2");
+                elementOne = GetTwoShorts(ref filePosition, binaryFileData);
             }
 
             if (NumberOfBytes == 4)
             {
-                elementOne = ((short)binaryFileData[filePosition++]).ToString("X2") +
-                ((short)binaryFileData[filePosition++]).ToString("X2");
-                elementTwo = ((short)binaryFileData[filePosition++]).ToString("X2") +
-                    ((short)binaryFileData[filePosition++]).ToString("X2");
+                elementOne = GetTwoShorts(ref filePosition, binaryFileData);
+                elementTwo = GetTwoShorts(ref filePosition, binaryFileData);
             }
 
             if (NumberOfBytes == 6)
             {
-                elementOne = ((short)binaryFileData[filePosition++]).ToString("X2") +
-                            ((short)binaryFileData[filePosition++]).ToString("X2");
-                elementTwo = ((short)binaryFileData[filePosition++]).ToString("X2") +
-                               ((short)binaryFileData[filePosition++]).ToString("X2");
-                elementThree = ((short)binaryFileData[filePosition++]).ToString("X2") +
-                               ((short)binaryFileData[filePosition++]).ToString("X2");
+                elementOne = GetTwoShorts(ref filePosition, binaryFileData);
+                elementTwo = GetTwoShorts(ref filePosition, binaryFileData);
+                elementThree = GetTwoShorts(ref filePosition, binaryFileData);
             }
 
             // Temporary fixes
@@ -76,17 +67,18 @@ namespace BinToAssembly
             {
                 filePosition += 12;
             }
-            //if (elementOne.Contains("48E7"))
-            //{
-            //    elementTwo = "";
-            //}
-
 
             string binOne = !elementOne.Equals("") ? elementOne : pad;
             string binTwo = !elementTwo.Equals("") ? elementTwo : pad;
 
             string retunLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
             return retunLine;
+        }
+
+        protected string GetTwoShorts(ref int filePosition, byte[] binaryFileData)
+        {
+            return ((short)binaryFileData[filePosition++]).ToString("X2") +
+                    ((short)binaryFileData[filePosition++]).ToString("X2");
         }
     }
 }
