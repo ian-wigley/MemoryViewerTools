@@ -309,26 +309,26 @@
 	<code>4E¬71¬NOP¬1¬¬¬¬</code>
 	<code>00¬54¬NOT¬2¬¬¬¬</code>
 
-	<code>00¬00¬OR.B¬2¬#$¬¬,D0¬</code>
-	<code>00¬01¬OR.B¬2¬#$¬¬,D1¬</code>
-	<code>00¬02¬OR.B¬2¬#$¬¬,D2¬</code>
-	<code>00¬03¬OR.B¬2¬#$¬¬,D3¬</code>
-	<code>00¬04¬OR.B¬2¬#$¬¬,D4¬</code>
-	<code>00¬14¬OR.B¬2¬#$¬¬,(A4)¬</code>
-	<code>00¬15¬OR.B¬2¬#$¬¬,(A5)¬</code>
-	<code>00¬16¬OR.B¬2¬#$¬¬,(A6)¬</code>
-	<code>00¬55¬OR.B¬2¬¬¬¬</code>
+	<code>00¬00¬OR¬2¬#$¬¬,D0¬</code>
+	<code>00¬01¬OR¬2¬#$¬¬,D1¬</code>
+	<code>00¬02¬OR¬2¬#$¬¬,D2¬</code>
+	<code>00¬03¬OR¬2¬#$¬¬,D3¬</code>
+	<code>00¬04¬OR¬2¬#$¬¬,D4¬</code>
+	<code>00¬14¬OR¬2¬#$¬¬,(A4)¬</code>
+	<code>00¬15¬OR¬2¬#$¬¬,(A5)¬</code>
+	<code>00¬16¬OR¬2¬#$¬¬,(A6)¬</code>
+	<code>00¬55¬OR¬2¬¬¬¬</code>
 	<code>00¬56¬ORI¬2¬¬¬¬</code>
-	<code>00¬6F¬OR.W¬4¬#$¬¬,(a7)¬</code>
-	<code>00¬79¬OR.B¬6¬#$¬¬¬¬</code>
-	<code>00¬B1¬OR.B¬6¬#$¬¬,(A1)¬</code>
-	<code>00¬B3¬OR.B¬6¬#$¬¬,(A3)¬</code>
-	<code>00¬B4¬OR.B¬6¬#$¬¬,(A4)¬</code>
-	<code>00¬B5¬OR.B¬6¬#$¬¬,(A5)¬</code>
-	<code>00¬B6¬OR.B¬6¬#$¬¬,(A6)¬</code>
-	<code>00¬B7¬OR.B¬6¬#$¬¬,(A7)¬</code>
-	<code>00¬B8¬OR.B¬6¬#$¬,$¬¬</code>
-	<code>00¬34¬OR.B¬4¬#$¬¬,A4¬</code>
+	<code>00¬6F¬OR¬4¬#$¬¬,(a7)¬</code>
+	<code>00¬79¬OR¬6¬#$¬¬¬¬</code>
+	<code>00¬B1¬OR¬6¬#$¬¬,(A1)¬</code>
+	<code>00¬B3¬OR¬6¬#$¬¬,(A3)¬</code>
+	<code>00¬B4¬OR¬6¬#$¬¬,(A4)¬</code>
+	<code>00¬B5¬OR¬6¬#$¬¬,(A5)¬</code>
+	<code>00¬B6¬OR¬6¬#$¬¬,(A6)¬</code>
+	<code>00¬B7¬OR¬6¬#$¬¬,(A7)¬</code>
+	<code>00¬B8¬OR¬6¬#$¬,$¬¬</code>
+	<code>00¬34¬OR¬4¬#$¬¬,A4¬</code>
 	
 	<code>48¬6E¬PEA¬2¬¬¬¬</code>
 	<code>00¬58¬RESET¬2¬¬¬¬</code>
