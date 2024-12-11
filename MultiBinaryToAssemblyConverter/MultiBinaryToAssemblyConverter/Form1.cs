@@ -108,7 +108,7 @@ namespace BinToAssembly
                             case "10": // BPL
                             case "50": // BVC
                             case "70": // BVS
-                                if (!branchLoc.Keys.Contains(lineDetails[11].Replace("$", "")))
+                                if (!branchLoc.Keys.Contains(lineDetails[18].Replace("$", "")))
                                 {
                                     branchLoc.Add(lineDetails[18].Replace("#$", ""), branch + branchCount++.ToString());
                                 }
@@ -148,7 +148,7 @@ namespace BinToAssembly
                 }
                 foreach (KeyValuePair<String, String> memLocation in branchLoc)
                 {
-                    if (originalFileContent[i].ToUpper().Contains(memLocation.Key))
+                    if (originalFileContent[i].ToUpper().Contains(memLocation.Key.ToUpper()))
                     {
                         var dets = assembly.Split(' ');
                         if (dets[0].Contains("BNE") || dets[0].Contains("BEQ") || dets[0].Contains("BPL"))
@@ -178,7 +178,7 @@ namespace BinToAssembly
 
                 foreach (KeyValuePair<String, String> memLocation in branchLoc)
                 {
-                    if (dets[0].ToUpper().Contains(memLocation.Key))
+                    if (dets[0].ToUpper().Contains(memLocation.Key.ToUpper()))
                     {
                         label = memLocation.Value + "         ";
                     }
