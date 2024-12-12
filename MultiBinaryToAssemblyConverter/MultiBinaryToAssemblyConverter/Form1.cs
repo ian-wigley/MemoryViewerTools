@@ -393,7 +393,7 @@ namespace BinToAssembly
             {
                 Title = "Save File",
                 InitialDirectory = @"*.*",
-                Filter = "All files (*.*)|*.*|All files (*.a)|*.a",
+                Filter = "All files (*.*)|*.*|All files (*.s)|*.s",
                 FilterIndex = 2,
                 RestoreDirectory = true
             };
