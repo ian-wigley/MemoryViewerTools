@@ -42,7 +42,6 @@ namespace BinToAssembly
 
             // Sets the byte viewer display mode.
             byteviewer.SetDisplayMode(DisplayMode.Hexdump);
-
             MaximizeBox = false;
             MinimizeBox = false;
             generateLabelsToolStripMenuItem.Enabled = false;
@@ -53,7 +52,6 @@ namespace BinToAssembly
             //comboBox1.Items.Insert(1, m68xx);
             //comboBox1.Items.Insert(2, m68000);
             comboBox1.SelectedIndex = 0;
-
             populateOpCodeList.Init(comboBox1.Items[0].ToString());
         }
 
@@ -75,7 +73,7 @@ namespace BinToAssembly
             // First pass parses the content looking for branch & jump conditions
             while (firstPass)
             {
-                //Split each line into an array
+                // Split each line into an array
                 var lineDetails = originalFileContent[count++].Split(' ');
 
                 if (lineDetails.Length > 1)
@@ -105,6 +103,7 @@ namespace BinToAssembly
                             case "F0": // BEQ
                             case "30": // BMI
                             case "6600": // BNE
+                            case "66F2":
                             case "10": // BPL
                             case "50": // BVC
                             case "70": // BVS
