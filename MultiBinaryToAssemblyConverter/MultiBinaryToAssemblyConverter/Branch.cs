@@ -48,8 +48,7 @@ namespace BinToAssembly
             if (NumberOfBytes == 2 && !m_name.Equals("JSR"))
             {
                 filePosition += 2;
-                elementOne = ((short)binaryFileData[filePosition++]).ToString("X2") +
-                    ((short)binaryFileData[filePosition++]).ToString("X2");
+                elementOne = GetTwoShorts(ref filePosition, binaryFileData);
                 var amount = Convert.ToInt16(elementOne, 16);
                 int result = filePosition - NumberOfBytes + amount;
                 binOne = elementOne;
@@ -59,8 +58,7 @@ namespace BinToAssembly
             if (NumberOfBytes == 2 && m_name.Equals("JSR"))
             {
                 filePosition += 2;
-                elementOne = ((short)binaryFileData[filePosition++]).ToString("X2") +
-                    ((short)binaryFileData[filePosition++]).ToString("X2");
+                elementOne = GetTwoShorts(ref filePosition, binaryFileData);
                 var amount = Convert.ToInt16(elementOne, 16);
                 binOne = elementOne;
                 elementOne = amount.ToString();
