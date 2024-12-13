@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 
 namespace BinToAssembly
 {
@@ -116,7 +117,7 @@ namespace BinToAssembly
                             default:
                                 int indexLength = lineDetails.Length;
                                 passOne.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
-                                break;                        
+                                break;
                         }
                     }
                 }
@@ -429,7 +430,7 @@ namespace BinToAssembly
             // Get any highlighted text
             string selectedText = this.textBox1.SelectedText;
             string[] split = selectedText.Split('\n');
-            string [] text = this.textBox1.Lines;
+            string[] text = this.textBox1.Lines;
             this.textBox1.SelectedText = this.textBox1.SelectedText.Replace(split[0], "DC.W $0FFF");
             // Todo finish implementation
             int i = 0;
@@ -440,6 +441,34 @@ namespace BinToAssembly
             // Todo finish implementation
             GenerateLabels();
             int i = 0;
+        }
+
+        private void Compile_Click(object sender, EventArgs e)
+        {
+            // Get a random temporary file name
+            string tempFile = Path.GetTempFileName();
+
+            // Convert the list to a byte array
+            byte[] dataAsBytes = passThree.SelectMany(s => System.Text.Encoding.UTF8.GetBytes(s + Environment.NewLine)).ToArray();
+
+            // Open a FileStream to write to the file:
+            using (Stream fileStream = File.OpenWrite(tempFile))
+            {
+                fileStream.Write(dataAsBytes, 0, dataAsBytes.Length);
+            }
+
+            tempFile = tempFile.Replace("\\", "/");
+
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.Arguments = "/C C:/Dev/ToolChain/vasm -m68020 -kick1hunks -Fhunkexe -o c:/temp/hellmans-test.exe " + tempFile;
+            p.StartInfo.RedirectStandardOutput = false;
+            p.StartInfo.UseShellExecute = true;
+            p.StartInfo.CreateNoWindow = true;
+            p.Start();
+
+            // Delete the temp file
+            File.Delete(tempFile);
         }
     }
 }
