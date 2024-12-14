@@ -44,12 +44,14 @@ namespace BinToAssembly
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generateLabelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Compile = new System.Windows.Forms.ToolStripMenuItem();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.byteviewer = new System.ComponentModel.Design.ByteViewer();
             this.labelGenerator = new System.Windows.Forms.Button();
-            this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.Compile = new System.Windows.Forms.ToolStripMenuItem();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.Configure = new System.Windows.Forms.ToolStripMenuItem();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -86,7 +88,8 @@ namespace BinToAssembly
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.buildToolStripMenuItem});
+            this.buildToolStripMenuItem,
+            this.settingsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -108,7 +111,7 @@ namespace BinToAssembly
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
@@ -118,7 +121,7 @@ namespace BinToAssembly
             this.leftWindowToolStripMenuItem,
             this.rightWindowToolStripMenuItem});
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             // 
             // leftWindowToolStripMenuItem
@@ -138,14 +141,14 @@ namespace BinToAssembly
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -160,9 +163,24 @@ namespace BinToAssembly
             // generateLabelsToolStripMenuItem
             // 
             this.generateLabelsToolStripMenuItem.Name = "generateLabelsToolStripMenuItem";
-            this.generateLabelsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.generateLabelsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
             this.generateLabelsToolStripMenuItem.Text = "Generate Labels";
             this.generateLabelsToolStripMenuItem.Click += new System.EventHandler(this.GenerateLabelsToolStripMenuItem_Click);
+            // 
+            // buildToolStripMenuItem
+            // 
+            this.buildToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Compile});
+            this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
+            this.buildToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.buildToolStripMenuItem.Text = "Build";
+            // 
+            // Compile
+            // 
+            this.Compile.Name = "Compile";
+            this.Compile.Size = new System.Drawing.Size(180, 22);
+            this.Compile.Text = "Compile";
+            this.Compile.Click += new System.EventHandler(this.Compile_Click);
             // 
             // textBox2
             // 
@@ -201,9 +219,11 @@ namespace BinToAssembly
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.Location = new System.Drawing.Point(168, 609);
             this.byteviewer.Name = "byteviewer";
             this.byteviewer.RowCount = 1;
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -228,20 +248,20 @@ namespace BinToAssembly
             this.labelGenerator.UseVisualStyleBackColor = true;
             this.labelGenerator.Click += new System.EventHandler(this.LabelGenerator_Click);
             // 
-            // buildToolStripMenuItem
+            // settingsToolStripMenuItem
             // 
-            this.buildToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Compile});
-            this.buildToolStripMenuItem.Name = "buildToolStripMenuItem";
-            this.buildToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.buildToolStripMenuItem.Text = "Build";
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Configure});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
             // 
-            // Compile
+            // Configure
             // 
-            this.Compile.Name = "Compile";
-            this.Compile.Size = new System.Drawing.Size(180, 22);
-            this.Compile.Text = "Compile";
-            this.Compile.Click += new System.EventHandler(this.Compile_Click);
+            this.Configure.Name = "Configure";
+            this.Configure.Size = new System.Drawing.Size(180, 22);
+            this.Configure.Text = "Configure";
+            this.Configure.Click += new System.EventHandler(this.Configure_Click);
             // 
             // BinaryConverter
             // 
@@ -288,5 +308,7 @@ namespace BinToAssembly
         private Button labelGenerator;
         private ToolStripMenuItem buildToolStripMenuItem;
         private ToolStripMenuItem Compile;
+        private ToolStripMenuItem settingsToolStripMenuItem;
+        private ToolStripMenuItem Configure;
     }
 }
