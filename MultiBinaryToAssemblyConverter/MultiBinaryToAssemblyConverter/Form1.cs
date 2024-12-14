@@ -45,6 +45,8 @@ namespace BinToAssembly
             byteviewer.SetDisplayMode(DisplayMode.Hexdump);
             MaximizeBox = false;
             MinimizeBox = false;
+            labelGenerator.Enabled = false;
+            Compile.Enabled = false;
             generateLabelsToolStripMenuItem.Enabled = false;
             leftWindowToolStripMenuItem.Enabled = false;
             rightWindowToolStripMenuItem.Enabled = false;
@@ -248,6 +250,7 @@ namespace BinToAssembly
                     Parser68000 p68000 = new Parser68000();
                     var data = p68000.LoadBinaryData(openFileDialog.FileName);
                     p68000.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
+                    labelGenerator.Enabled = true;
                 }
 
                 byteviewer.SetFile(openFileDialog.FileName);
@@ -440,6 +443,7 @@ namespace BinToAssembly
         {
             // Todo finish implementation
             GenerateLabels();
+            Compile.Enabled = true;
             int i = 0;
         }
 
@@ -469,6 +473,11 @@ namespace BinToAssembly
 
             // Delete the temp file
             File.Delete(tempFile);
+        }
+
+        private void Configure_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
