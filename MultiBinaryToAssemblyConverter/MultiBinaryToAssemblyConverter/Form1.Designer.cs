@@ -46,14 +46,21 @@ namespace BinToAssembly
             this.generateLabelsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buildToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Compile = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.byteviewer = new System.ComponentModel.Design.ByteViewer();
-            this.labelGenerator = new System.Windows.Forms.Button();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Configure = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.labelGenerator = new System.Windows.Forms.Button();
+            this.Dissambly = new System.Windows.Forms.TabControl();
+            this.Disassembly = new System.Windows.Forms.TabPage();
+            this.CompilerOutput = new System.Windows.Forms.TabPage();
+            this.byteviewer = new System.ComponentModel.Design.ByteViewer();
+            this.CompilerTextBox = new System.Windows.Forms.TextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.Dissambly.SuspendLayout();
+            this.Disassembly.SuspendLayout();
+            this.CompilerOutput.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox1
@@ -178,9 +185,24 @@ namespace BinToAssembly
             // Compile
             // 
             this.Compile.Name = "Compile";
-            this.Compile.Size = new System.Drawing.Size(180, 22);
+            this.Compile.Size = new System.Drawing.Size(119, 22);
             this.Compile.Text = "Compile";
             this.Compile.Click += new System.EventHandler(this.Compile_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.Configure});
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            // 
+            // Configure
+            // 
+            this.Configure.Name = "Configure";
+            this.Configure.Size = new System.Drawing.Size(127, 22);
+            this.Configure.Text = "Configure";
+            this.Configure.Click += new System.EventHandler(this.Configure_Click);
             // 
             // textBox2
             // 
@@ -201,6 +223,48 @@ namespace BinToAssembly
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 4;
             // 
+            // labelGenerator
+            // 
+            this.labelGenerator.Location = new System.Drawing.Point(443, 572);
+            this.labelGenerator.Name = "labelGenerator";
+            this.labelGenerator.Size = new System.Drawing.Size(111, 32);
+            this.labelGenerator.TabIndex = 6;
+            this.labelGenerator.Text = "Generate Labels";
+            this.labelGenerator.UseVisualStyleBackColor = true;
+            this.labelGenerator.Click += new System.EventHandler(this.LabelGenerator_Click);
+            // 
+            // Dissambly
+            // 
+            this.Dissambly.Controls.Add(this.Disassembly);
+            this.Dissambly.Controls.Add(this.CompilerOutput);
+            this.Dissambly.Location = new System.Drawing.Point(14, 590);
+            this.Dissambly.Name = "Dissambly";
+            this.Dissambly.SelectedIndex = 0;
+            this.Dissambly.Size = new System.Drawing.Size(982, 235);
+            this.Dissambly.TabIndex = 7;
+            // 
+            // Disassembly
+            // 
+            this.Disassembly.Controls.Add(this.byteviewer);
+            this.Disassembly.Location = new System.Drawing.Point(4, 22);
+            this.Disassembly.Name = "Disassembly";
+            this.Disassembly.Padding = new System.Windows.Forms.Padding(3);
+            this.Disassembly.Size = new System.Drawing.Size(974, 209);
+            this.Disassembly.TabIndex = 0;
+            this.Disassembly.Text = "Disassembly";
+            this.Disassembly.UseVisualStyleBackColor = true;
+            // 
+            // CompilerOutput
+            // 
+            this.CompilerOutput.Controls.Add(this.CompilerTextBox);
+            this.CompilerOutput.Location = new System.Drawing.Point(4, 22);
+            this.CompilerOutput.Name = "CompilerOutput";
+            this.CompilerOutput.Padding = new System.Windows.Forms.Padding(3);
+            this.CompilerOutput.Size = new System.Drawing.Size(974, 209);
+            this.CompilerOutput.TabIndex = 1;
+            this.CompilerOutput.Text = "Compiler Output";
+            this.CompilerOutput.UseVisualStyleBackColor = true;
+            // 
             // byteviewer
             // 
             this.byteviewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -220,7 +284,9 @@ namespace BinToAssembly
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.byteviewer.Location = new System.Drawing.Point(168, 609);
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.Location = new System.Drawing.Point(63, 46);
             this.byteviewer.Name = "byteviewer";
             this.byteviewer.RowCount = 1;
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -235,33 +301,20 @@ namespace BinToAssembly
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.byteviewer.Size = new System.Drawing.Size(634, 220);
-            this.byteviewer.TabIndex = 5;
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.Size = new System.Drawing.Size(784, 137);
+            this.byteviewer.TabIndex = 6;
             // 
-            // labelGenerator
+            // CompilerTextBox
             // 
-            this.labelGenerator.Location = new System.Drawing.Point(443, 572);
-            this.labelGenerator.Name = "labelGenerator";
-            this.labelGenerator.Size = new System.Drawing.Size(111, 32);
-            this.labelGenerator.TabIndex = 6;
-            this.labelGenerator.Text = "Generate Labels";
-            this.labelGenerator.UseVisualStyleBackColor = true;
-            this.labelGenerator.Click += new System.EventHandler(this.LabelGenerator_Click);
-            // 
-            // settingsToolStripMenuItem
-            // 
-            this.settingsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Configure});
-            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.settingsToolStripMenuItem.Text = "Settings";
-            // 
-            // Configure
-            // 
-            this.Configure.Name = "Configure";
-            this.Configure.Size = new System.Drawing.Size(180, 22);
-            this.Configure.Text = "Configure";
-            this.Configure.Click += new System.EventHandler(this.Configure_Click);
+            this.CompilerTextBox.BackColor = System.Drawing.SystemColors.WindowText;
+            this.CompilerTextBox.ForeColor = System.Drawing.SystemColors.Window;
+            this.CompilerTextBox.Location = new System.Drawing.Point(6, 6);
+            this.CompilerTextBox.Multiline = true;
+            this.CompilerTextBox.Name = "CompilerTextBox";
+            this.CompilerTextBox.Size = new System.Drawing.Size(962, 197);
+            this.CompilerTextBox.TabIndex = 0;
             // 
             // BinaryConverter
             // 
@@ -269,11 +322,11 @@ namespace BinToAssembly
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 857);
             this.Controls.Add(this.labelGenerator);
+            this.Controls.Add(this.Dissambly);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.byteviewer);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
@@ -283,6 +336,10 @@ namespace BinToAssembly
             this.contextMenuStrip1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.Dissambly.ResumeLayout(false);
+            this.Disassembly.ResumeLayout(false);
+            this.CompilerOutput.ResumeLayout(false);
+            this.CompilerOutput.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -310,5 +367,10 @@ namespace BinToAssembly
         private ToolStripMenuItem Compile;
         private ToolStripMenuItem settingsToolStripMenuItem;
         private ToolStripMenuItem Configure;
+        private TabControl Dissambly;
+        private TabPage Disassembly;
+        private System.ComponentModel.Design.ByteViewer byteviewer;
+        private TabPage CompilerOutput;
+        private TextBox CompilerTextBox;
     }
 }
