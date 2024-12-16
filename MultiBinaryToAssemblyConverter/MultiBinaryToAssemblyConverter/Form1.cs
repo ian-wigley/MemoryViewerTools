@@ -31,8 +31,6 @@ namespace BinToAssembly
 
         private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
 
-        private ByteViewer byteviewer;
-
         private const string m6502 = "6502";
         private const string m68xx = "68xx";
         private const string m68000 = "68000";
@@ -466,10 +464,14 @@ namespace BinToAssembly
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.Arguments = "/C C:/Dev/ToolChain/vasm -m68020 -kick1hunks -Fhunkexe -o c:/temp/hellmans-test.exe " + tempFile;
-            p.StartInfo.RedirectStandardOutput = false;
-            p.StartInfo.UseShellExecute = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.UseShellExecute = false;
             p.StartInfo.CreateNoWindow = true;
             p.Start();
+
+            CompilerTextBox.Text += p.StandardOutput.ReadToEnd();
+            CompilerTextBox.Text += p.StandardError.ReadToEnd();
 
             // Delete the temp file
             File.Delete(tempFile);
