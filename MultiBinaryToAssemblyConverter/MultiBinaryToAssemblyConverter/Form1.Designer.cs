@@ -48,14 +48,15 @@ namespace BinToAssembly
             this.Compile = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.Configure = new System.Windows.Forms.ToolStripMenuItem();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.AssemblyView = new System.Windows.Forms.RichTextBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.labelGenerator = new System.Windows.Forms.Button();
             this.Dissambly = new System.Windows.Forms.TabControl();
             this.Disassembly = new System.Windows.Forms.TabPage();
-            this.CompilerOutput = new System.Windows.Forms.TabPage();
             this.byteviewer = new System.ComponentModel.Design.ByteViewer();
-            this.CompilerTextBox = new System.Windows.Forms.TextBox();
+            this.CompilerOutput = new System.Windows.Forms.TabPage();
+            this.CompilerTextBox = new System.Windows.Forms.RichTextBox();
+            this.Numbers = new System.Windows.Forms.RichTextBox();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.Dissambly.SuspendLayout();
@@ -204,16 +205,18 @@ namespace BinToAssembly
             this.Configure.Text = "Configure";
             this.Configure.Click += new System.EventHandler(this.Configure_Click);
             // 
-            // textBox2
+            // AssemblyView
             // 
-            this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.AssemblyView.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox2.Location = new System.Drawing.Point(527, 38);
-            this.textBox2.Multiline = true;
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox2.Size = new System.Drawing.Size(460, 530);
-            this.textBox2.TabIndex = 3;
+            this.AssemblyView.Font = new System.Drawing.Font("Consolas", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.AssemblyView.Location = new System.Drawing.Point(527, 38);
+            this.AssemblyView.Name = "AssemblyView";
+            this.AssemblyView.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.AssemblyView.Size = new System.Drawing.Size(460, 530);
+            this.AssemblyView.TabIndex = 3;
+            this.AssemblyView.Text = "";
+            this.AssemblyView.VScroll += new System.EventHandler(this.TextBox2_VScroll);
             // 
             // comboBox1
             // 
@@ -254,17 +257,6 @@ namespace BinToAssembly
             this.Disassembly.Text = "Disassembly";
             this.Disassembly.UseVisualStyleBackColor = true;
             // 
-            // CompilerOutput
-            // 
-            this.CompilerOutput.Controls.Add(this.CompilerTextBox);
-            this.CompilerOutput.Location = new System.Drawing.Point(4, 22);
-            this.CompilerOutput.Name = "CompilerOutput";
-            this.CompilerOutput.Padding = new System.Windows.Forms.Padding(3);
-            this.CompilerOutput.Size = new System.Drawing.Size(974, 209);
-            this.CompilerOutput.TabIndex = 1;
-            this.CompilerOutput.Text = "Compiler Output";
-            this.CompilerOutput.UseVisualStyleBackColor = true;
-            // 
             // byteviewer
             // 
             this.byteviewer.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -286,7 +278,12 @@ namespace BinToAssembly
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.byteviewer.Location = new System.Drawing.Point(63, 46);
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.Location = new System.Drawing.Point(162, 6);
             this.byteviewer.Name = "byteviewer";
             this.byteviewer.RowCount = 1;
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -303,28 +300,60 @@ namespace BinToAssembly
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.byteviewer.Size = new System.Drawing.Size(784, 137);
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.Size = new System.Drawing.Size(634, 178);
             this.byteviewer.TabIndex = 6;
+            // 
+            // CompilerOutput
+            // 
+            this.CompilerOutput.Controls.Add(this.CompilerTextBox);
+            this.CompilerOutput.Location = new System.Drawing.Point(4, 22);
+            this.CompilerOutput.Name = "CompilerOutput";
+            this.CompilerOutput.Padding = new System.Windows.Forms.Padding(3);
+            this.CompilerOutput.Size = new System.Drawing.Size(974, 209);
+            this.CompilerOutput.TabIndex = 1;
+            this.CompilerOutput.Text = "Compiler Output";
+            this.CompilerOutput.UseVisualStyleBackColor = true;
             // 
             // CompilerTextBox
             // 
             this.CompilerTextBox.BackColor = System.Drawing.SystemColors.WindowText;
             this.CompilerTextBox.ForeColor = System.Drawing.SystemColors.Window;
-            this.CompilerTextBox.Location = new System.Drawing.Point(6, 6);
-            this.CompilerTextBox.Multiline = true;
+            this.CompilerTextBox.Location = new System.Drawing.Point(6, 3);
             this.CompilerTextBox.Name = "CompilerTextBox";
-            this.CompilerTextBox.Size = new System.Drawing.Size(962, 197);
+            this.CompilerTextBox.ReadOnly = true;
+            this.CompilerTextBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
+            this.CompilerTextBox.Size = new System.Drawing.Size(962, 203);
             this.CompilerTextBox.TabIndex = 0;
+            this.CompilerTextBox.Text = "";
+            // 
+            // Numbers
+            // 
+            this.Numbers.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.Numbers.Cursor = System.Windows.Forms.Cursors.No;
+            this.Numbers.Enabled = false;
+            this.Numbers.Location = new System.Drawing.Point(501, 42);
+            this.Numbers.Name = "Numbers";
+            this.Numbers.ReadOnly = true;
+            this.Numbers.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.Numbers.Size = new System.Drawing.Size(28, 522);
+            this.Numbers.TabIndex = 8;
+            this.Numbers.Text = "";
             // 
             // BinaryConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 857);
+            this.Controls.Add(this.AssemblyView);
+            this.Controls.Add(this.Numbers);
             this.Controls.Add(this.labelGenerator);
             this.Controls.Add(this.Dissambly);
             this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -339,7 +368,6 @@ namespace BinToAssembly
             this.Dissambly.ResumeLayout(false);
             this.Disassembly.ResumeLayout(false);
             this.CompilerOutput.ResumeLayout(false);
-            this.CompilerOutput.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -353,7 +381,7 @@ namespace BinToAssembly
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.RichTextBox AssemblyView;
         private System.Windows.Forms.ToolStripMenuItem leftWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rightWindowToolStripMenuItem;
         private System.Windows.Forms.ComboBox comboBox1;
@@ -371,6 +399,7 @@ namespace BinToAssembly
         private TabPage Disassembly;
         private System.ComponentModel.Design.ByteViewer byteviewer;
         private TabPage CompilerOutput;
-        private TextBox CompilerTextBox;
+        private RichTextBox CompilerTextBox;
+        private RichTextBox Numbers;
     }
 }
