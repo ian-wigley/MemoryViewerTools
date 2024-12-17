@@ -54,6 +54,47 @@ namespace BinToAssembly
             //comboBox1.Items.Insert(2, m68000);
             comboBox1.SelectedIndex = 0;
             populateOpCodeList.Init(comboBox1.Items[0].ToString());
+
+            Numbers.Font = AssemblyView.Font;
+            CompilerTextBox.Cursor = Cursors.Arrow;
+            CompilerTextBox.GotFocus += CompilerTextBox_GotFocus;
+        }
+
+        private void AddLineNumbers()
+        {
+            Point pt = new Point(0, 0);
+            int firstIndex = AssemblyView.GetCharIndexFromPosition(pt);
+            int firstLine = AssemblyView.GetLineFromCharIndex(firstIndex);
+            pt.X = ClientRectangle.Width;
+            pt.Y = ClientRectangle.Height;
+            int lastIndex = AssemblyView.GetCharIndexFromPosition(pt);
+            int lastLine = AssemblyView.GetLineFromCharIndex(lastIndex);
+            Numbers.SelectionAlignment = HorizontalAlignment.Center;
+            Numbers.Text = "";
+            Numbers.Width = GetWidth();
+            for (int i = firstLine - 1; i <= lastLine + 1; i++)
+            {
+                Numbers.Text += i + 1 + "\n";
+            }
+        }
+
+        private int GetWidth()
+        {
+            int line = Numbers.Lines.Length;
+            int width;
+            if (line <= 99)
+            {
+                width = 20 + (int)Numbers.Font.Size;
+            }
+            else if (line <= 999)
+            {
+                width = 30 + (int)Numbers.Font.Size;
+            }
+            else
+            {
+                width = 50 + (int)Numbers.Font.Size;
+            }
+            return width;
         }
 
         private void AddLabels(
@@ -64,7 +105,7 @@ namespace BinToAssembly
             int firstOccurrence,
             int lastOccurrence)
         {
-            textBox2.Clear();
+            AssemblyView.Clear();
             ClearRightWindow();
             passThree.Add("                *=$" + start);
             var originalFileContent = code;
@@ -195,8 +236,8 @@ namespace BinToAssembly
                 }
             }
 
-            textBox2.Font = new Font(FontFamily.GenericMonospace, textBox2.Font.Size);
-            textBox2.Lines = passThree.ToArray();
+            AssemblyView.Font = new Font(FontFamily.GenericMonospace, AssemblyView.Font.Size);
+            AssemblyView.Lines = passThree.ToArray();
             rightWindowToolStripMenuItem.Enabled = true;
         }
 
@@ -366,6 +407,7 @@ namespace BinToAssembly
 
         private void ClearRightWindow()
         {
+            AssemblyView.Text = "";
             passOne.Clear();
             passTwo.Clear();
             passThree.Clear();
@@ -419,7 +461,7 @@ namespace BinToAssembly
         {
             ClearCollections();
             textBox1.Clear();
-            textBox2.Clear();
+            AssemblyView.Clear();
             byteviewer.SetBytes(new byte[] { });
             //lineNumbers = 0;
         }
@@ -434,7 +476,6 @@ namespace BinToAssembly
             string[] text = this.textBox1.Lines;
             this.textBox1.SelectedText = this.textBox1.SelectedText.Replace(split[0], "DC.W $0FFF");
             // Todo finish implementation
-            int i = 0;
         }
 
         private void LabelGenerator_Click(object sender, EventArgs e)
@@ -442,11 +483,22 @@ namespace BinToAssembly
             // Todo finish implementation
             GenerateLabels();
             Compile.Enabled = true;
-            int i = 0;
+            Numbers.Select();
+            AddLineNumbers();
         }
+
+        private void CompilerTextBox_GotFocus(object sender, EventArgs e)
+        {
+            ((RichTextBox)sender).Parent.Focus();
+        }
+
 
         private void Compile_Click(object sender, EventArgs e)
         {
+            // Make the output visible
+            Dissambly.SelectTab(1);
+            CompilerTextBox.Text = "";
+
             // Get a random temporary file name
             string tempFile = Path.GetTempFileName();
 
@@ -480,6 +532,13 @@ namespace BinToAssembly
         private void Configure_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void TextBox2_VScroll(object sender, EventArgs e)
+        {
+            Numbers.Text = "";
+            AddLineNumbers();
+            AssemblyView.Invalidate();
         }
     }
 }
