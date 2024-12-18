@@ -16,7 +16,8 @@ namespace BinToAssembly
             this.processor = processor;
             m_OpCodes.Clear();
             xmlLoader.SetValid = false;
-            xmlLoader.Load(m_OpCodes, processor);
+            xmlLoader.LoadSettings(processor);
+            xmlLoader.LoadOpCodes(m_OpCodes, processor);
         }
 
         //public dynamic GetOpCode(string value)
