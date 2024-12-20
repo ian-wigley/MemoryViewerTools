@@ -8,6 +8,7 @@ namespace BinToAssembly
     {
         private bool valid = false;
         public bool SetValid { set { valid = value; } }
+        public SettingsCache SettingsCache { private set; get; }
 
         public void LoadSettings(string processor)
         {
@@ -21,7 +22,8 @@ namespace BinToAssembly
             string settingsXML = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "/" + "config.xml";
             XmlTextReader reader = new XmlTextReader(settingsXML);
 
-            try { 
+            try
+            {
                 reader.MoveToContent();
                 vasmLocation = reader.GetAttribute("vasmLocation");
                 processors = reader.GetAttribute("processor");
@@ -35,7 +37,7 @@ namespace BinToAssembly
                 if (reader != null)
                 {
                     reader.Close();
-                    SettingsCache settingsCache = new SettingsCache(vasmLocation, processors, kickhunk, fhunk, flag, destination);
+                    SettingsCache = new SettingsCache(vasmLocation, processors, kickhunk, fhunk, flag, destination);
                 }
             }
         }
@@ -59,7 +61,7 @@ namespace BinToAssembly
                             string[] split = reader.Value.Split('¬');
                             string name = split[2];
                             GetDataType(name, out string dataSize);
-                            if(name.Contains("BNE") || name.Contains("BEQ") || name.Contains("JSR") || name.Contains("BSR")) 
+                            if (name.Contains("BNE") || name.Contains("BEQ") || name.Contains("JSR") || name.Contains("BSR"))
                             {
                                 m_OpCodes.Add(new Branch(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
                             }
