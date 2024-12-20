@@ -142,8 +142,8 @@
 	
 	<code>00¬23¬DBCC¬2¬¬¬¬</code>
 	
-	<code>51¬C8¬DBF¬2¬D0,#$¬¬¬</code>
-	<code>51¬CA¬DBF¬2¬D2,#$¬¬¬</code>
+	<code>51¬C8¬DBF¬2¬D0,$¬¬¬</code>
+	<code>51¬CA¬DBF¬2¬D2,$¬¬¬</code>
 
 	<code>00¬24¬DIVS¬2¬¬¬¬</code>
 	<code>00¬25¬DIVU¬2¬¬¬¬</code>
