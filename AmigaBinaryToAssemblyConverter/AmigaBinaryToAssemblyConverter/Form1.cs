@@ -31,8 +31,6 @@ namespace BinToAssembly
 
         private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
 
-        private const string m6502 = "6502";
-        private const string m68xx = "68xx";
         private const string m68000 = "68000";
 
         public BinaryConverter()
@@ -49,9 +47,6 @@ namespace BinToAssembly
             leftWindowToolStripMenuItem.Enabled = false;
             rightWindowToolStripMenuItem.Enabled = false;
             comboBox1.Items.Insert(0, m68000);
-            //comboBox1.Items.Insert(0, m6502);
-            //comboBox1.Items.Insert(1, m68xx);
-            //comboBox1.Items.Insert(2, m68000);
             comboBox1.SelectedIndex = 0;
             populateOpCodeList.Init(comboBox1.Items[0].ToString());
 
@@ -242,7 +237,7 @@ namespace BinToAssembly
         }
 
         private void OpenToolStripMenuItem_Click(
-            object sender, 
+            object sender,
             EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
@@ -256,44 +251,12 @@ namespace BinToAssembly
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                // Check what set of Opcodes are loaded
-                if (populateOpCodeList.GetProcessor != comboBox1.Text)
-                {//.SelectedText) {
-                    populateOpCodeList.Init(comboBox1.SelectedText);
-                }
-
                 ClearCollections();
                 textBox1.Clear();
-                // Specify the memory location to load the `code` into.
-                // Useful for 6502, not 68000 relocatable code
-                if (comboBox1.Text.Equals(m6502))
-                {
-                    MemoryLocation ml = new MemoryLocation();
-                    if (ml.ShowDialog() == DialogResult.OK)
-                    {
-                        int.TryParse(ml.GetMemStartLocation, out startAddress);
-                        // ParseFileContent(openFileDialog.FileName);
-                        if (comboBox1.Text.Equals(m6502))
-                        {
-                            Parser6502 p6502 = new Parser6502();
-                            p6502.ParseFileContent(openFileDialog.FileName, populateOpCodeList, textBox1, ref lineNumbers, ref code);
-                        }
-                    }
-                }
-
-                if (comboBox1.Text.Equals(m68xx))
-                {
-                    Parser68xx p68xx = new Parser68xx();
-                    p68xx.ParseFileContent(openFileDialog.FileName, populateOpCodeList, textBox1);
-                }
-                if (comboBox1.Text.Equals(m68000))
-                {
-                    Parser68000 p68000 = new Parser68000();
-                    var data = p68000.LoadBinaryData(openFileDialog.FileName);
-                    p68000.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
-                    labelGenerator.Enabled = true;
-                }
-
+                Parser68000 p68000 = new Parser68000();
+                var data = p68000.LoadBinaryData(openFileDialog.FileName);
+                p68000.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
+                labelGenerator.Enabled = true;
                 byteviewer.SetFile(openFileDialog.FileName);
                 generateLabelsToolStripMenuItem.Enabled = true;
             }
@@ -515,9 +478,18 @@ namespace BinToAssembly
 
             tempFile = tempFile.Replace("\\", "/");
 
+            var sc = populateOpCodeList.GetXMLLoader.SettingsCache;
+            string args = "/C " + sc.VasmLocation +
+                " " + sc.Processor +
+                " " + sc.Kickhunk +
+                " " + sc.Fhunk +
+                " " + sc.Flag +
+                " " + sc.Destination +
+                " " + tempFile;
+
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.Arguments = "/C C:/Dev/ToolChain/vasm -m68020 -kick1hunks -Fhunkexe -o c:/temp/hellmans-test.exe " + tempFile;
+            p.StartInfo.Arguments = args;
             p.StartInfo.RedirectStandardOutput = true;
             p.StartInfo.RedirectStandardError = true;
             p.StartInfo.UseShellExecute = false;

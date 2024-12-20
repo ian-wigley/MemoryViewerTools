@@ -1,6 +1,4 @@
-﻿using System.Reflection;
-
-namespace BinToAssembly
+﻿namespace BinToAssembly
 {
     public class BaseOpCode
     {
@@ -13,12 +11,9 @@ namespace BinToAssembly
         protected string m_dataSize = "";
         protected string pad = "    ";
 
-        public BaseOpCode() { }
-
         public string m_codeOne { get; set; }
         public string m_codeTwo { get; set; }
         public string m_code { get; set; }
-        public bool m_illegal { get; set; }
         public string Code { get { return m_code; } }
         public string Name { get { return m_name; } }
         public int NumberOfBytes { get { return m_numberOfBytes; } }
@@ -26,7 +21,6 @@ namespace BinToAssembly
         public string Firstfix { get { return m_firstfix; } }
         public string Midfix { get { return m_midfix; } }
         public string Suffix { get { return m_suffix; } }
-        public bool Illegal { get { return m_illegal; } }
 
         public string Detail(ref int filePosition, byte[] binaryFileData)
         {

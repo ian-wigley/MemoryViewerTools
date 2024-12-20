@@ -8,6 +8,7 @@ namespace BinToAssembly
         private readonly List<BaseOpCode> m_OpCodes = new List<BaseOpCode>();
         public List<BaseOpCode> GetOpCodes { get { return m_OpCodes; } }
         private readonly XMLLoader xmlLoader = new XMLLoader();
+        public XMLLoader GetXMLLoader { get { return xmlLoader; } }
         private string processor = "";
         public string GetProcessor { get { return processor; } }
 
@@ -30,6 +31,5 @@ namespace BinToAssembly
             return m_OpCodes.FirstOrDefault(opCode => opCode.m_codeOne.Equals(t) && opCode.m_codeTwo.Equals(tt));
 
         }
-
     }
 }

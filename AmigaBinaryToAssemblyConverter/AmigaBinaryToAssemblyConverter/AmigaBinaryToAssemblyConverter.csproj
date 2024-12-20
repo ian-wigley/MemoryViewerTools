@@ -46,9 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="6502Parser.cs" />
+<!--    <Compile Include="6502Parser.cs" />   -->
     <Compile Include="68000Parser.cs" />
-    <Compile Include="68xxParser.cs" />
+<!--    <Compile Include="68xxParser.cs" />  -->
     <Compile Include="BaseOpCode.cs" />
     <Compile Include="Branch.cs" />
     <Compile Include="Form1.cs">
@@ -108,15 +108,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="6502-codes.xml">
+<!--    <Content Include="6502-codes.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Content> -->
     <Content Include="68000-codes.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="68xx-codes.xml">
+<!--    <Content Include="68xx-codes.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    </Content> -->
     <Content Include="config.xml" />
     <None Include="build.bat" />
   </ItemGroup>
