@@ -10,7 +10,7 @@ namespace BinToAssembly
         public bool SetValid { set { valid = value; } }
         public SettingsCache SettingsCache { private set; get; }
 
-        public void LoadSettings(string processor)
+        public void LoadSettings()
         {
             string vasmLocation = "";
             string processors = "";
@@ -42,9 +42,10 @@ namespace BinToAssembly
             }
         }
 
-        public void LoadOpCodes(List<BaseOpCode> m_OpCodes, string processor)
+        public void LoadOpCodes(List<BaseOpCode> m_OpCodes)
         {
-            string xmlOpCodes = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "/" + processor + "-codes.xml";
+            string processor = "68000";
+            string xmlOpCodes = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).ToString()) + "/68000-codes.xml";
             XmlTextReader reader = new XmlTextReader(xmlOpCodes);
             while (reader.Read())
             {
