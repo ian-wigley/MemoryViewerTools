@@ -291,6 +291,7 @@
 	<code>00¬43¬MOVEtoSR¬2¬¬¬¬</code>
 	<code>00¬44¬MOVEUSP¬2¬¬¬¬</code>
 	<code>48¬E7¬MOVEM.L¬2¬D0-D7¬/A0-A6¬,-(A7)¬</code>
+	<code>48¬F9¬MOVEM¬2¬¬¬¬</code>
 	<code>4C¬DF¬MOVEM¬2¬(A7)+,D0-D7/A0-A6¬¬¬</code>
 	<code>00¬46¬MOVEP¬2¬¬¬¬</code>
 	<code>00¬47¬MOVEQ¬2¬¬¬¬</code>
