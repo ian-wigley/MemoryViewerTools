@@ -14,3 +14,4 @@ MultiBinaryToAssemblyConverter/packages/MSTest.TestAdapter.2.1.2/
 MultiBinaryToAssemblyConverter/packages/MSTest.TestFramework.2.1.2/
 /AmigaBinaryToAssemblyConverter/AmigaBinaryToAssemblyConverter/bin
 /AmigaBinaryToAssemblyConverter/AmigaBinaryToAssemblyConverter/obj
+/AmigaBinaryToAssemblyConverter/AmigaBinaryToAssemblyConverterTests/obj
