@@ -12,13 +12,12 @@ namespace BinToAssembly
         private string processor = "";
         public string GetProcessor { get { return processor; } }
 
-        public void Init(string processor)
+        public void Init()
         {
-            this.processor = processor;
             m_OpCodes.Clear();
             xmlLoader.SetValid = false;
-            xmlLoader.LoadSettings(processor);
-            xmlLoader.LoadOpCodes(m_OpCodes, processor);
+            xmlLoader.LoadSettings();
+            xmlLoader.LoadOpCodes(m_OpCodes);
         }
 
         //public dynamic GetOpCode(string value)
