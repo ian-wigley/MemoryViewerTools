@@ -46,9 +46,7 @@ namespace BinToAssembly
             generateLabelsToolStripMenuItem.Enabled = false;
             leftWindowToolStripMenuItem.Enabled = false;
             rightWindowToolStripMenuItem.Enabled = false;
-            comboBox1.Items.Insert(0, m68000);
-            comboBox1.SelectedIndex = 0;
-            populateOpCodeList.Init(comboBox1.Items[0].ToString());
+            populateOpCodeList.Init();
 
             Numbers.Font = AssemblyView.Font;
             CompilerTextBox.Cursor = Cursors.Arrow;
