@@ -408,7 +408,12 @@ namespace BinToAssembly
                 case "0034":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-
+                case "4EB9":  // jsr
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
+                case "48F9": // movem
+                    line += oc.Detail(ref filePosition, binaryFileData);
+                    break;
                 default:
                     filePosition = binaryFileData.Length;
                     break;
