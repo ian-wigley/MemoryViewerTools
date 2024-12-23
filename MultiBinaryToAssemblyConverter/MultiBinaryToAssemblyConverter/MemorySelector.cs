@@ -43,6 +43,13 @@ namespace BinToAssembly
             comboBox2.Text = startAdress[1].ToString();
             comboBox3.Text = startAdress[2].ToString();
             comboBox4.Text = startAdress[3].ToString();
+
+            comboBox5.Text = endAdress[0].ToString();
+            comboBox6.Text = endAdress[1].ToString();
+            comboBox7.Text = endAdress[2].ToString();
+            comboBox8.Text = endAdress[3].ToString();
+
+            checkBox1.Enabled = false;
         }
 
         private void InitialiseComboBoxes(
