@@ -50,8 +50,8 @@
 	<code>65¬00¬BCS.W¬2¬#$¬¬¬</code>
 	<code>65¬72¬BCS.B¬1¬#$¬¬¬</code>
 
-	<code>67¬0A¬BEQ¬1¬#$¬¬¬</code>
-	<code>67¬72¬BEQ¬1¬#$¬¬¬</code>
+	<code>67¬0A¬BEQ¬1¬$¬¬¬</code>
+	<code>67¬72¬BEQ¬1¬$¬¬¬</code>
 	<code>67¬00¬BEQ¬2¬¬¬¬</code>	
 	<code>67¬61¬BEQ.B¬1¬#$¬¬¬</code>	
 	<code>67¬66¬BEQ.B¬1¬#$¬¬¬</code>
@@ -67,16 +67,16 @@
 
 	<code>62¬61¬BHI.B¬1¬#$¬¬¬</code>
 	
-	<code>6F¬75¬BLE.B¬1¬#$¬¬¬</code>
-	<code>6F¬70¬BLE.B¬1¬#$¬¬¬</code>
-	<code>6F¬61¬BLE.B¬1¬#$¬¬¬</code>
-	<code>6F¬77¬BLE.B¬1¬#$¬¬¬</code>
+	<code>6F¬75¬BLE.B¬1¬$¬¬¬</code>
+	<code>6F¬70¬BLE.B¬1¬$¬¬¬</code>
+	<code>6F¬61¬BLE.B¬1¬$¬¬¬</code>
+	<code>6F¬77¬BLE.B¬1¬$¬¬¬</code>
 	
-	<code>63¬68¬BLS.B¬1¬#$¬¬¬</code>
-	<code>63¬6F¬BLS.B¬1¬#$¬¬¬¬</code>
-	<code>63¬3A¬BLS.B¬1¬#$¬¬¬</code>
-	<code>63¬73¬BLS.W¬1¬#$¬¬¬</code>
-	<code>6D¬6F¬BLT.B¬1¬#$¬¬¬</code>	
+	<code>63¬68¬BLS.B¬1¬$¬¬¬</code>
+	<code>63¬6F¬BLS.B¬1¬$¬¬¬¬</code>
+	<code>63¬3A¬BLS.B¬1¬$¬¬¬</code>
+	<code>63¬73¬BLS.W¬1¬$¬¬¬</code>
+	<code>6D¬6F¬BLT.B¬1¬$¬¬¬</code>	
 
 	<code>6B¬6D¬BMI.B¬1¬#$¬¬¬</code>	
 	
@@ -90,11 +90,11 @@
 	<code>60¬08¬BRA¬2¬¬¬¬</code>
 	<code>60¬EC¬BRA¬1¬#$¬¬¬</code>
 	
-	<code>61¬00¬BSR.W¬2¬#$¬¬¬</code>
-	<code>61¬2D¬BSR.B¬1¬#$¬¬¬</code>	
-	<code>61¬6D¬BSR.B¬1¬#$¬¬¬</code>
-	<code>61¬70¬BSR.W¬1¬#$¬¬¬</code>
-	<code>61¬76¬BSR.B¬1¬#$¬¬¬</code>
+	<code>61¬2D¬BSR.B¬1¬$¬¬¬</code>	
+	<code>61¬6D¬BSR.B¬1¬$¬¬¬</code>
+	<code>61¬00¬BSR.W¬2¬$¬¬¬</code>
+	<code>61¬70¬BSR.W¬1¬$¬¬¬</code>
+	<code>61¬76¬BSR.B¬1¬$¬¬¬</code>
 	
 	<code>01¬C0¬BSET.L¬1¬D0¬¬,D0¬</code>
 	<code>01¬D2¬BSET.B¬1¬D0¬¬,(A2)¬</code>
@@ -111,12 +111,12 @@
 	<code>08¬39¬BTST.B¬6¬#$¬,$¬¬</code>
 	<code>03¬33¬BTST.B,¬10¬D1¬¬,A3¬</code>
 
-	<code>68¬69¬BVC.W¬1¬#$¬¬¬</code>
+	<code>68¬69¬BVC.W¬1¬$¬¬¬</code>
 	
-	<code>69¬6E¬BVS.B¬1¬#$¬¬¬</code>
-	<code>69¬74¬BVS.B¬1¬#$¬¬¬</code>
-	<code>69¬63¬BVS.B¬1¬#$¬¬,D0¬</code>
-	<code>69¬67¬BVS.B¬1¬#$¬¬¬</code>
+	<code>69¬6E¬BVS.B¬1¬$¬¬¬</code>
+	<code>69¬74¬BVS.B¬1¬$¬¬¬</code>
+	<code>69¬63¬BVS.B¬1¬$¬¬,D0¬</code>
+	<code>69¬67¬BVS.B¬1¬$¬¬¬</code>
 
 	<code>0E¬EE¬CAS.L¬4¬D6¬¬,D3¬</code>
 
