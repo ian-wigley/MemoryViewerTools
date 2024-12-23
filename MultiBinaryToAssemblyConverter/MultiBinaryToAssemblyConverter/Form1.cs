@@ -241,7 +241,9 @@ namespace BinToAssembly
             rightWindowToolStripMenuItem.Enabled = true;
         }
 
-        private void OpenToolStripMenuItem_Click(object sender, EventArgs e)
+        private void OpenToolStripMenuItem_Click(
+            object sender, 
+            EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog
             {
@@ -502,8 +504,8 @@ namespace BinToAssembly
             // Get a random temporary file name
             string tempFile = Path.GetTempFileName();
 
-            // Convert the list to a byte array
-            byte[] dataAsBytes = passThree.SelectMany(s => System.Text.Encoding.UTF8.GetBytes(s + Environment.NewLine)).ToArray();
+            // Convert the lines of Text to a byte array
+            byte[] dataAsBytes = AssemblyView.Lines.SelectMany(s => System.Text.Encoding.UTF8.GetBytes(s + Environment.NewLine)).ToArray();
 
             // Open a FileStream to write to the file:
             using (Stream fileStream = File.OpenWrite(tempFile))
