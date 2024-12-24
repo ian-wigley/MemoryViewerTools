@@ -55,26 +55,26 @@ namespace BinToAssembly
                 elementOne = result.ToString("x4");
             }
 
-            if (NumberOfBytes == 2 && m_name.Equals("JSR"))
-            {
-                filePosition += 2;
-                elementOne = GetTwoShorts(ref filePosition, binaryFileData);
-                var amount = Convert.ToInt16(elementOne, 16);
-                binOne = elementOne;
-                elementOne = amount.ToString();
-            }
+            //if (NumberOfBytes == 2 && m_name.Equals("JSR"))
+            //{
+            //    filePosition += 2;
+            //    elementOne = GetTwoShorts(ref filePosition, binaryFileData);
+            //    var amount = Convert.ToInt16(elementOne, 16);
+            //    binOne = elementOne;
+            //    elementOne = amount.ToString();
+            //}
 
-            if (NumberOfBytes == 4 && m_name.Equals("JSR"))
-            {
-                filePosition += 2;
-                elementOne = GetTwoShorts(ref filePosition, binaryFileData);
-                var amount = Convert.ToInt16(elementOne, 16);
-                binOne = elementOne;
-                elementOne = amount.ToString();
-                filePosition += 2;
-                elementTwo = GetTwoShorts(ref filePosition, binaryFileData);
-                filePosition += 2;
-            }
+            //if (NumberOfBytes == 4 && m_name.Equals("JSR"))
+            //{
+            //    filePosition += 2;
+            //    elementOne = GetTwoShorts(ref filePosition, binaryFileData);
+            //    var amount = Convert.ToInt16(elementOne, 16);
+            //    binOne = elementOne;
+            //    elementOne = amount.ToString();
+            //    filePosition += 2;
+            //    elementTwo = GetTwoShorts(ref filePosition, binaryFileData);
+            //    filePosition += 2;
+            //}
 
             string retunLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
             return retunLine;
