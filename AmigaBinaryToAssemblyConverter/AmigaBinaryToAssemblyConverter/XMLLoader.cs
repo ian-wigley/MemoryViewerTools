@@ -71,10 +71,10 @@ namespace BinToAssembly
                             {
                                 m_OpCodes.Add(new Jump(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
                             }
-                            //if (name.Contains("MOVE"))
-                            //{
-                            //    m_OpCodes.Add(new Move(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
-                            //}
+                            if (name.Contains("MOVE"))
+                            {
+                                m_OpCodes.Add(new Move(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
+                            }
                             else
                             {
                                 m_OpCodes.Add(new OpCode(split[0], split[1], name, int.Parse(split[3]), split[4], split[5], split[6], split[7], dataSize));
