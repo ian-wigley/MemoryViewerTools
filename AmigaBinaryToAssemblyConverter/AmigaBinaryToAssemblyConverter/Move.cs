@@ -71,6 +71,11 @@ namespace BinToAssembly
             string binOne = !elementOne.Equals("") ? elementOne : pad;
             string binTwo = !elementTwo.Equals("") ? elementTwo : pad;
 
+            if (Code.Equals("23E9"))
+            {
+                elementTwo = "";
+            }
+
             string returnLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
             return returnLine;
         }
