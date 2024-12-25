@@ -65,8 +65,8 @@
             string binOne = !elementOne.Equals("") ? elementOne : pad;
             string binTwo = !elementTwo.Equals("") ? elementTwo : pad;
 
-            string retunLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
-            return retunLine;
+            string returnLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
+            return returnLine;
         }
 
         protected string GetTwoShorts(ref int filePosition, byte[] binaryFileData)
