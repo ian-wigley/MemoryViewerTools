@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BinToAssembly
 {
@@ -37,11 +33,46 @@ namespace BinToAssembly
             string elementOne = "";
             string elementTwo = "";
             string elementThree = "";
-            string binOne = pad;
-            string binTwo = pad;
 
-            string retunLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
-            return retunLine;
+            filePosition += 2;
+
+            if (NumberOfBytes == 2)
+            {
+                elementOne = GetTwoShorts(ref filePosition, binaryFileData);
+            }
+
+            if (NumberOfBytes == 4)
+            {
+                elementOne = GetTwoShorts(ref filePosition, binaryFileData);
+                elementTwo = GetTwoShorts(ref filePosition, binaryFileData);
+            }
+
+            if (NumberOfBytes == 6)
+            {
+                elementOne = GetTwoShorts(ref filePosition, binaryFileData);
+                elementTwo = GetTwoShorts(ref filePosition, binaryFileData);
+                elementThree = GetTwoShorts(ref filePosition, binaryFileData);
+            }
+
+            // Temporary fixes
+            if (NumberOfBytes == 8)
+            {
+                filePosition += 8;
+            }
+            if (NumberOfBytes == 10)
+            {
+                filePosition += 10;
+            }
+            if (NumberOfBytes == 12)
+            {
+                filePosition += 12;
+            }
+
+            string binOne = !elementOne.Equals("") ? elementOne : pad;
+            string binTwo = !elementTwo.Equals("") ? elementTwo : pad;
+
+            string returnLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
+            return returnLine;
         }
 
     }
