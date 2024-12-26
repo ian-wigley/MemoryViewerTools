@@ -13,7 +13,7 @@ namespace MultiBinaryToAssemblyConverterTests
         private PopulateOpCodeList InitOpCodeList()
         {
             PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
-            populateOpCodeList.Init("68000");
+            populateOpCodeList.Init();
             return populateOpCodeList;
         }
 
@@ -28,7 +28,7 @@ namespace MultiBinaryToAssemblyConverterTests
         public void TestRTSOpcode()
         {
             int opCode = 20085;
-            var oc = InitOpCodeList().GetOpCode(opCode.ToString("X4"));
+            var oc = InitOpCodeList().GetOpCode(opCode.ToString("X2"), opCode.ToString("X2"));
             Assert.IsTrue(oc.Name == "RTS");
             Assert.IsTrue(oc.Code == "4E75");
         }
@@ -51,7 +51,7 @@ namespace MultiBinaryToAssemblyConverterTests
         [DataTestMethod]
         public void TestValidOpcodes(int op, string name)
         {
-            var oc = InitOpCodeList().GetOpCode(op.ToString("X4"));
+            var oc = InitOpCodeList().GetOpCode(op.ToString("X2"), op.ToString("X2"));
             Assert.AreEqual(oc.Name, name);
         }
 
@@ -59,7 +59,7 @@ namespace MultiBinaryToAssemblyConverterTests
         public void TestFormatRTSOpcode()
         {
             int opCode = 0x4e75;
-            var oc = InitOpCodeList().GetOpCode(opCode.ToString("X4"));
+            var oc = InitOpCodeList().GetOpCode(opCode.ToString("X2"), opCode.ToString("X2"));
             int testInt = 1;
             var data = new ushort[1];
             var formatted = oc.Format(ref testInt, data);
@@ -70,7 +70,7 @@ namespace MultiBinaryToAssemblyConverterTests
         public void TestFormatMoveBOpcode()
         {
             int opCode = 0x13fc;
-            var oc = InitOpCodeList().GetOpCode(opCode.ToString("X4"));
+            var oc = InitOpCodeList().GetOpCode(opCode.ToString("X2"), opCode.ToString("X2"));
             int testInt = 1;
             var data = new ushort[1];
             var formatted = oc.Format(ref testInt, data);
@@ -81,7 +81,7 @@ namespace MultiBinaryToAssemblyConverterTests
         public void TestFormatJSROpcode()
         {
             int opCode = 0x4eb9;
-            var oc = InitOpCodeList().GetOpCode(opCode.ToString("X4"));
+            var oc = InitOpCodeList().GetOpCode(opCode.ToString("X2"), opCode.ToString("X2"));
             int testInt = 1;
             var data = new ushort[] { 0x0004, 0x0014 };
             var formatted = oc.Format(ref testInt, data);
@@ -105,7 +105,7 @@ namespace MultiBinaryToAssemblyConverterTests
         [DataTestMethod]
         public void TestMultiOpcodes(int op, string expected, ushort[] data)
         {
-            var oc = InitOpCodeList().GetOpCode(op.ToString("X4"));
+            var oc = InitOpCodeList().GetOpCode(op.ToString("X2"), op.ToString("X2"));
             int testInt = 1;
             var formatted = oc.Format(ref testInt, data);
             Assert.IsTrue(formatted.Contains(expected));
