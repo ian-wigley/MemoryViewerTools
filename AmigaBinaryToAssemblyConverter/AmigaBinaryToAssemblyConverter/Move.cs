@@ -75,7 +75,10 @@ namespace BinToAssembly
             {
                 elementTwo = "";
             }
-
+            if (Code.Equals("48E7"))
+            {
+                elementOne = "";
+            }
             string returnLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
             return returnLine;
         }
