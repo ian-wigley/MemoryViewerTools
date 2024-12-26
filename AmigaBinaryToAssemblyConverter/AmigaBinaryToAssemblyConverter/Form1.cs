@@ -249,6 +249,7 @@ namespace BinToAssembly
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
+                FileLoaded.Text = openFileDialog.FileName;
                 ClearCollections();
                 textBox1.Clear();
                 Parser68000 p68000 = new Parser68000();
