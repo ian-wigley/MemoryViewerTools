@@ -56,6 +56,7 @@ namespace BinToAssembly
             this.CompilerOutput = new System.Windows.Forms.TabPage();
             this.CompilerTextBox = new System.Windows.Forms.RichTextBox();
             this.Numbers = new System.Windows.Forms.RichTextBox();
+            this.FileLoaded = new System.Windows.Forms.Label();
             this.contextMenuStrip1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.Dissambly.SuspendLayout();
@@ -243,7 +244,7 @@ namespace BinToAssembly
             this.Disassembly.Controls.Add(this.byteviewer);
             this.Disassembly.Location = new System.Drawing.Point(4, 22);
             this.Disassembly.Name = "Disassembly";
-            this.Disassembly.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.Disassembly.Padding = new System.Windows.Forms.Padding(3);
             this.Disassembly.Size = new System.Drawing.Size(974, 209);
             this.Disassembly.TabIndex = 0;
             this.Disassembly.Text = "Disassembly";
@@ -256,6 +257,7 @@ namespace BinToAssembly
             | System.Windows.Forms.AnchorStyles.Right)));
             this.byteviewer.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Inset;
             this.byteviewer.ColumnCount = 1;
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -301,7 +303,8 @@ namespace BinToAssembly
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.byteviewer.Size = new System.Drawing.Size(634, 197);
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.Size = new System.Drawing.Size(634, 178);
             this.byteviewer.TabIndex = 6;
             // 
             // CompilerOutput
@@ -309,7 +312,7 @@ namespace BinToAssembly
             this.CompilerOutput.Controls.Add(this.CompilerTextBox);
             this.CompilerOutput.Location = new System.Drawing.Point(4, 22);
             this.CompilerOutput.Name = "CompilerOutput";
-            this.CompilerOutput.Padding = new System.Windows.Forms.Padding(3, 3, 3, 3);
+            this.CompilerOutput.Padding = new System.Windows.Forms.Padding(3);
             this.CompilerOutput.Size = new System.Drawing.Size(974, 209);
             this.CompilerOutput.TabIndex = 1;
             this.CompilerOutput.Text = "Compiler Output";
@@ -340,11 +343,21 @@ namespace BinToAssembly
             this.Numbers.TabIndex = 8;
             this.Numbers.Text = "";
             // 
+            // FileLoaded
+            // 
+            this.FileLoaded.AutoSize = true;
+            this.FileLoaded.Location = new System.Drawing.Point(203, 5);
+            this.FileLoaded.Name = "FileLoaded";
+            this.FileLoaded.Size = new System.Drawing.Size(35, 13);
+            this.FileLoaded.TabIndex = 9;
+            this.FileLoaded.Text = "label1";
+            // 
             // BinaryConverter
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1008, 857);
+            this.Controls.Add(this.FileLoaded);
             this.Controls.Add(this.AssemblyView);
             this.Controls.Add(this.Numbers);
             this.Controls.Add(this.labelGenerator);
@@ -395,5 +408,6 @@ namespace BinToAssembly
         private TabPage CompilerOutput;
         private RichTextBox CompilerTextBox;
         private RichTextBox Numbers;
+        private Label FileLoaded;
     }
 }
