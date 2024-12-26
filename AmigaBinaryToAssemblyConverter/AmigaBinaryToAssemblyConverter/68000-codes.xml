@@ -37,7 +37,7 @@
 
 	<code>08¬79¬BCHG.B¬6¬#$¬,$¬¬</code>
 	<code>01¬46¬BCHG.L¬1¬¬¬D0,D6¬</code>
-	<code>07¬77¬BCHG.B,¬10¬D3¬¬,A2¬</code>
+	<code>07¬77¬BCHG¬10¬D3¬¬,A2¬</code>
 	<code>01¬76¬BCHG.B¬2¬D0¬¬,(A6)¬</code>
 
 	<code>00¬11¬BCLR¬2¬¬¬¬</code>
