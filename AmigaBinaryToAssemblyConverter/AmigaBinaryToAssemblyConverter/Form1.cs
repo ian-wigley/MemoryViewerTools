@@ -252,9 +252,9 @@ namespace BinToAssembly
                 FileLoaded.Text = openFileDialog.FileName;
                 ClearCollections();
                 textBox1.Clear();
-                Parser68000 p68000 = new Parser68000();
-                var data = p68000.LoadBinaryData(openFileDialog.FileName);
-                p68000.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
+                Parser68000 parser = new Parser68000();
+                var data = parser.LoadBinaryData(openFileDialog.FileName);
+                parser.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
                 labelGenerator.Enabled = true;
                 byteviewer.SetFile(openFileDialog.FileName);
                 generateLabelsToolStripMenuItem.Enabled = true;
@@ -266,7 +266,7 @@ namespace BinToAssembly
             Application.Exit();
         }
 
-        private void GenerateLabels()
+        public void GenerateLabels()
         {
             char[] startAddress = new char[lineNumbers[0].Length];
             char[] endAddress = new char[lineNumbers[lineNumbers.Count - 1].Length];
