@@ -279,9 +279,11 @@ namespace BinToAssembly
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.Location = new System.Drawing.Point(162, 6);
             this.byteviewer.Name = "byteviewer";
             this.byteviewer.RowCount = 1;
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -348,9 +350,9 @@ namespace BinToAssembly
             this.FileLoaded.AutoSize = true;
             this.FileLoaded.Location = new System.Drawing.Point(203, 5);
             this.FileLoaded.Name = "FileLoaded";
-            this.FileLoaded.Size = new System.Drawing.Size(35, 13);
+            this.FileLoaded.Size = new System.Drawing.Size(16, 13);
             this.FileLoaded.TabIndex = 9;
-            this.FileLoaded.Text = "label1";
+            this.FileLoaded.Text = "...";
             // 
             // BinaryConverter
             // 
