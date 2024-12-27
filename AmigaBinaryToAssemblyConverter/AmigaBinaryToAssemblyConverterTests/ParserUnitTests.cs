@@ -150,7 +150,7 @@ namespace MultiBinaryToAssemblyConverterTests
     public class LabelGenUnitTests
     {
         [TestMethod]
-        public void TestFormatJSROpcode()
+        public void TestLabelCreation()
         {
             BinaryConverter binaryConverter = new BinaryConverter();
             // 015C 4280  CLR.L D0
