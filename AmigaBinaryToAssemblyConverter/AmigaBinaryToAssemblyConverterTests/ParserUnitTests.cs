@@ -152,10 +152,19 @@ namespace MultiBinaryToAssemblyConverterTests
         [TestMethod]
         public void TestLabelCreation()
         {
-            BinaryConverter binaryConverter = new BinaryConverter();
-            // 015C 4280  CLR.L D0
+            string clrTest = "015C 4280  CLR.L D0";
+            BinaryConverterTesting binaryConverter = new BinaryConverterTesting(clrTest);
             binaryConverter.GenerateLabels();
             // Assert.IsTrue();
+        }
+    }
+
+
+    public class BinaryConverterTesting : BinaryConverter
+    {
+        public BinaryConverterTesting(string clrTest)
+        {
+            lineNumbers.Add(clrTest);
         }
     }
 
