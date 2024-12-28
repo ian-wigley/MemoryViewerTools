@@ -22,7 +22,7 @@ namespace BinToAssembly
         private List<string> passTwo = new List<string>();
         private List<string> passThree = new List<string>();
         private List<string> found = new List<string>();
-        private List<string> lineNumbers = new List<string>();
+        protected List<string> lineNumbers = new List<string>();
         private List<string> illegalOpcodes = new List<string>();
 
         private Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
