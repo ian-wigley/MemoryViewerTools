@@ -391,7 +391,7 @@ namespace BinToAssembly
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.RichTextBox AssemblyView;
+        protected System.Windows.Forms.RichTextBox AssemblyView;
         private System.Windows.Forms.ToolStripMenuItem leftWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem rightWindowToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
