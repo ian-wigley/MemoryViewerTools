@@ -17,7 +17,7 @@ namespace BinToAssembly
         private int branchCount = 0;
         private int startAddress = 0;
 
-        private List<string> code = new List<string>();
+        protected List<string> code = new List<string>();
         private List<string> passOne = new List<string>();
         private List<string> passTwo = new List<string>();
         private List<string> passThree = new List<string>();
@@ -111,6 +111,12 @@ namespace BinToAssembly
                 // Split each line into an array
                 var lineDetails = originalFileContent[count++].Split(' ');
 
+                //if (lineDetails.Contains("CLR.L")) //21, 22
+                //{
+                //    bool stop = true;
+                //}
+
+
                 if (lineDetails.Length > 1)
                 {
                     // Replace the Illegal Opcodes with data statement
@@ -147,6 +153,9 @@ namespace BinToAssembly
                                     branchLoc.Add(lineDetails[18].Replace("#$", ""), branch + branchCount++.ToString());
                                 }
                                 passOne.Add(lineDetails[17] + " " + lineDetails[18]);
+                                break;
+                            case "4280":
+                                passOne.Add(lineDetails[21] + " " + lineDetails[22]);
                                 break;
                             default:
                                 int indexLength = lineDetails.Length;
