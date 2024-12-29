@@ -152,9 +152,9 @@ namespace MultiBinaryToAssemblyConverterTests
         [TestMethod]
         public void TestLabelCreation()
         {
-            string clrTest = "015C 4280  CLR.L D0";
-            BinaryConverterTesting binaryConverter = new BinaryConverterTesting(clrTest);
+            BinaryConverterTesting binaryConverter = new BinaryConverterTesting();
             binaryConverter.GenerateLabels();
+            //var result = binaryConverter.AssemblyView.Lines;
             // Assert.IsTrue();
         }
     }
@@ -162,9 +162,11 @@ namespace MultiBinaryToAssemblyConverterTests
 
     public class BinaryConverterTesting : BinaryConverter
     {
-        public BinaryConverterTesting(string clrTest)
+        public BinaryConverterTesting()
         {
-            lineNumbers.Add(clrTest);
+            int lineNumer = 0;
+            lineNumbers.Add(lineNumer.ToString("X4"));
+            code.Add("0000 4280  CLR.L D0");
         }
     }
 
