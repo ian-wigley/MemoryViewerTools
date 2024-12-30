@@ -31,7 +31,7 @@ namespace BinToAssembly
 
         private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
 
-        private const string m68000 = "68000";
+        //private const string m68000 = "68000";
 
         public BinaryConverter()
         {
@@ -110,12 +110,6 @@ namespace BinToAssembly
             {
                 // Split each line into an array
                 var lineDetails = originalFileContent[count++].Split(' ');
-
-                //if (lineDetails.Contains("CLR.L")) //21, 22
-                //{
-                //    bool stop = true;
-                //}
-
 
                 if (lineDetails.Length > 1)
                 {
@@ -258,7 +252,7 @@ namespace BinToAssembly
 
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                FileLoaded.Text = openFileDialog.FileName;
+                FileLoaded.Text = openFileDialog.SafeFileName;
                 ClearCollections();
                 textBox1.Clear();
                 Parser68000 parser = new Parser68000();
