@@ -120,7 +120,7 @@ namespace BinToAssembly
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
@@ -130,7 +130,7 @@ namespace BinToAssembly
             this.leftWindowToolStripMenuItem,
             this.rightWindowToolStripMenuItem});
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Save As";
             // 
             // leftWindowToolStripMenuItem
@@ -150,14 +150,14 @@ namespace BinToAssembly
             // clearToolStripMenuItem
             // 
             this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
-            this.clearToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.clearToolStripMenuItem.Text = "Clear";
             this.clearToolStripMenuItem.Click += new System.EventHandler(this.ClearToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(114, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
@@ -172,7 +172,7 @@ namespace BinToAssembly
             // generateLabelsToolStripMenuItem
             // 
             this.generateLabelsToolStripMenuItem.Name = "generateLabelsToolStripMenuItem";
-            this.generateLabelsToolStripMenuItem.Size = new System.Drawing.Size(157, 22);
+            this.generateLabelsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.generateLabelsToolStripMenuItem.Text = "Generate Labels";
             this.generateLabelsToolStripMenuItem.Click += new System.EventHandler(this.GenerateLabelsToolStripMenuItem_Click);
             // 
@@ -280,9 +280,11 @@ namespace BinToAssembly
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.byteviewer.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.Location = new System.Drawing.Point(162, 6);
             this.byteviewer.Name = "byteviewer";
             this.byteviewer.RowCount = 1;
+            this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.byteviewer.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -348,11 +350,11 @@ namespace BinToAssembly
             // FileLoaded
             // 
             this.FileLoaded.AutoSize = true;
-            this.FileLoaded.Location = new System.Drawing.Point(203, 5);
+            this.FileLoaded.BackColor = System.Drawing.SystemColors.ControlDark;
+            this.FileLoaded.Location = new System.Drawing.Point(467, 5);
             this.FileLoaded.Name = "FileLoaded";
-            this.FileLoaded.Size = new System.Drawing.Size(16, 13);
+            this.FileLoaded.Size = new System.Drawing.Size(0, 13);
             this.FileLoaded.TabIndex = 9;
-            this.FileLoaded.Text = "...";
             // 
             // BinaryConverter
             // 
