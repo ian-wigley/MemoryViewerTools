@@ -6,7 +6,7 @@
 	<code>06¬11¬ADD¬2¬#$¬,(A1)¬¬</code>
 	<code>52¬39¬ADD¬2¬#$¬,$¬¬</code>
 	<code>54¬80¬ADDQ.L¬1¬#$¬¬,D0¬</code>
-	<code>06¬66¬ADD.W,¬2¬#$¬¬,-(A6)¬</code>
+	<code>06¬66¬ADD.W¬2¬#$¬¬,-(A6)¬</code>
 	<code>50¬00¬ADDQ.B¬1¬#$¬¬,D0¬</code>
 	<code>D2¬7C¬ADD.W¬2¬#$¬,D1¬¬</code>
 	<code>D6¬7C¬ADD.W¬2¬#$¬,D3¬¬</code>
@@ -28,7 +28,7 @@
 	<code>00¬05¬ADDX¬2¬¬¬¬</code>
 	
 	<code>00¬06¬AND¬2¬¬¬¬</code>
-	<code>02¬22¬AND.B,¬2¬#$¬¬,-(A2)¬</code>
+	<code>02¬22¬AND.B¬2¬#$¬¬,-(A2)¬</code>
 	<code>00¬07¬ANDI¬2¬¬¬¬</code>
 	
 	<code>00¬09¬BCC¬2¬¬¬¬</code>
@@ -109,7 +109,7 @@
 	<code>01¬11¬BTST.B¬1¬D0¬¬,(A1)¬</code>
 	<code>08¬28¬BTST¬4¬#¬,$¬¬</code>
 	<code>08¬39¬BTST.B¬6¬#$¬,$¬¬</code>
-	<code>03¬33¬BTST.B,¬10¬D1¬¬,A3¬</code>
+	<code>03¬33¬BTST.B¬10¬D1¬¬,A3¬</code>
 
 	<code>68¬69¬BVC.W¬1¬$¬¬¬</code>
 	
@@ -189,7 +189,7 @@
 	<code>4E¬D5¬JMP¬2¬¬¬¬</code>
 
 	<code>4E¬B9¬JSR¬4¬$¬¬¬</code>
-	<code>4E¬AE¬JSR¬2¬$¬¬(A6)¬</code>
+	<code>4E¬AE¬JSR¬2¬¬¬(A6)¬</code>
 
 	<code>41¬F9¬LEA¬4¬$¬¬,A0¬</code>
 	<code>43¬F9¬LEA¬4¬$¬¬,A1¬</code>
@@ -360,7 +360,7 @@
 	<code>57¬61¬SUBQ.W¬2¬#$¬¬,-(A1)¬</code>
 	<code>00¬71¬SUBX¬2¬¬¬¬</code>
 	<code>92¬7C¬SUB.W¬2¬#$¬¬,D1¬</code>
-	<code>04¬44¬SUB.W,¬2¬#$¬¬,D4¬</code>
+	<code>04¬44¬SUB.W¬2¬#$¬¬,D4¬</code>
 	<code>53¬61¬SUBQ.W¬1¬#$¬¬,-(A1)¬</code>
 	<code>5F¬6C¬SUBQ.W¬2¬#$¬¬,(A4)¬</code>
 	
