@@ -20,7 +20,7 @@ namespace MultiBinaryToAssemblyConverterTests
         [TestMethod]
         public void Test68000Parser()
         {
-            Parser68000 parser = new Parser68000();
+            Parser parser = new Parser();
             Assert.IsNotNull(parser);
         }
 
