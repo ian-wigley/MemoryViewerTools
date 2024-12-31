@@ -47,7 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <!--    <Compile Include="6502Parser.cs" />   -->
-    <Compile Include="68000Parser.cs" />
+    <Compile Include="Parser.cs" />
     <!--    <Compile Include="68xxParser.cs" />  -->
     <Compile Include="BaseOpCode.cs" />
     <Compile Include="Branch.cs" />
