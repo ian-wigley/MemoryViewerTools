@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
+using System.Text;
 
 namespace BinToAssembly
 {
@@ -10,6 +11,9 @@ namespace BinToAssembly
     {
         private readonly int startAddress = 0;
         private Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
+        
+        //gfxlib:     dc.b    "graphics.library",0,0
+        private string graphicsLibrary = "graphics.library";
 
         public byte[] LoadBinaryData(string fileName)
         {
@@ -32,6 +36,18 @@ namespace BinToAssembly
             ref List<string> code
             )
         {
+            int start = 0;
+            int end = graphicsLibrary.Length;
+            string converted = Encoding.UTF8.GetString(data, 0, data.Length);
+            if (converted.Contains(graphicsLibrary))
+            {
+                // Todo - inform user of the existance & option to convert to data
+                DialogResult result = MessageBox.Show("The text `graphics.library` found do\n you want to convert this to data?", "Confirmation", MessageBoxButtons.YesNo);
+                if (result == DialogResult.Yes)
+                {
+                    start = converted.IndexOf(graphicsLibrary);
+                }
+            }
             textBox.Clear();
             int filePosition = 0;
             while (filePosition < data.Length - 4)
@@ -51,6 +67,11 @@ namespace BinToAssembly
 
                 // Get the Opcode object
                 var oc = populateOpCodeList.GetOpCode(firstByte.ToString("X2"), secondByte.ToString("X2"));
+
+                if (filePosition == start)
+                {
+                    bool stop = true;
+                }
 
                 if (oc != null)
                 {
