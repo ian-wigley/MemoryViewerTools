@@ -31,8 +31,6 @@ namespace BinToAssembly
 
         private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
 
-        //private const string m68000 = "68000";
-
         public BinaryConverter()
         {
             InitializeComponent();
