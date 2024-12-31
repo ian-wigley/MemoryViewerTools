@@ -253,7 +253,7 @@ namespace BinToAssembly
                 FileLoaded.Text = openFileDialog.SafeFileName;
                 ClearCollections();
                 textBox1.Clear();
-                Parser68000 parser = new Parser68000();
+                Parser parser = new Parser();
                 var data = parser.LoadBinaryData(openFileDialog.FileName);
                 parser.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
                 labelGenerator.Enabled = true;
