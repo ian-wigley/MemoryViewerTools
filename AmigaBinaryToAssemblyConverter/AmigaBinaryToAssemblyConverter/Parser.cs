@@ -98,6 +98,11 @@ namespace BinToAssembly
             return filePosition;
         }
 
+        private void ConvertDataToWords()
+        {
+
+        }
+
         public void ConvertToAssembly(
             dynamic oc,
             ref string line,
