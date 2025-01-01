@@ -60,7 +60,7 @@ namespace BinToAssembly
                 int opCode = byteOne + data[filePosition + 1];
                 int lineNumber = startAddress + filePosition;
                 lineNumbers.Add(lineNumber.ToString("X4"));
-                string line = (startAddress + filePosition).ToString("X4");
+                string line = (startAddress + filePosition).ToString("X8");
                 line += " " + opCode.ToString("X4");
                 int pc = startAddress + filePosition;
                 bool found = false;
@@ -70,7 +70,7 @@ namespace BinToAssembly
 
                 if (filePosition == start)
                 {
-                    bool stop = true;
+                    filePosition = ConvertDataToByte(filePosition, out line, out oc);
                 }
 
                 if (oc != null)
@@ -88,6 +88,14 @@ namespace BinToAssembly
             // Use a monospaced font
             textBox.Font = new Font(FontFamily.GenericMonospace, textBox.Font.Size);
             textBox.Lines = code.ToArray();
+        }
+
+        private int ConvertDataToByte(int filePosition, out string line, out dynamic oc)
+        {
+            line = (startAddress + filePosition).ToString("X8") + "                         DC.B '" + graphicsLibrary + "'";
+            oc = null;
+            filePosition += graphicsLibrary.Length;
+            return filePosition;
         }
 
         public void ConvertToAssembly(
