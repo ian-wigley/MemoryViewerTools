@@ -68,8 +68,9 @@ namespace BinToAssembly
                 // Get the Opcode object
                 var oc = populateOpCodeList.GetOpCode(firstByte.ToString("X2"), secondByte.ToString("X2"));
 
-                if (filePosition == start)
+                if (filePosition == start || filePosition == start + 1)
                 {
+                    filePosition = filePosition % 2 == 0 ? filePosition : filePosition + 1;
                     filePosition = ConvertDataToByte(filePosition, out line, out oc);
                 }
 
