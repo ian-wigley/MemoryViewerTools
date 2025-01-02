@@ -35,10 +35,10 @@
 	<code>64¬65¬BCC.B¬1¬#$¬¬¬</code>
 	<code>64¬73¬BCC.B¬1¬#$¬¬¬</code>
 
-	<code>08¬79¬BCHG.B¬6¬#$¬,$¬¬</code>
-	<code>01¬46¬BCHG.L¬1¬¬¬D0,D6¬</code>
-	<code>07¬77¬BCHG¬10¬D3¬¬,A2¬</code>
-	<code>01¬76¬BCHG.B¬2¬D0¬¬,(A6)¬</code>
+	<code>08¬79¬;BCHG.B¬6¬#$¬,$¬¬</code>
+	<code>01¬46¬;BCHG.L¬1¬¬¬D0,D6¬</code>
+	<code>07¬77¬;BCHG¬10¬D3¬¬,A2¬</code>
+	<code>01¬76¬;BCHG.B¬2¬D0¬¬,(A6)¬</code>
 
 	<code>00¬11¬BCLR¬2¬¬¬¬</code>
 	<code>01¬B0¬BCLR.B¬2¬D0¬¬,(A0)¬</code>
@@ -50,11 +50,11 @@
 	<code>65¬00¬BCS.W¬2¬#$¬¬¬</code>
 	<code>65¬72¬BCS.B¬1¬#$¬¬¬</code>
 
-	<code>67¬0A¬BEQ¬1¬$¬¬¬</code>
-	<code>67¬72¬BEQ¬1¬$¬¬¬</code>
-	<code>67¬00¬BEQ¬2¬¬¬¬</code>	
-	<code>67¬61¬BEQ.B¬1¬#$¬¬¬</code>	
-	<code>67¬66¬BEQ.B¬1¬#$¬¬¬</code>
+	<code>67¬0A¬;BEQ¬1¬$¬¬¬</code>
+	<code>67¬72¬;BEQ¬1¬$¬¬¬</code>
+	<code>67¬00¬;BEQ¬2¬¬¬¬</code>	
+	<code>67¬61¬;BEQ.B¬1¬#$¬¬¬</code>	
+	<code>67¬66¬;BEQ.B¬1¬#$¬¬¬</code>
 	
 	<code>6C¬75¬BGE.B¬1¬#$¬¬¬</code>
 	<code>6C¬69¬BGE.B¬1¬#$¬¬¬</code>
@@ -88,13 +88,13 @@
 
 	<code>60¬00¬BRA¬2¬¬¬¬</code>
 	<code>60¬08¬BRA¬2¬¬¬¬</code>
-	<code>60¬EC¬BRA¬1¬#$¬¬¬</code>
+	<code>60¬EC¬BRA¬1¬$¬¬¬</code>
 	
-	<code>61¬2D¬BSR.B¬1¬$¬¬¬</code>	
-	<code>61¬6D¬BSR.B¬1¬$¬¬¬</code>
-	<code>61¬00¬BSR.W¬2¬$¬¬¬</code>
-	<code>61¬70¬BSR.W¬1¬$¬¬¬</code>
-	<code>61¬76¬BSR.B¬1¬$¬¬¬</code>
+	<code>61¬2D¬;BSR.B¬1¬$¬¬¬</code>	
+	<code>61¬6D¬;BSR.B¬1¬$¬¬¬</code>
+	<code>61¬00¬;BSR.W¬2¬$¬¬¬</code>
+	<code>61¬70¬;BSR.W¬1¬$¬¬¬</code>
+	<code>61¬76¬;BSR.B¬1¬$¬¬¬</code>
 	
 	<code>01¬C0¬BSET.L¬1¬D0¬¬,D0¬</code>
 	<code>01¬D2¬BSET.B¬1¬D0¬¬,(A2)¬</code>
@@ -118,7 +118,7 @@
 	<code>69¬63¬BVS.B¬1¬$¬¬,D0¬</code>
 	<code>69¬67¬BVS.B¬1¬$¬¬¬</code>
 
-	<code>0E¬EE¬CAS.L¬4¬D6¬¬,D3¬</code>
+	<code>0E¬EE¬;CAS.L¬4¬D6¬¬,D3¬</code>
 
 	<code>42¬40¬CLR.W¬1¬D0¬¬¬</code>
 	<code>42¬68¬CLR.W A0¬2¬¬¬¬</code>
