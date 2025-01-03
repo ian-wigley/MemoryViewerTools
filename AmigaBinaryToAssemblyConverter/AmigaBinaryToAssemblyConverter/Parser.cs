@@ -15,6 +15,9 @@ namespace BinToAssembly
         //gfxlib:     dc.b    "graphics.library",0,0
         private string graphicsLibrary = "graphics.library";
 
+        /// <summary>
+        ///
+        /// </summary>
         public byte[] LoadBinaryData(string fileName)
         {
             try
@@ -28,6 +31,9 @@ namespace BinToAssembly
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public void ParseFileContent(
             byte[] data,
             PopulateOpCodeList populateOpCodeList,
@@ -36,12 +42,10 @@ namespace BinToAssembly
             ref List<string> code
             )
         {
-            int start = 0;
-            int end = graphicsLibrary.Length;
+            int start = -10;
             string converted = Encoding.UTF8.GetString(data, 0, data.Length);
             if (converted.Contains(graphicsLibrary))
             {
-                // Todo - inform user of the existance & option to convert to data
                 DialogResult result = MessageBox.Show("The text `graphics.library` found do\n you want to convert this to data?", "Confirmation", MessageBoxButtons.YesNo);
                 if (result == DialogResult.Yes)
                 {
@@ -59,7 +63,7 @@ namespace BinToAssembly
                 int byteOne = data[filePosition] << 8;
                 int opCode = byteOne + data[filePosition + 1];
                 int lineNumber = startAddress + filePosition;
-                lineNumbers.Add(lineNumber.ToString("X4"));
+                lineNumbers.Add(lineNumber.ToString("X8"));
                 string line = (startAddress + filePosition).ToString("X8");
                 line += " " + opCode.ToString("X4");
                 int pc = startAddress + filePosition;
@@ -91,6 +95,9 @@ namespace BinToAssembly
             textBox.Lines = code.ToArray();
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private int ConvertDataToByte(int filePosition, out string line, out dynamic oc)
         {
             line = (startAddress + filePosition).ToString("X8") + "                         DC.B '" + graphicsLibrary + "'";
@@ -99,11 +106,17 @@ namespace BinToAssembly
             return filePosition;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void ConvertDataToWords()
         {
-
+            // TODO
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public void ConvertToAssembly(
             dynamic oc,
             ref string line,
@@ -441,6 +454,8 @@ namespace BinToAssembly
                 case "0108":
                 case "010A":
                 case "0034":
+                case "01FC":
+                case "0555":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "4EB9":  // jsr
