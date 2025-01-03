@@ -15,7 +15,6 @@ namespace BinToAssembly
         private readonly string branch = "branch";
         private int labelCount = 0;
         private int branchCount = 0;
-        private int startAddress = 0;
 
         protected List<string> code = new List<string>();
         private List<string> passOne = new List<string>();
@@ -23,11 +22,11 @@ namespace BinToAssembly
         private List<string> passThree = new List<string>();
         private List<string> found = new List<string>();
         protected List<string> lineNumbers = new List<string>();
-        private List<string> illegalOpcodes = new List<string>();
 
         private Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
         private Dictionary<string, string> labelLoc = new Dictionary<string, string>();
         private Dictionary<string, string> branchLoc = new Dictionary<string, string>();
+        Dictionary<string, string[]> replacedWithDataCollection = new Dictionary<string, string[]>();
 
         private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
 
@@ -51,6 +50,9 @@ namespace BinToAssembly
             CompilerTextBox.GotFocus += CompilerTextBox_GotFocus;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void AddLineNumbers()
         {
             Point pt = new Point(0, 0);
@@ -69,6 +71,9 @@ namespace BinToAssembly
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private int GetWidth()
         {
             int line = Numbers.Lines.Length;
@@ -88,13 +93,12 @@ namespace BinToAssembly
             return width;
         }
 
+        /// <summary>
+        /// AddLabels
+        /// </summary>
         private void AddLabels(
             string start,
-            string end,
-            bool replaceIllegalOpcodes,
-            Dictionary<string, string[]> bucket,
-            int firstOccurrence,
-            int lastOccurrence)
+            string end)
         {
             AssemblyView.Clear();
             ClearRightWindow();
@@ -111,49 +115,36 @@ namespace BinToAssembly
 
                 if (lineDetails.Length > 1)
                 {
-                    // Replace the Illegal Opcodes with data statement
-                    if (replaceIllegalOpcodes && bucket.TryGetValue(lineDetails[0], out string[] dataValue))
+                    switch (lineDetails[1])
                     {
-                        foreach (string str in dataValue)
-                        {
-                            passOne.Add(str);
-                        }
-                    }
-                    else
-                    {
-                        switch (lineDetails[1])
-                        {
-                            case "20": // JSR
-                            case "4C": // JMP
-                                if (!labelLoc.Keys.Contains(lineDetails[4] + lineDetails[3]))
-                                {
-                                    labelLoc.Add(lineDetails[4] + lineDetails[3], label + labelCount++.ToString());
-                                }
-                                passOne.Add(lineDetails[8] + " " + lineDetails[9]);
-                                break;
-                            case "90": // BCC
-                            case "B0": // BCS
-                            case "F0": // BEQ
-                            case "30": // BMI
-                            case "6600": // BNE
-                            case "66F2":
-                            case "10": // BPL
-                            case "50": // BVC
-                            case "70": // BVS
-                                if (!branchLoc.Keys.Contains(lineDetails[18].Replace("$", "")))
-                                {
-                                    branchLoc.Add(lineDetails[18].Replace("#$", ""), branch + branchCount++.ToString());
-                                }
-                                passOne.Add(lineDetails[17] + " " + lineDetails[18]);
-                                break;
-                            case "4280":
-                                passOne.Add(lineDetails[21] + " " + lineDetails[22]);
-                                break;
-                            default:
-                                int indexLength = lineDetails.Length;
-                                passOne.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
-                                break;
-                        }
+                        case "20": // JSR
+                        case "4C": // JMP
+                            if (!labelLoc.Keys.Contains(lineDetails[4] + lineDetails[3]))
+                            {
+                                labelLoc.Add(lineDetails[4] + lineDetails[3], label + labelCount++.ToString());
+                            }
+                            passOne.Add(lineDetails[8] + " " + lineDetails[9]);
+                            break;
+
+                        case "670A": // BEQ
+                        case "6600": // BNE
+                        case "66F2": // BEQ
+                        case "6100": // BSR
+                            string location = lineDetails[18].Replace("$", "");
+                            location = location.Replace("#", "");
+                            if (!branchLoc.Keys.Contains(location))
+                            {
+                                branchLoc.Add(location, branch + branchCount++.ToString());
+                            }
+                            passOne.Add(lineDetails[17] + " " + lineDetails[18]);
+                            break;
+                        case "4280": // CLR
+                            passOne.Add(lineDetails[21] + " " + lineDetails[22]);
+                            break;
+                        default:
+                            int indexLength = lineDetails.Length;
+                            passOne.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
+                            break;
                     }
                 }
                 if (count >= int.Parse(end, System.Globalization.NumberStyles.HexNumber) || count >= originalFileContent.Count || lineDetails[0].ToLower().Contains(end.ToLower()))
@@ -166,13 +157,10 @@ namespace BinToAssembly
             int counter = 0;
             for (int i = 0; i < passOne.Count; i++)
             {
-
-                string label = "";
                 string assembly = passOne[counter++];
-                foreach (KeyValuePair<String, String> memLocation in labelLoc)
+                foreach (KeyValuePair<string, string> memLocation in labelLoc)
                 {
                     if (passOne[i].ToUpper().Contains(memLocation.Key))
-                    //   if (originalFileContent[i].ToUpper().Contains(memLocation.Key))
                     {
                         var dets = assembly.Split(' ');
                         if (dets[0].Contains("JSR") || dets[0].Contains("JMP"))
@@ -181,18 +169,19 @@ namespace BinToAssembly
                         }
                     }
                 }
-                foreach (KeyValuePair<String, String> memLocation in branchLoc)
+                foreach (KeyValuePair<string, string> memLocation in branchLoc)
                 {
                     if (originalFileContent[i].ToUpper().Contains(memLocation.Key.ToUpper()))
                     {
                         var dets = assembly.Split(' ');
-                        if (dets[0].Contains("BNE") || dets[0].Contains("BEQ") || dets[0].Contains("BPL"))
+                        if (dets[0].Contains("BNE") || dets[0].Contains("BEQ") || dets[0].Contains("BSR"))
                         {
                             assembly = dets[0] + " " + memLocation.Value;
                         }
                     }
                 }
-                passTwo.Add(label + assembly);
+                //passTwo.Add(label + assembly);
+                passTwo.Add(assembly);
             }
 
             // Add the labels to the front of the code
@@ -201,7 +190,7 @@ namespace BinToAssembly
             {
                 var dets = originalFileContent[counter++].Split(' ');
                 string label = "                ";
-                foreach (KeyValuePair<String, String> memLocation in labelLoc)
+                foreach (KeyValuePair<string, string> memLocation in labelLoc)
                 {
                     if (dets[0].ToUpper().Contains(memLocation.Key))
                     {
@@ -211,7 +200,7 @@ namespace BinToAssembly
                     }
                 }
 
-                foreach (KeyValuePair<String, String> memLocation in branchLoc)
+                foreach (KeyValuePair<string, string> memLocation in branchLoc)
                 {
                     if (dets[0].ToUpper().Contains(memLocation.Key.ToUpper()))
                     {
@@ -222,7 +211,7 @@ namespace BinToAssembly
             }
 
             // Finally iterate through the found list & add references to the address not found
-            foreach (KeyValuePair<String, String> memLocation in labelLoc)
+            foreach (KeyValuePair<string, string> memLocation in labelLoc)
             {
                 if (!found.Contains(memLocation.Key))
                 {
@@ -235,6 +224,9 @@ namespace BinToAssembly
             rightWindowToolStripMenuItem.Enabled = true;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void OpenToolStripMenuItem_Click(
             object sender,
             EventArgs e)
@@ -262,17 +254,21 @@ namespace BinToAssembly
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void ExitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        /// <summary>
+        /// Method to add labels to the `source code`
+        /// </summary>
         public void GenerateLabels()
         {
             char[] startAddress = new char[lineNumbers[0].Length];
             char[] endAddress = new char[lineNumbers[lineNumbers.Count - 1].Length];
-            int firstOccurrence = 0;
-            int lastOccurrence = 0;
 
             int count = 0;
             foreach (char chr in lineNumbers[0])
@@ -290,67 +286,10 @@ namespace BinToAssembly
             {
                 int start = int.Parse(ms.GetSelectedMemStartLocation, System.Globalization.NumberStyles.HexNumber);
                 int end = int.Parse(ms.GetSelectedMemEndLocation, System.Globalization.NumberStyles.HexNumber);
-                bool firstIllegalOpcodeFound = false;
-                Dictionary<string, string[]> replacedWithDataCollection = new Dictionary<string, string[]>();
 
                 if (start <= end)
                 {
-                    //Check to see if illegal opcodes exist within the code selection
-                    for (int i = start; i < end; i++)
-                    {
-                        if (illegalOpcodes.Contains(i.ToString("X4")))
-                        {
-                            if (i > firstOccurrence & !firstIllegalOpcodeFound)
-                            {
-                                firstOccurrence = i;
-                                firstIllegalOpcodeFound = true;
-                            }
-                            if (i > lastOccurrence)
-                            {
-                                lastOccurrence = i;
-                            }
-                        }
-                    }
-
-                    var temp = lastOccurrence.ToString("X4");
-                    int index = 0;
-                    foreach (string str in code)
-                    {
-                        if (str.Contains(temp))
-                        {
-                            // nudge the last Occurrence along to the next valid opCode
-                            //lastOccurrence = int.Parse(lineNumbers[++index], System.Globalization.NumberStyles.HexNumber);
-                        }
-                        index++;
-                    }
-
-                    for (int i = firstOccurrence; i < lastOccurrence; i++)
-                    {
-                        // Replace the Illegal Opcodes with data statement
-                        if (dataStatements.TryGetValue(i.ToString("X4"), out string[] dataValue))
-                        {
-                            replacedWithDataCollection.Add(i.ToString("X4"), dataValue);
-                        }
-                    }
-
-                    DialogResult result = DialogResult.Yes;
-                    if (firstIllegalOpcodeFound)
-                    {
-                        result = MessageBox.Show("Illegal Opcodes found within the selection from : " + firstOccurrence.ToString("X4") + " to " + lastOccurrence.ToString("X4") + "\n"
-                        + "Replace Illegal Opcodes with data statements ?", " ", MessageBoxButtons.YesNo);
-                    }
-
-                    bool convertToBytes = false;
-                    if (result == DialogResult.Yes)
-                    {
-                        convertToBytes = true;
-                    }
-                    AddLabels(ms.GetSelectedMemStartLocation,
-                        ms.GetSelectedMemEndLocation,
-                        convertToBytes,
-                        replacedWithDataCollection,
-                        firstOccurrence,
-                        lastOccurrence);
+                    AddLabels(ms.GetSelectedMemStartLocation, ms.GetSelectedMemEndLocation);
                 }
                 else
                 {
@@ -359,17 +298,26 @@ namespace BinToAssembly
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void ClearCollections()
         {
             ClearLeftWindow();
             ClearRightWindow();
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void ClearLeftWindow()
         {
             code.Clear();
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void ClearRightWindow()
         {
             AssemblyView.Text = "";
@@ -381,6 +329,9 @@ namespace BinToAssembly
             branchLoc.Clear();
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void LeftWindowToolStripMenuItem_Click(
             object sender,
             EventArgs e)
@@ -388,6 +339,9 @@ namespace BinToAssembly
             Save(code);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void RightWindowToolStripMenuItem_Click(
             object sender,
             EventArgs e)
@@ -395,6 +349,9 @@ namespace BinToAssembly
             Save(passThree);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void Save(
             List<string> collection)
         {
@@ -413,6 +370,9 @@ namespace BinToAssembly
             }
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void GenerateLabelsToolStripMenuItem_Click(
             object sender,
             EventArgs e)
@@ -420,6 +380,9 @@ namespace BinToAssembly
             GenerateLabels();
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void ClearToolStripMenuItem_Click(
             object sender,
             EventArgs e)
@@ -431,18 +394,37 @@ namespace BinToAssembly
             //lineNumbers = 0;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void OpenContextMenuItem_Click(
             object sender,
             EventArgs e)
         {
             // Get any highlighted text
-            string selectedText = this.textBox1.SelectedText;
+            string selectedText = textBox1.SelectedText;
             string[] split = selectedText.Split('\n');
-            string[] text = this.textBox1.Lines;
-            this.textBox1.SelectedText = this.textBox1.SelectedText.Replace(split[0], "DC.W $0FFF");
+            string[] text = textBox1.Lines;
+            if (textBox1.SelectedText != "")
+            {
+                textBox1.SelectedText = textBox1.SelectedText.Replace(split[0], "DC.W $0FFF");
+            }
+
             // Todo finish implementation
+
+            //for (int i = firstOccurrence; i < lastOccurrence; i++)
+            //{
+            //    // Replace the Illegal Opcodes with data statement
+            //    if (dataStatements.TryGetValue(i.ToString("X4"), out string[] dataValue))
+            //    {
+            //        replacedWithDataCollection.Add(i.ToString("X4"), dataValue);
+            //    }
+            //}
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void LabelGenerator_Click(object sender, EventArgs e)
         {
             // Todo finish implementation
@@ -452,12 +434,17 @@ namespace BinToAssembly
             AddLineNumbers();
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void CompilerTextBox_GotFocus(object sender, EventArgs e)
         {
             ((RichTextBox)sender).Parent.Focus();
         }
 
-
+        /// <summary>
+        ///
+        /// </summary>
         private void Compile_Click(object sender, EventArgs e)
         {
             // Make the output visible
@@ -503,11 +490,17 @@ namespace BinToAssembly
             File.Delete(tempFile);
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void Configure_Click(object sender, EventArgs e)
         {
-
+            // TODO
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         private void TextBox2_VScroll(object sender, EventArgs e)
         {
             Numbers.Text = "";
