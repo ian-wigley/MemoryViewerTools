@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BinToAssembly
+﻿namespace BinToAssembly
 {
     public class Move : BaseOpCode
     {
@@ -28,6 +26,9 @@ namespace BinToAssembly
             m_dataSize = dataSize;
         }
 
+        /// <summary>
+        ///
+        /// </summary>
         public new string Detail(ref int filePosition, byte[] binaryFileData)
         {
             string elementOne = "";
@@ -57,7 +58,9 @@ namespace BinToAssembly
             // Temporary fixes
             if (NumberOfBytes == 8)
             {
-                filePosition += 8;
+                elementOne = GetTwoShorts(ref filePosition, binaryFileData);
+                elementTwo = GetTwoShorts(ref filePosition, binaryFileData);
+                elementThree = GetTwoShorts(ref filePosition, binaryFileData) + GetTwoShorts(ref filePosition, binaryFileData);
             }
             if (NumberOfBytes == 10)
             {
@@ -74,6 +77,10 @@ namespace BinToAssembly
             if (Code.Equals("23E9"))
             {
                 elementTwo = "";
+            }
+            if (Code.Equals("33F0"))
+            {
+                elementOne = "";
             }
             if (Code.Equals("48E7"))
             {
