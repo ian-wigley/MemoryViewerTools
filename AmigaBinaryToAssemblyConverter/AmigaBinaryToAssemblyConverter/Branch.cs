@@ -55,8 +55,8 @@ namespace BinToAssembly
                 elementOne = result.ToString("x4");
             }
 
-            string retunLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
-            return retunLine;
+            string returnLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
+            return returnLine;
         }
     }
 }
