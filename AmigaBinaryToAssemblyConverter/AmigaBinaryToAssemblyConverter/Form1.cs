@@ -13,20 +13,22 @@ namespace BinToAssembly
     {
         private readonly string label = "label";
         private readonly string branch = "branch";
+
         private int labelCount = 0;
         private int branchCount = 0;
 
         protected List<string> code = new List<string>();
-        private List<string> passOne = new List<string>();
-        private List<string> passTwo = new List<string>();
-        private List<string> passThree = new List<string>();
-        private List<string> found = new List<string>();
         protected List<string> lineNumbers = new List<string>();
 
-        private Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
-        private Dictionary<string, string> labelLoc = new Dictionary<string, string>();
-        private Dictionary<string, string> branchLoc = new Dictionary<string, string>();
-        Dictionary<string, string[]> replacedWithDataCollection = new Dictionary<string, string[]>();
+        private readonly List<string> passOne = new List<string>();
+        private readonly List<string> passTwo = new List<string>();
+        private readonly List<string> passThree = new List<string>();
+        private readonly List<string> found = new List<string>();
+
+        private readonly Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
+        private readonly Dictionary<string, string> labelLoc = new Dictionary<string, string>();
+        private readonly Dictionary<string, string> branchLoc = new Dictionary<string, string>();
+        private readonly Dictionary<string, string[]> replacedWithDataCollection = new Dictionary<string, string[]>();
 
         private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
 
@@ -78,18 +80,9 @@ namespace BinToAssembly
         {
             int line = Numbers.Lines.Length;
             int width;
-            if (line <= 99)
-            {
-                width = 20 + (int)Numbers.Font.Size;
-            }
-            else if (line <= 999)
-            {
-                width = 30 + (int)Numbers.Font.Size;
-            }
-            else
-            {
-                width = 50 + (int)Numbers.Font.Size;
-            }
+            if (line <= 99) { width = 20 + (int)Numbers.Font.Size; }
+            else if (line <= 999) { width = 30 + (int)Numbers.Font.Size; }
+            else { width = 50 + (int)Numbers.Font.Size; }
             return width;
         }
 
@@ -127,6 +120,7 @@ namespace BinToAssembly
                             break;
 
                         case "670A": // BEQ
+                        case "6700":
                         case "6600": // BNE
                         case "66F2": // BEQ
                         case "6100": // BSR
@@ -180,7 +174,6 @@ namespace BinToAssembly
                         }
                     }
                 }
-                //passTwo.Add(label + assembly);
                 passTwo.Add(assembly);
             }
 
@@ -205,17 +198,24 @@ namespace BinToAssembly
                     if (dets[0].ToUpper().Contains(memLocation.Key.ToUpper()))
                     {
                         label = memLocation.Value + "         ";
+                        found.Add(memLocation.Key);
                     }
                 }
                 passThree.Add(label + passTwo[i]);
             }
 
+            if (found.Count != branchLoc.Count)
+            {
+                passThree.Add("\n; ---------------------------------------------------------");
+                passThree.Add("; The memory locations below were not found within the file\n");
+            }
+
             // Finally iterate through the found list & add references to the address not found
-            foreach (KeyValuePair<string, string> memLocation in labelLoc)
+            foreach (KeyValuePair<string, string> memLocation in branchLoc)
             {
                 if (!found.Contains(memLocation.Key))
                 {
-                    passThree.Add(memLocation.Value + " = $" + memLocation.Key);
+                    passThree.Add(memLocation.Value + "; @: " + memLocation.Key);
                 }
             }
 
@@ -403,23 +403,22 @@ namespace BinToAssembly
         {
             // Get any highlighted text
             string selectedText = textBox1.SelectedText;
-            string[] split = selectedText.Split('\n');
-            string[] text = textBox1.Lines;
+            string[] splitSelectedText = selectedText.Split('\n');
+
+            // TODO: finish implementation.
+
             if (textBox1.SelectedText != "")
             {
-                textBox1.SelectedText = textBox1.SelectedText.Replace(split[0], "DC.W $0FFF");
+                string str = "";
+                foreach (string dataLines in splitSelectedText)
+                {
+                    string[] extraSplit = dataLines.Split(' ');
+                    str += extraSplit[0] + "                         " + "DC.W $" + extraSplit[1] + "\r\n";
+                }
+                str = str.Remove(str.LastIndexOf("\r\n"));
+                textBox1.SelectedText = str;
+                //string[] text = textBox1.Lines;
             }
-
-            // Todo finish implementation
-
-            //for (int i = firstOccurrence; i < lastOccurrence; i++)
-            //{
-            //    // Replace the Illegal Opcodes with data statement
-            //    if (dataStatements.TryGetValue(i.ToString("X4"), out string[] dataValue))
-            //    {
-            //        replacedWithDataCollection.Add(i.ToString("X4"), dataValue);
-            //    }
-            //}
         }
 
         /// <summary>
