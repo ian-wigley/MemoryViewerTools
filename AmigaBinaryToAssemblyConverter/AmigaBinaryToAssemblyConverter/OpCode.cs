@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace BinToAssembly
+﻿namespace BinToAssembly
 {
     public class OpCode : BaseOpCode
     {
