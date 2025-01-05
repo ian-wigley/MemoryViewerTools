@@ -37,7 +37,11 @@
 
 	<code>01¬46¬;BCHG.L¬1¬¬¬D0,D6¬</code>
 	<code>01¬76¬;BCHG.B¬2¬D0¬¬,(A6)¬</code>
-	<code>07¬77¬BCHG¬10¬D3¬¬,(A2)¬</code>
+	
+	<!--<code>07¬77¬BCHG¬10¬D3¬¬,(A2)¬</code>-->
+	<code>07¬77¬BCHG¬2¬D3,$77(A7,D0)¬¬¬</code>
+
+	
 	<code>08¬79¬;BCHG.B¬6¬#$¬,$¬¬</code>
 
 	<code>05¬55¬BCHG.B¬1¬D2¬¬,(A5)¬</code>
@@ -119,8 +123,6 @@
 	<code>69¬63¬BVS.B¬1¬$¬¬,D0¬</code>
 	<code>69¬67¬BVS.B¬1¬$¬¬¬</code>
 
-	<code>0E¬EE¬;CAS.L¬4¬D6¬¬,D3¬</code>
-
 	<code>42¬40¬CLR.W¬1¬D0¬¬¬</code>
 	<code>42¬68¬CLR.W A0¬2¬¬¬¬</code>
 	<code>42¬A8¬CLR.L¬2¬¬(A0)¬¬</code>
@@ -166,9 +168,14 @@
 	<code>00¬33¬ILLEGAL¬1¬¬¬¬</code>
 	<code>00¬E0¬ILLEGAL¬1¬¬¬¬</code>
 	<code>08¬88¬ILLEGAL¬1¬¬¬¬</code>
+	<code>09¬99¬ILLEGAL¬1¬¬¬¬</code>
 	<code>0B¬BB¬ILLEGAL¬1¬¬¬¬</code>
 	<code>0C¬CC¬ILLEGAL¬1¬¬¬¬</code>
+	
+	<code>0E¬EE¬ILLEGAL¬1¬¬¬¬</code>
 	<code>0F¬FF¬ILLEGAL¬1¬¬¬¬</code>
+	<!--<code>0F¬FF¬BSET¬4¬D7,#$¬¬¬</code>-->
+	
 	<code>41¬43¬ILLEGAL¬1¬¬¬¬</code>
 	<code>43¬6F¬ILLEGAL¬1¬¬¬¬</code>
 	<code>44¬4D¬ILLEGAL¬1¬¬¬¬</code>
