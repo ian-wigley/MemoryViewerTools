@@ -340,6 +340,7 @@ namespace BinToAssembly
                 case "0033": // ILLEGAL
                 case "00E0":
                 case "0888":
+                case "0999":
                 case "0BBB":
                 case "0CCC":
                 case "0FFF":
