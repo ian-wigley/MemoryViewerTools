@@ -65,6 +65,11 @@
             string binOne = !elementOne.Equals("") ? elementOne : pad;
             string binTwo = !elementTwo.Equals("") ? elementTwo : pad;
 
+            if (Code.Equals("0777"))
+            {
+                elementOne = "";
+            }
+
             string returnLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
             return returnLine;
         }
