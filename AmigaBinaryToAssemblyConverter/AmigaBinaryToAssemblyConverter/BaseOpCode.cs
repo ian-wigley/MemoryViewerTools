@@ -65,13 +65,34 @@
             string binOne = !elementOne.Equals("") ? elementOne : pad;
             string binTwo = !elementTwo.Equals("") ? elementTwo : pad;
 
+            FudgeFactor(ref elementOne, ref elementTwo);
+
+            string returnLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
+            return returnLine;
+        }
+
+
+        /// <summary>
+        /// FudgeFactor is a temporary fix method that needs reviewing !
+        /// </summary>
+        protected void FudgeFactor(ref string elementOne, ref string elementTwo)
+        {
             if (Code.Equals("0777"))
             {
                 elementOne = "";
             }
-
-            string returnLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
-            return returnLine;
+            if (Code.Equals("23E9"))
+            {
+                elementTwo = "";
+            }
+            if (Code.Equals("33F0"))
+            {
+                elementOne = "";
+            }
+            if (Code.Equals("48E7"))
+            {
+                elementOne = "";
+            }
         }
 
         protected string GetTwoShorts(ref int filePosition, byte[] binaryFileData)
