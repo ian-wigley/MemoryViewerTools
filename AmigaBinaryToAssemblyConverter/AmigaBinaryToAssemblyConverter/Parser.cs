@@ -249,6 +249,7 @@ namespace BinToAssembly
                 case "33D2":
                 case "33EE":
                 case "33F0":
+                case "33FC":
                 case "3412":
                 case "3481":
                 case "3607":
