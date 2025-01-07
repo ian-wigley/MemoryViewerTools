@@ -248,6 +248,8 @@
 	<code>36¬13¬MOVE.W¬1¬(A3)¬¬,D3¬</code>
 	<code>36¬81¬MOVE.W¬1¬D1¬¬,(A3)¬</code>
 
+	<code>33¬FC¬MOVE.W¬6¬#$¬,$¬¬</code>
+	
 	<code>20¬39¬MOVE.L¬4¬$¬¬,D0¬</code>
 	<code>20¬3C¬MOVE.L¬4¬#$¬¬¬,D0¬</code>
 	<code>20¬79¬MOVE.L¬4¬$¬¬,A0¬</code>
@@ -275,7 +277,9 @@
 	<code>22¬40¬MOVEA¬1¬D0¬,A1¬¬</code>
 	<code>22¬79¬MOVEA¬4¬$¬,A1¬¬</code>
 	<code>28¬29¬MOVEA¬2¬A1¬¬,D4¬</code>
-	<code>20¬7A¬MOVEA¬2¬PC¬¬,A0¬</code>
+	
+	<code>20¬7A¬MOVE.L¬2¬$¬(PC)¬,A0¬</code>
+	
 	<code>2C¬78¬MOVEA.L¬2¬$¬.W¬,A6¬</code>
 
 	<code>72¬61¬MOVEQ¬1¬#$¬,D1¬¬</code>
@@ -302,7 +306,7 @@
 	<code>00¬43¬MOVEtoSR¬2¬¬¬¬</code>
 	<code>00¬44¬MOVEUSP¬2¬¬¬¬</code>
 	<code>48¬E7¬MOVEM.L¬2¬D0-D7¬/A0-A6¬,-(A7)¬</code>
-	<code>48¬F9¬MOVEM¬2¬¬¬¬</code>
+	<code>48¬F9¬MOVEM.L¬6¬D0-D7¬/A0-A6¬,$¬</code>
 	<code>4C¬DF¬MOVEM¬2¬(A7)+,D0-D7/A0-A6¬¬¬</code>
 	<code>00¬46¬MOVEP¬2¬¬¬¬</code>
 	<code>00¬47¬MOVEQ¬2¬¬¬¬</code>
