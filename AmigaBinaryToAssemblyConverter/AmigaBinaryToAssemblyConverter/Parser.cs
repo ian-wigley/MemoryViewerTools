@@ -139,6 +139,7 @@ namespace BinToAssembly
                 case "0016":
                 case "006F":
                 case "0079":
+                case "0096":
                 case "00B1":
                 case "00B3":
                 case "00B4":
@@ -363,7 +364,10 @@ namespace BinToAssembly
 
                 case "6572": // To sort & put into order ...
                 case "0111":
-                case "01B0":
+                case "0180": // BCLR
+                case "0182": // BCLR
+                case "01B0": // BCLR
+
                 case "0DDD":
                 case "0EEE":
                 case "6261":
@@ -444,6 +448,7 @@ namespace BinToAssembly
                 case "7068":
                 case "5F6C":
                 case "2E69":
+                case "0100": // BTST
                 case "0102": // BTST
                 case "0106":
                 case "0777":
@@ -458,6 +463,8 @@ namespace BinToAssembly
                 case "0034":
                 case "01FC":
                 case "0555":
+                case "FF00":
+                case "4000": //NEGX
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "4EB9":  // jsr
