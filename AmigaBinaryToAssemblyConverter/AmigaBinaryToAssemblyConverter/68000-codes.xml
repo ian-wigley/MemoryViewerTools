@@ -304,8 +304,10 @@
 	<code>70¬6C¬MOVEQ¬1¬#$¬¬,D0¬</code>
 	<code>78¬36¬MOVEQ¬1¬#$¬¬,D4¬</code>
 	<code>34¬5C¬MOVEA.W¬1¬(A4)+¬¬,A2¬</code>
-	<code>76¬73¬MOVEQ¬1¬#$¬¬,D3¬</code>
 	<code>70¬2E¬MOVEQ¬1¬#$¬¬,D0¬</code>
+	<code>76¬73¬MOVEQ¬1¬#$¬¬,D3¬</code>
+	<code>7E¬35¬MOVEQ¬1¬#$¬¬,D7¬</code>
+	
 	<code>2D¬61¬MOVE.L¬2¬-(A1)¬¬,(A6)¬</code>
 	<code>2D¬77¬MOVE.L¬12¬A7¬¬,(A6)¬</code>	
 	<code>00¬41¬MOVEtoCCR¬2¬¬¬¬</code>
@@ -356,6 +358,9 @@
 	
 	<code>00¬34¬OR¬4¬#$¬,$¬(A4)¬</code>
 	<code>00¬96¬OR¬4¬#$¬,$¬(A6)¬</code>
+	<code>00¬E4¬OR¬2¬#$¬,¬-(A4)¬</code>
+	<code>00¬E6¬OR¬2¬#$¬,¬-(A6)¬</code>
+	<code>00¬E8¬OR¬4¬#$¬,$¬(A0)¬</code>
 	
 	<code>48¬6E¬PEA¬2¬¬¬¬</code>
 	<code>00¬58¬RESET¬2¬¬¬¬</code>
