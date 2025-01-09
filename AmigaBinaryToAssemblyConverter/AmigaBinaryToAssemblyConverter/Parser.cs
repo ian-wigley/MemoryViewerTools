@@ -147,6 +147,9 @@ namespace BinToAssembly
                 case "00B6":
                 case "00B7":
                 case "00B8":
+                case "00E4":
+                case "00E6":
+                case "00E8":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "6600": // BNE
@@ -418,7 +421,8 @@ namespace BinToAssembly
                 case "735F":
                 case "7836":
                 case "345C":
-                case "7673":
+                case "7673": // MOVEQ
+                case "7E35": // MOVEQ
                 case "6465":
                 case "2D61":
                 case "6D69":
