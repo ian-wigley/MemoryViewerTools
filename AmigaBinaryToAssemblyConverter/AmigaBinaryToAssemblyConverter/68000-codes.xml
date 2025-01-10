@@ -49,8 +49,12 @@
 	<code>00¬11¬BCLR¬2¬¬¬¬</code>
     <code>01¬80¬BCLR¬1¬D0¬¬,D0¬</code>
 	<code>01¬82¬BCLR¬1¬D0¬¬,D2¬</code>
-	<code>01¬B0¬BCLR.B¬2¬D0¬¬,(A0)¬</code>
+	<code>01¬86¬BCLR¬1¬D0¬¬,D6¬</code>
 	
+	<code>01¬90¬BCLR¬1¬D0¬¬,(A0)¬</code>
+	<code>01¬98¬BCLR¬1¬D0¬¬,(A0)+¬</code>
+	
+	<code>01¬B0¬BCLR.B¬2¬D0¬¬,(A0)¬</code>
 	
 	<code>65¬6E¬BCS.B¬1¬#$¬¬¬</code>
 	<code>65¬2D¬BCS.B¬1¬#$¬¬¬</code>
@@ -115,6 +119,9 @@
 	
 	<code>01¬00¬BTST¬1¬D0¬¬,D0¬</code>
 	<code>01¬02¬BTST¬1¬D0¬¬,D2¬</code>
+	<code>01¬04¬BTST¬1¬D0¬¬,D4¬</code>
+	<code>01¬05¬BTST¬1¬D0¬¬,D5¬</code>
+	
 	<code>01¬11¬BTST.B¬1¬D0¬¬,(A1)¬</code>
 	<code>08¬28¬BTST¬4¬#¬,$¬¬</code>
 	<code>08¬39¬BTST.B¬6¬#$¬,$¬¬</code>
@@ -142,6 +149,9 @@
 	<code>B2¬40¬CMP.W¬1¬D0,D1¬¬¬</code>
 	<code>B3¬FC¬CMPA¬4¬#$¬,A1¬¬</code>
 	<code>B5¬FC¬CMPA¬4¬#$¬,A2¬¬</code>
+	
+	<code>BA¬FC¬CMP.W¬2¬#$¬,A5¬¬</code>
+	
 	<code>0C¬39¬CMP.B¬6¬#$¬,$¬¬</code>
 	
 	<code>00¬21¬CMPM¬2¬¬¬¬</code>
@@ -217,6 +227,7 @@
 
 	<code>00¬37¬LINK¬2¬¬¬¬</code>
 	
+	<code>A6¬B5¬LINE_A¬1¬$06B5¬¬¬¬</code>
 	<code>FF¬00¬LINE_F¬1¬$0F00¬¬¬¬</code>
 	
 	<code>00¬38¬LSL,LSR¬2¬¬¬¬</code>
@@ -256,6 +267,7 @@
 	<code>36¬81¬MOVE.W¬1¬D1¬¬,(A3)¬</code>
 
 	<code>33¬FC¬MOVE.W¬6¬#$¬,$¬¬</code>
+	<code>40¬C0¬MOVE.W¬1¬SR¬,D0¬¬</code>
 	
 	<code>20¬39¬MOVE.L¬4¬$¬¬,D0¬</code>
 	<code>20¬3C¬MOVE.L¬4¬#$¬¬¬,D0¬</code>
@@ -286,6 +298,12 @@
 	<code>28¬29¬MOVEA¬2¬A1¬¬,D4¬</code>
 	
 	<code>20¬7A¬MOVE.L¬2¬$¬(PC)¬,A0¬</code>
+	<code>29¬40¬MOVE.L¬2¬D0,$¬(A4)¬¬</code>
+
+	<code>01¬84¬ILLEGAL¬1¬¬¬¬</code>
+	<code>0E¬CA¬ILLEGAL¬1¬¬¬¬</code>
+	<!--<code>0E¬CA¬MOVES.W¬2¬A2¬,D0¬¬</code>-->
+	
 	
 	<code>2C¬78¬MOVEA.L¬2¬$¬.W¬,A6¬</code>
 
@@ -324,6 +342,12 @@
 	<code>01¬08¬MOVEP.W¬2¬$¬(A0)¬,D0¬</code>
 	<code>01¬0A¬MOVEP.W¬2¬$¬(A2)¬,D0¬</code>
 
+	<code>01¬88¬MOVEP.W¬2¬D0,$¬¬(A0)¬</code>
+	<code>01¬8A¬MOVEP.W¬2¬D0,$¬¬(A2)¬</code>
+	<code>01¬8C¬MOVEP.W¬2¬D0,$¬¬(A4)¬</code>
+	<code>01¬8E¬MOVEP.W¬2¬D0,$¬¬(A6)¬</code>
+	<code>03¬49¬MOVEP.L¬2¬$¬¬(A1),D1¬</code>
+	
 	<code>C3¬FC¬MULS¬2¬#$¬¬,D1¬</code>
 	<code>00¬49¬MULU¬2¬¬¬¬</code>
 
@@ -331,7 +355,8 @@
 	<code>00¬51¬NEG¬2¬¬¬¬</code>
 	<code>44¬46¬NEG¬1¬¬¬D6¬</code>
 	<code>00¬52¬NEGX¬2¬¬¬¬</code>
-	<code>40¬00¬NEGX¬1¬D0¬¬¬</code>
+	
+	<code>40¬00¬MOVE.W¬1¬SR,D0¬¬¬</code>
 	
 	<code>4E¬71¬NOP¬1¬¬¬¬</code>
 	<code>00¬54¬NOT¬2¬¬¬¬</code>
@@ -361,6 +386,7 @@
 	<code>00¬E4¬OR¬2¬#$¬,¬-(A4)¬</code>
 	<code>00¬E6¬OR¬2¬#$¬,¬-(A6)¬</code>
 	<code>00¬E8¬OR¬4¬#$¬,$¬(A0)¬</code>
+	<code>00¬EC¬OR¬4¬#$¬,$¬(A4)¬</code>
 	
 	<code>48¬6E¬PEA¬2¬¬¬¬</code>
 	<code>00¬58¬RESET¬2¬¬¬¬</code>
