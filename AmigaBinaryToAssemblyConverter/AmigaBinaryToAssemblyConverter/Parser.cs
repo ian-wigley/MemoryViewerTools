@@ -150,6 +150,7 @@ namespace BinToAssembly
                 case "00E4":
                 case "00E6":
                 case "00E8":
+                case "00EC":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "6600": // BNE
@@ -344,6 +345,7 @@ namespace BinToAssembly
                 case "0008":
                 case "0033": // ILLEGAL
                 case "00E0":
+                case "0184":
                 case "0888":
                 case "0999":
                 case "0BBB":
@@ -454,6 +456,22 @@ namespace BinToAssembly
                 case "2E69":
                 case "0100": // BTST
                 case "0102": // BTST
+                case "0104": // BTST
+                case "0105": // BTST
+
+                case "0186": // BCLR
+                case "0190": // BCLR
+                case "0198": // BCLR
+
+                case "0188": // MOVEP
+                case "018A": // MOVEP
+                case "018C": // MOVEP
+                case "018E": // MOVEP
+                case "0349": // MOVEP
+
+                case "045A": // SUB
+                case "066B": // ADD
+
                 case "0106":
                 case "0777":
                 case "0333":
@@ -468,6 +486,11 @@ namespace BinToAssembly
                 case "01FC":
                 case "0555":
                 case "FF00":
+                case "A6B5":
+                case "BAFC":
+                case "2940":
+                case "40C0":
+                case "0ECA":
                 case "4000": //NEGX
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
