@@ -134,11 +134,14 @@ namespace BinToAssembly
                 case "0002":
                 case "0003":
                 case "0004":
+                case "0005":
+                case "0007":
                 case "0014":
                 case "0015":
                 case "0016":
                 case "006F":
                 case "0079":
+                case "0092":
                 case "0096":
                 case "00B1":
                 case "00B3":
@@ -147,6 +150,8 @@ namespace BinToAssembly
                 case "00B6":
                 case "00B7":
                 case "00B8":
+                case "00E0":
+                case "00E2":
                 case "00E4":
                 case "00E6":
                 case "00E8":
@@ -344,7 +349,7 @@ namespace BinToAssembly
                     break;
                 case "0008":
                 case "0033": // ILLEGAL
-                case "00E0":
+//                case "00E0":
                 case "0184":
                 case "0888":
                 case "0999":
