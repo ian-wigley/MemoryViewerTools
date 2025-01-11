@@ -395,7 +395,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// OpenContextMenuItem_Click
         /// </summary>
         private void OpenContextMenuItem_Click(
             object sender,
@@ -404,19 +404,29 @@ namespace BinToAssembly
             // Get any highlighted text
             string selectedText = textBox1.SelectedText;
             string[] splitSelectedText = selectedText.Split('\n');
-
-            // TODO: finish implementation.
-
             if (textBox1.SelectedText != "")
             {
                 string str = "";
                 foreach (string dataLines in splitSelectedText)
                 {
-                    string[] extraSplit = dataLines.Split(' ');
-                    str += extraSplit[0] + "                         " + "DC.W $" + extraSplit[1] + "\r\n";
+                    int index = dataLines.IndexOf("   ");
+                    if (index != -1)
+                    {
+                        string trimmed = dataLines.Substring(0, index);
+                        string[] extraSplit = trimmed.Split(' ');
+                        string data = "";
+                        str += extraSplit[0] + "                         DC.W ";
+
+                        for (int i = 1; i < extraSplit.Length; i++)
+                        {
+                            data += "$" + extraSplit[i] + ",";
+
+                        }
+                        data = data.Remove(data.LastIndexOf(","));
+                        str += data + "\r\n";
+                    }
                 }
-                str = str.Remove(str.LastIndexOf("\r\n"));
-                textBox1.SelectedText = str;
+                textBox1.SelectedText = str.Remove(str.LastIndexOf("\r\n"));
                 //string[] text = textBox1.Lines;
             }
         }
