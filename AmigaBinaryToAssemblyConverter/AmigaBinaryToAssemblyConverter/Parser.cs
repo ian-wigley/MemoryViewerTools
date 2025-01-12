@@ -13,7 +13,7 @@ namespace BinToAssembly
         private Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
         
         //gfxlib:     dc.b    "graphics.library",0,0
-        private string graphicsLibrary = "graphics.library";
+        private readonly string graphicsLibrary = "graphics.library";
 
         /// <summary>
         ///
