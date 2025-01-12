@@ -53,7 +53,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// AddLineNumbers
         /// </summary>
         private void AddLineNumbers()
         {
@@ -74,7 +74,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        ///
+        /// GetWidth
         /// </summary>
         private int GetWidth()
         {
@@ -395,43 +395,6 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// OpenContextMenuItem_Click
-        /// </summary>
-        private void OpenContextMenuItem_Click(
-            object sender,
-            EventArgs e)
-        {
-            // Get any highlighted text
-            string selectedText = textBox1.SelectedText;
-            string[] splitSelectedText = selectedText.Split('\n');
-            if (textBox1.SelectedText != "")
-            {
-                string str = "";
-                foreach (string dataLines in splitSelectedText)
-                {
-                    int index = dataLines.IndexOf("   ");
-                    if (index != -1)
-                    {
-                        string trimmed = dataLines.Substring(0, index);
-                        string[] extraSplit = trimmed.Split(' ');
-                        string data = "";
-                        str += extraSplit[0] + "                         DC.W ";
-
-                        for (int i = 1; i < extraSplit.Length; i++)
-                        {
-                            data += "$" + extraSplit[i] + ",";
-
-                        }
-                        data = data.Remove(data.LastIndexOf(","));
-                        str += data + "\r\n";
-                    }
-                }
-                textBox1.SelectedText = str.Remove(str.LastIndexOf("\r\n"));
-                //string[] text = textBox1.Lines;
-            }
-        }
-
-        /// <summary>
         ///
         /// </summary>
         private void LabelGenerator_Click(object sender, EventArgs e)
@@ -515,6 +478,50 @@ namespace BinToAssembly
             Numbers.Text = "";
             AddLineNumbers();
             AssemblyView.Invalidate();
+        }
+
+        /// <summary>
+        /// Convert To Data DCW Click
+        /// </summary>
+        private void ConvertToDataDCWClick(object sender, EventArgs e)
+        {
+            // Get any highlighted text
+            string selectedText = textBox1.SelectedText;
+            string[] splitSelectedText = selectedText.Split('\n');
+            if (textBox1.SelectedText != "")
+            {
+                string str = "";
+                foreach (string dataLines in splitSelectedText)
+                {
+                    int index = dataLines.IndexOf("   ");
+                    if (index != -1)
+                    {
+                        string trimmed = dataLines.Substring(0, index);
+                        string[] extraSplit = trimmed.Split(' ');
+                        string data = "";
+                        str += extraSplit[0] + "                         DC.W ";
+
+                        for (int i = 1; i < extraSplit.Length; i++)
+                        {
+                            data += "$" + extraSplit[i] + ",";
+
+                        }
+                        data = data.Remove(data.LastIndexOf(","));
+                        str += data + "\r\n";
+                    }
+                }
+                textBox1.SelectedText = str.Remove(str.LastIndexOf("\r\n"));
+                //string[] text = textBox1.Lines;
+            }
+        }
+
+        /// <summary>
+        /// Convert To Data DCW Click
+        /// </summary>
+        private void ConvertToDataDCBClick(object sender, EventArgs e)
+        {
+            // TODO
+            // string converted = Encoding.UTF8.GetString(data, 0, data.Length);
         }
     }
 }
