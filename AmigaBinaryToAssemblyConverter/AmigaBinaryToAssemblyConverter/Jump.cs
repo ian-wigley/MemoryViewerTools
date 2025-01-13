@@ -75,9 +75,9 @@ namespace BinToAssembly
                 var amount = Convert.ToInt16(elementOne, 16);
                 binOne = elementOne;
                 elementOne = amount.ToString();
-                filePosition += 2;
+                // filePosition += 2;
                 elementTwo = GetTwoShorts(ref filePosition, binaryFileData);
-                filePosition += 2;
+                // filePosition += 2;
             }
 
             string retunLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
