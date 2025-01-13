@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Forms;
 using System.ComponentModel.Design;
 using System.Diagnostics;
+using System.Text;
 
 namespace BinToAssembly
 {
@@ -31,6 +32,8 @@ namespace BinToAssembly
         private readonly Dictionary<string, string[]> replacedWithDataCollection = new Dictionary<string, string[]>();
 
         private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
+
+        private byte[] data;
 
         public BinaryConverter()
         {
@@ -246,7 +249,7 @@ namespace BinToAssembly
                 ClearCollections();
                 textBox1.Clear();
                 Parser parser = new Parser();
-                var data = parser.LoadBinaryData(openFileDialog.FileName);
+                data = parser.LoadBinaryData(openFileDialog.FileName);
                 parser.ParseFileContent(data, populateOpCodeList, textBox1, ref lineNumbers, ref code);
                 labelGenerator.Enabled = true;
                 byteviewer.SetFile(openFileDialog.FileName);
@@ -516,12 +519,17 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// Convert To Data DCW Click
+        /// Convert To Data DCB Click
         /// </summary>
         private void ConvertToDataDCBClick(object sender, EventArgs e)
         {
-            // TODO
-            // string converted = Encoding.UTF8.GetString(data, 0, data.Length);
+            string selectedText = textBox1.SelectedText;
+            string[] splitSelectedText = selectedText.Split('\n');
+            var another = splitSelectedText[0].Split(' ');
+            int value = Convert.ToInt32(another[0], 16);
+            var converted = Encoding.ASCII.GetString(data, value, splitSelectedText.Length);
+            string str = another[0] + "                         DC.B " + "'" + converted + "'";
+            textBox1.SelectedText = str;
         }
     }
 }
