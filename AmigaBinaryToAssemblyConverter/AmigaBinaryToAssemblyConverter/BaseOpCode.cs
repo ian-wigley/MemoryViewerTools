@@ -93,6 +93,10 @@
             {
                 elementOne = "";
             }
+            if (Code.Equals("48F9"))
+            {
+                elementOne = "";
+            }
         }
 
         protected string GetTwoShorts(ref int filePosition, byte[] binaryFileData)
