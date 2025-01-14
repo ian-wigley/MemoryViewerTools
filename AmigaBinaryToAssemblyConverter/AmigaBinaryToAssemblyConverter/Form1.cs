@@ -90,7 +90,7 @@ namespace BinToAssembly
         }
 
         /// <summary>
-        /// AddLabels
+        /// Add Labels
         /// </summary>
         private void AddLabels(
             string start,
@@ -107,26 +107,28 @@ namespace BinToAssembly
             while (firstPass)
             {
                 // Split each line into an array
-                var lineDetails = originalFileContent[count++].Split(' ');
+                // var lineDetails = originalFileContent[count++].Split(' ');
+                var lineDetails = textBox1.Lines[count++].Split(' ');
 
                 if (lineDetails.Length > 1)
                 {
                     switch (lineDetails[1])
                     {
-                        case "20": // JSR
-                        case "4C": // JMP
-                            if (!labelLoc.Keys.Contains(lineDetails[4] + lineDetails[3]))
-                            {
-                                labelLoc.Add(lineDetails[4] + lineDetails[3], label + labelCount++.ToString());
-                            }
-                            passOne.Add(lineDetails[8] + " " + lineDetails[9]);
-                            break;
+                        //case "20": // JSR
+                        //case "4C": // JMP
+                        //    if (!labelLoc.Keys.Contains(lineDetails[4] + lineDetails[3]))
+                        //    {
+                        //        labelLoc.Add(lineDetails[4] + lineDetails[3], label + labelCount++.ToString());
+                        //    }
+                        //    passOne.Add(lineDetails[8] + " " + lineDetails[9]);
+                        //    break;
 
-                        case "670A": // BEQ
-                        case "6700":
+                        case "6000": // BRA
+                        case "6100": // BSR
                         case "6600": // BNE
                         case "66F2": // BEQ
-                        case "6100": // BSR
+                        case "670A": // BEQ
+                        case "6700":
                             string location = lineDetails[18].Replace("$", "");
                             location = location.Replace("#", "");
                             if (!branchLoc.Keys.Contains(location))
@@ -155,23 +157,12 @@ namespace BinToAssembly
             for (int i = 0; i < passOne.Count; i++)
             {
                 string assembly = passOne[counter++];
-                foreach (KeyValuePair<string, string> memLocation in labelLoc)
-                {
-                    if (passOne[i].ToUpper().Contains(memLocation.Key))
-                    {
-                        var dets = assembly.Split(' ');
-                        if (dets[0].Contains("JSR") || dets[0].Contains("JMP"))
-                        {
-                            assembly = dets[0] + " " + memLocation.Value;
-                        }
-                    }
-                }
                 foreach (KeyValuePair<string, string> memLocation in branchLoc)
                 {
                     if (originalFileContent[i].ToUpper().Contains(memLocation.Key.ToUpper()))
                     {
                         var dets = assembly.Split(' ');
-                        if (dets[0].Contains("BNE") || dets[0].Contains("BEQ") || dets[0].Contains("BSR"))
+                        if (dets[0].Contains("BNE") || dets[0].Contains("BEQ") || dets[0].Contains("BSR") || dets[0].Contains("BRA"))
                         {
                             assembly = dets[0] + " " + memLocation.Value;
                         }
@@ -186,15 +177,15 @@ namespace BinToAssembly
             {
                 var dets = originalFileContent[counter++].Split(' ');
                 string label = "                ";
-                foreach (KeyValuePair<string, string> memLocation in labelLoc)
-                {
-                    if (dets[0].ToUpper().Contains(memLocation.Key))
-                    {
-                        label = memLocation.Value + "          ";
-                        // The memory address has been found add it another list
-                        found.Add(memLocation.Key);
-                    }
-                }
+                //foreach (KeyValuePair<string, string> memLocation in labelLoc)
+                //{
+                //    if (dets[0].ToUpper().Contains(memLocation.Key))
+                //    {
+                //        label = memLocation.Value + "          ";
+                //        // The memory address has been found add it another list
+                //        found.Add(memLocation.Key);
+                //    }
+                //}
 
                 foreach (KeyValuePair<string, string> memLocation in branchLoc)
                 {
@@ -268,7 +259,7 @@ namespace BinToAssembly
         /// <summary>
         /// Method to add labels to the `source code`
         /// </summary>
-        public void GenerateLabels()
+        public void DisplayMemorySelector()
         {
             char[] startAddress = new char[lineNumbers[0].Length];
             char[] endAddress = new char[lineNumbers[lineNumbers.Count - 1].Length];
@@ -380,7 +371,7 @@ namespace BinToAssembly
             object sender,
             EventArgs e)
         {
-            GenerateLabels();
+            DisplayMemorySelector();
         }
 
         /// <summary>
@@ -403,7 +394,7 @@ namespace BinToAssembly
         private void LabelGenerator_Click(object sender, EventArgs e)
         {
             // Todo finish implementation
-            GenerateLabels();
+            DisplayMemorySelector();
             Compile.Enabled = true;
             Numbers.Select();
             AddLineNumbers();
