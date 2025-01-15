@@ -107,22 +107,21 @@ namespace BinToAssembly
             while (firstPass)
             {
                 // Split each line into an array
-                // var lineDetails = originalFileContent[count++].Split(' ');
+                if (textBox1.Lines[count].Contains("DC.B") || textBox1.Lines[count].Contains("DC.W"))
+                {
+                    var foundDebug = true;
+                    //if (count == 842)
+                    //{
+                    //    var found = true;
+                    //}
+                }
+
                 var lineDetails = textBox1.Lines[count++].Split(' ');
 
                 if (lineDetails.Length > 1)
                 {
                     switch (lineDetails[1])
                     {
-                        //case "20": // JSR
-                        //case "4C": // JMP
-                        //    if (!labelLoc.Keys.Contains(lineDetails[4] + lineDetails[3]))
-                        //    {
-                        //        labelLoc.Add(lineDetails[4] + lineDetails[3], label + labelCount++.ToString());
-                        //    }
-                        //    passOne.Add(lineDetails[8] + " " + lineDetails[9]);
-                        //    break;
-
                         case "6000": // BRA
                         case "6100": // BSR
                         case "6600": // BNE
@@ -141,6 +140,8 @@ namespace BinToAssembly
                             passOne.Add(lineDetails[21] + " " + lineDetails[22]);
                             break;
                         default:
+                            // Add the DC.W's 
+                            // TODO add the DC.B's
                             int indexLength = lineDetails.Length;
                             passOne.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
                             break;
@@ -177,16 +178,6 @@ namespace BinToAssembly
             {
                 var dets = originalFileContent[counter++].Split(' ');
                 string label = "                ";
-                //foreach (KeyValuePair<string, string> memLocation in labelLoc)
-                //{
-                //    if (dets[0].ToUpper().Contains(memLocation.Key))
-                //    {
-                //        label = memLocation.Value + "          ";
-                //        // The memory address has been found add it another list
-                //        found.Add(memLocation.Key);
-                //    }
-                //}
-
                 foreach (KeyValuePair<string, string> memLocation in branchLoc)
                 {
                     if (dets[0].ToUpper().Contains(memLocation.Key.ToUpper()))
@@ -519,8 +510,35 @@ namespace BinToAssembly
             var another = splitSelectedText[0].Split(' ');
             int value = Convert.ToInt32(another[0], 16);
             var converted = Encoding.ASCII.GetString(data, value, splitSelectedText.Length);
-            string str = another[0] + "                         DC.B " + "'" + converted + "'";
+            string str = another[0] + "                         DC.B '" + converted + "'";
+            var smeel = SplitToLines(str, 60).ToArray();
+            //textBox1.SelectedText = string.Join("", smeel);
             textBox1.SelectedText = str;
+        }
+
+        /// <summary>
+        /// Split To Lines
+        /// </summary>
+        private IEnumerable<string> SplitToLines(string value, int maximumLineLength)
+        {
+            var words = value.Split(' ');
+            var line = new StringBuilder();
+
+            foreach (var word in words)
+            {
+                if ((line.Length + word.Length) >= maximumLineLength)
+                {
+                    line.Append("'");
+                    yield return line.ToString();
+                    line = new StringBuilder();
+                    line.Append("                         DC.B '");
+                }
+
+                line.AppendFormat("{0}{1}", (line.Length > 0) ? " " : "", word);
+            }
+
+            yield return line.ToString().ToString();
+            
         }
     }
 }
