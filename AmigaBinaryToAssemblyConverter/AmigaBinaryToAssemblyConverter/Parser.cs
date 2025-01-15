@@ -335,6 +335,7 @@ namespace BinToAssembly
                 case "0679":
                 case "5761":
                 case "927C":
+                case "92FC":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
                 case "0C00": // CMP
@@ -954,6 +955,7 @@ namespace BinToAssembly
                 case "BC01":
                 case "BD01":
                 case "C001":
+                case "C0FC":
                 case "C101":
                 case "C201":
                 case "C301":
@@ -970,6 +972,7 @@ namespace BinToAssembly
                 case "DA01":
                 case "DB01":
                 case "DC01":
+                case "DCC0":
                 case "DD01":
                 case "DE01":
                 case "DF01":
@@ -1005,7 +1008,7 @@ namespace BinToAssembly
                 case "48F9": // movem
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-                default:
+                default: // Stop here if op code not found above
                     filePosition = binaryFileData.Length;
                     break;
             }
