@@ -101,19 +101,18 @@ namespace BinToAssembly
             passThree.Add("                *=$" + start);
             var originalFileContent = code;
             bool firstPass = true;
+            string dataWord = "";
             int count = 0;
 
             // First pass parses the content looking for branch & jump conditions
             while (firstPass)
             {
                 // Split each line into an array
-                if (textBox1.Lines[count].Contains("DC.B") || textBox1.Lines[count].Contains("DC.W"))
+                if (textBox1.Lines[count].Contains("DC.B"))
                 {
-                    var foundDebug = true;
-                    //if (count == 842)
-                    //{
-                    //    var found = true;
-                    //}
+                    dataWord = textBox1.Lines[count];
+                    int startLocation = dataWord.IndexOf("DC.B");
+                    dataWord = dataWord.Substring(startLocation, dataWord.Length - startLocation);
                 }
 
                 var lineDetails = textBox1.Lines[count++].Split(' ');
@@ -130,6 +129,8 @@ namespace BinToAssembly
                         case "6700":
                             string location = lineDetails[18].Replace("$", "");
                             location = location.Replace("#", "");
+                            location = location.Replace("$", "");
+                            //location = int.Parse(location).ToString("X8");
                             if (!branchLoc.Keys.Contains(location))
                             {
                                 branchLoc.Add(location, branch + branchCount++.ToString());
@@ -141,9 +142,16 @@ namespace BinToAssembly
                             break;
                         default:
                             // Add the DC.W's 
-                            // TODO add the DC.B's
-                            int indexLength = lineDetails.Length;
-                            passOne.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
+                            if (dataWord != "")
+                            {
+                                passOne.Add(dataWord);
+                                dataWord = "";
+                            }
+                            else 
+                            {
+                                int indexLength = lineDetails.Length;
+                                passOne.Add(lineDetails[indexLength - 2] + " " + lineDetails[indexLength - 1]);
+                            }
                             break;
                     }
                 }
@@ -153,40 +161,40 @@ namespace BinToAssembly
                 }
             }
 
-            // Second pass iterates through first pass collection adding labels and branches into the code
+            // Add the labels to the front of the code
             int counter = 0;
             for (int i = 0; i < passOne.Count; i++)
             {
-                string assembly = passOne[counter++];
-                foreach (KeyValuePair<string, string> memLocation in branchLoc)
-                {
-                    if (originalFileContent[i].ToUpper().Contains(memLocation.Key.ToUpper()))
-                    {
-                        var dets = assembly.Split(' ');
-                        if (dets[0].Contains("BNE") || dets[0].Contains("BEQ") || dets[0].Contains("BSR") || dets[0].Contains("BRA"))
-                        {
-                            assembly = dets[0] + " " + memLocation.Value;
-                        }
-                    }
-                }
-                passTwo.Add(assembly);
-            }
-
-            // Add the labels to the front of the code
-            counter = 0;
-            for (int i = 0; i < passOne.Count; i++)
-            {
-                var dets = originalFileContent[counter++].Split(' ');
+                //var dets = originalFileContent[counter++].Split(' ');
+                var dets = originalFileContent[counter].Split(' ');
                 string label = "                ";
                 foreach (KeyValuePair<string, string> memLocation in branchLoc)
                 {
-                    if (dets[0].ToUpper().Contains(memLocation.Key.ToUpper()))
+                    // If the current line number matches the memory loction, add a label
+                    if (dets[0].ToUpper().Contains(memLocation.Key.ToUpper()) && !originalFileContent[counter].Contains("BNE"))
                     {
                         label = memLocation.Value + "         ";
                         found.Add(memLocation.Key);
                     }
+                    else if (originalFileContent[counter].Contains("BNE"))
+                    {
+                        var memoryLocation = dets[18].Replace("#", "");
+                        memoryLocation = memoryLocation.Replace("$", "");
+                        if (memLocation.Key.Equals(memoryLocation))
+                        {
+                            string value = memLocation.Value;
+                            //var location = dets[18].Replace("#", "");
+                            //location = int.Parse(location).ToString("X8");
+                        }
+                    }
+                    //else
+                    //{
+                    //    label = label = "                ";
+                    //}
                 }
-                passThree.Add(label + passTwo[i]);
+                //passThree.Add(label + passTwo[i]);
+                passThree.Add(label + passOne[i]);
+                counter++;
             }
 
             if (found.Count != branchLoc.Count)
@@ -496,7 +504,6 @@ namespace BinToAssembly
                     }
                 }
                 textBox1.SelectedText = str.Remove(str.LastIndexOf("\r\n"));
-                //string[] text = textBox1.Lines;
             }
         }
 
@@ -511,16 +518,17 @@ namespace BinToAssembly
             int value = Convert.ToInt32(another[0], 16);
             var converted = Encoding.ASCII.GetString(data, value, splitSelectedText.Length);
             string str = another[0] + "                         DC.B '" + converted + "'";
-            var smeel = SplitToLines(str, 60).ToArray();
-            //textBox1.SelectedText = string.Join("", smeel);
-            textBox1.SelectedText = str;
+            var splitLines = SplitToNewLines(str).ToArray();
+            textBox1.SelectedText = string.Join("", splitLines);
+            //textBox1.SelectedText = str;
         }
 
         /// <summary>
-        /// Split To Lines
+        /// Split To New Lines
         /// </summary>
-        private IEnumerable<string> SplitToLines(string value, int maximumLineLength)
+        private IEnumerable<string> SplitToNewLines(string value)
         {
+            int maximumLineLength = 60;
             var words = value.Split(' ');
             var line = new StringBuilder();
 
@@ -528,7 +536,7 @@ namespace BinToAssembly
             {
                 if ((line.Length + word.Length) >= maximumLineLength)
                 {
-                    line.Append("'");
+                    line.Append("'\r\n");
                     yield return line.ToString();
                     line = new StringBuilder();
                     line.Append("                         DC.B '");
