@@ -44,7 +44,7 @@ namespace BinToAssembly
             {
                 sbyte amount = unchecked((sbyte)binaryFileData[filePosition + 1]);
                 int result = filePosition + 2 + amount;
-                elementOne = result.ToString("X4");
+                elementOne = result.ToString("X4").ToUpper();
                 binOne = elementOne;
                 filePosition += 2;
             }
@@ -56,7 +56,7 @@ namespace BinToAssembly
                 var amount = Convert.ToInt16(elementOne, 16);
                 int result = filePosition - NumberOfBytes + amount;
                 binOne = elementOne;
-                elementOne = result.ToString("x4");
+                elementOne = result.ToString("x4").ToUpper();
             }
 
             if (NumberOfBytes == 2 && m_name.Equals("JSR"))
@@ -65,7 +65,7 @@ namespace BinToAssembly
                 elementOne = GetTwoShorts(ref filePosition, binaryFileData);
                 var amount = Convert.ToInt16(elementOne, 16);
                 binOne = elementOne;
-                elementOne = amount.ToString();
+                elementOne = amount.ToString().ToUpper();
             }
 
             if (NumberOfBytes == 4 && m_name.Equals("JSR"))
@@ -74,10 +74,8 @@ namespace BinToAssembly
                 elementOne = GetTwoShorts(ref filePosition, binaryFileData);
                 var amount = Convert.ToInt16(elementOne, 16);
                 binOne = elementOne;
-                elementOne = amount.ToString();
-                // filePosition += 2;
+                elementOne = amount.ToString().ToUpper();
                 elementTwo = GetTwoShorts(ref filePosition, binaryFileData);
-                // filePosition += 2;
             }
 
             string retunLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
