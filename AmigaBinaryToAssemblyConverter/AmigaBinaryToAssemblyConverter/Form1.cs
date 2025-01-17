@@ -12,27 +12,15 @@ namespace BinToAssembly
 {
     public partial class BinaryConverter : Form
     {
-        private readonly string label = "label";
-        private readonly string branch = "branch";
-
-        private int labelCount = 0;
-        private int branchCount = 0;
-
+        private readonly string branch = "BRANCH";
         protected List<string> code = new List<string>();
         protected List<string> lineNumbers = new List<string>();
-
         private readonly List<string> passOne = new List<string>();
         private readonly List<string> passTwo = new List<string>();
-        private readonly List<string> passThree = new List<string>();
         private readonly List<string> found = new List<string>();
-
-        private readonly Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
         private readonly Dictionary<string, string> labelLoc = new Dictionary<string, string>();
         private readonly Dictionary<string, string> branchLoc = new Dictionary<string, string>();
-        private readonly Dictionary<string, string[]> replacedWithDataCollection = new Dictionary<string, string[]>();
-
         private readonly PopulateOpCodeList populateOpCodeList = new PopulateOpCodeList();
-
         private byte[] data;
 
         public BinaryConverter()
@@ -98,11 +86,12 @@ namespace BinToAssembly
         {
             AssemblyView.Clear();
             ClearRightWindow();
-            passThree.Add("                *=$" + start);
+            passTwo.Add("                *=$" + start);
             var originalFileContent = code;
             bool firstPass = true;
             string dataWord = "";
             int count = 0;
+            int branchCount = 0;
 
             // First pass parses the content looking for branch & jump conditions
             while (firstPass)
@@ -124,12 +113,14 @@ namespace BinToAssembly
                         case "6000": // BRA
                         case "6100": // BSR
                         case "6600": // BNE
+                        case "66CA": // BNE
                         case "66F2": // BEQ
                         case "670A": // BEQ
                         case "6700":
                             string location = lineDetails[18].Replace("$", "");
                             location = location.Replace("#", "");
-                            location = location.Replace("$", "");
+                            location = location.Replace("$", "").ToUpper();
+                            // TODO => Convert the location Value to X8 String
                             //location = int.Parse(location).ToString("X8");
                             if (!branchLoc.Keys.Contains(location))
                             {
@@ -165,42 +156,54 @@ namespace BinToAssembly
             int counter = 0;
             for (int i = 0; i < passOne.Count; i++)
             {
+                string currentRowFromPassOne = passOne[i];
+                string currentRowFromOriginalFileContent = originalFileContent[counter];
+
+                if (i == 548)
+                {
+                    var stop = true;
+                }
+
                 //var dets = originalFileContent[counter++].Split(' ');
-                var dets = originalFileContent[counter].Split(' ');
+                var splitCurrentRow = currentRowFromOriginalFileContent.Split(' ');
                 string label = "                ";
                 foreach (KeyValuePair<string, string> memLocation in branchLoc)
                 {
                     // If the current line number matches the memory loction, add a label
-                    if (dets[0].ToUpper().Contains(memLocation.Key.ToUpper()) && !originalFileContent[counter].Contains("BNE"))
+                    if (splitCurrentRow[0].ToUpper().Contains(memLocation.Key.ToUpper()) &&
+                        !currentRowFromOriginalFileContent.Contains("BEQ") &&
+                        !currentRowFromOriginalFileContent.Contains("BNE") &&
+                        !currentRowFromOriginalFileContent.Contains("BSR") &&
+                        !currentRowFromOriginalFileContent.Contains("BRA"))
                     {
                         label = memLocation.Value + "         ";
                         found.Add(memLocation.Key);
                     }
-                    else if (originalFileContent[counter].Contains("BNE"))
+                    else if (currentRowFromOriginalFileContent.Contains("BEQ") || 
+                        currentRowFromOriginalFileContent.Contains("BNE") ||
+                        currentRowFromOriginalFileContent.Contains("BRA") ||
+                        currentRowFromOriginalFileContent.Contains("BSR"))
                     {
-                        var memoryLocation = dets[18].Replace("#", "");
-                        memoryLocation = memoryLocation.Replace("$", "");
+                        var memoryLocation = splitCurrentRow[18].Replace("#", "");
+                        memoryLocation = memoryLocation.Replace("$", "").ToUpper();
                         if (memLocation.Key.Equals(memoryLocation))
                         {
-                            string value = memLocation.Value;
+                            var hemm = currentRowFromPassOne.Split(' ');
+                            currentRowFromPassOne = hemm[0] + " " + memLocation.Value;
+                            //string value = memLocation.Value;
                             //var location = dets[18].Replace("#", "");
                             //location = int.Parse(location).ToString("X8");
                         }
                     }
-                    //else
-                    //{
-                    //    label = label = "                ";
-                    //}
                 }
-                //passThree.Add(label + passTwo[i]);
-                passThree.Add(label + passOne[i]);
+                passTwo.Add(label + currentRowFromPassOne);
                 counter++;
             }
 
             if (found.Count != branchLoc.Count)
             {
-                passThree.Add("\n; ---------------------------------------------------------");
-                passThree.Add("; The memory locations below were not found within the file\n");
+                passTwo.Add("\n; ---------------------------------------------------------");
+                passTwo.Add("; The memory locations below were not found within the file\n");
             }
 
             // Finally iterate through the found list & add references to the address not found
@@ -208,12 +211,12 @@ namespace BinToAssembly
             {
                 if (!found.Contains(memLocation.Key))
                 {
-                    passThree.Add(memLocation.Value + "; @: " + memLocation.Key);
+                    passTwo.Add(memLocation.Value + "; @: " + memLocation.Key);
                 }
             }
 
             AssemblyView.Font = new Font(FontFamily.GenericMonospace, AssemblyView.Font.Size);
-            AssemblyView.Lines = passThree.ToArray();
+            AssemblyView.Lines = passTwo.ToArray();
             rightWindowToolStripMenuItem.Enabled = true;
         }
 
@@ -316,7 +319,6 @@ namespace BinToAssembly
             AssemblyView.Text = "";
             passOne.Clear();
             passTwo.Clear();
-            passThree.Clear();
             found.Clear();
             labelLoc.Clear();
             branchLoc.Clear();
@@ -339,7 +341,7 @@ namespace BinToAssembly
             object sender,
             EventArgs e)
         {
-            Save(passThree);
+            Save(passTwo);
         }
 
         /// <summary>
