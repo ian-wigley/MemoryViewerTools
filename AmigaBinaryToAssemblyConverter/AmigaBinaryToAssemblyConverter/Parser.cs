@@ -12,7 +12,6 @@ namespace BinToAssembly
         private readonly int startAddress = 0;
         private Dictionary<string, string[]> dataStatements = new Dictionary<string, string[]>();
 
-        //gfxlib:     dc.b    "graphics.library",0,0
         private readonly string graphicsLibrary = "graphics.library";
 
         /// <summary>
@@ -175,7 +174,8 @@ namespace BinToAssembly
                 case "6772":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-                case "6008": // BRA
+                case "6000": // BRA
+                case "6008":
                 case "60EC":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
@@ -210,9 +210,9 @@ namespace BinToAssembly
                 case "4A13":
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
-                case "6000":
-                    line += oc.Detail(ref filePosition, binaryFileData);
-                    break;
+                //case "6000":
+                //    line += oc.Detail(ref filePosition, binaryFileData);
+                //    break;
                 case "0A00": // EOR
                     line += oc.Detail(ref filePosition, binaryFileData);
                     break;
