@@ -97,12 +97,16 @@
             {
                 elementOne = "";
             }
+            if (Code.Equals("4CDF"))
+            {
+                elementOne = "";
+            }
         }
 
         protected string GetTwoShorts(ref int filePosition, byte[] binaryFileData)
         {
-            return ((short)binaryFileData[filePosition++]).ToString("X2") +
-                    ((short)binaryFileData[filePosition++]).ToString("X2");
+            return ((short)binaryFileData[filePosition++]).ToString("X2").ToUpper() +
+                    ((short)binaryFileData[filePosition++]).ToString("X2").ToUpper();
         }
     }
 }
