@@ -40,7 +40,7 @@ namespace BinToAssembly
             {
                 sbyte amount = unchecked((sbyte)binaryFileData[filePosition + 1]);
                 int result = filePosition + 2 + amount;
-                elementOne = result.ToString("X4");
+                elementOne = result.ToString("X4").ToUpper();
                 binOne = elementOne;
                 filePosition += 2;
             }
@@ -52,7 +52,7 @@ namespace BinToAssembly
                 var amount = Convert.ToInt16(elementOne, 16);
                 int result = filePosition - NumberOfBytes + amount;
                 binOne = elementOne;
-                elementOne = result.ToString("x4");
+                elementOne = result.ToString("x4").ToUpper();
             }
 
             string returnLine = " " + binOne + " " + binTwo + "          " + Name + " " + Prefix + elementOne + Firstfix + elementTwo + Midfix + elementThree + Suffix;
