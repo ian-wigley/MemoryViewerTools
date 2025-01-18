@@ -7,8 +7,11 @@ This small app is useful for viewing raw image data, currently there is a lot of
 <br>
 <br>
 <br>
-# Multi Binary To Assembly Converter Tool
-This tool was written a while back and isn't complete, added to Git so it doesn't get lost .. The intent was to create a multi purpose app that can convert 6502, 68000 code from a binary file back to assembly.
+# Amiga Binary To Assembly Conversion Tool
+This application was written as a quick
+ way to convert Amiga binaries into
+editable source code.
+
 
 
 ![](MultiFormatBinaryConvter.png)
