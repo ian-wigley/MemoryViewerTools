@@ -133,7 +133,7 @@
 	<code>04¬39¬SUB¬6¬#$¬¬,$¬</code>
 	<code>04¬44¬SUB.W¬2¬#$¬¬,D4¬</code>
 	<code>04¬5A¬SUB¬2¬#$¬¬,(A2)+¬</code>
-	<code>04¬79¬SUB¬6¬#$¬¬,$¬</code>
+	<code>04¬79¬SUB¬6¬#$¬,$¬¬</code>
 	<code>05¬00¬;TODO!¬1¬¬¬¬</code>
 	<code>05¬0B¬;TODO!¬1¬¬¬¬</code>
 	<code>05¬10¬;TODO!¬1¬¬¬¬</code>
@@ -226,7 +226,7 @@
 	<code>12¬D8¬MOVE.B¬1¬(A0)+¬¬,(A1)+¬</code>
 	<code>12¬E9¬MOVE.B¬2¬(A1)¬¬,(A1)+¬</code>
 	<code>13¬D1¬MOVE.B¬4¬(A1)¬¬,$¬</code>
-	<code>13¬FC¬MOVE.B¬6¬#$¬¬,$¬</code>
+	<code>13¬FC¬MOVE.B¬6¬#$¬,$¬¬</code>
 	<code>16¬83¬MOVE¬1¬D3¬¬,A3¬</code>
 	<code>1C¬01¬;TODO!¬1¬¬¬¬</code>
 	<code>1C¬CC¬;TODO!¬1¬¬¬¬</code>
@@ -788,7 +788,7 @@
 	<code>B5¬FC¬CMP¬4¬#$¬,A2¬¬</code>
 	<code>B6¬01¬;TODO!¬1¬¬¬¬</code>
 	<code>B7¬01¬;TODO!¬1¬¬¬¬</code>
-	<code>B7¬FC¬CMP¬4¬#$¬,A3¬¬</code>
+	<code>B7¬FC¬CMP.L¬4¬#$¬¬,A3¬</code>
 	<code>B8¬01¬;TODO!¬1¬¬¬¬</code>
 	<code>B9¬01¬;TODO!¬1¬¬¬¬</code>
 	<code>BA¬01¬;TODO!¬1¬¬¬¬</code>
